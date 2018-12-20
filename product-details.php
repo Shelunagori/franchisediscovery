@@ -205,15 +205,17 @@
 				   <div class="rating-footer">
 				   <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-cutlery" aria-hidden="true"></i> Our Menu </span>
 				    
-					  				
 					
-					<span> 
-							<i style="color: #121312;" class="fa fa-leaf" aria-hidden="true"></i> 
-								<?php echo $row_brand['food_type'];  ?> 
-				    </span>
+						<span style="width: 120px;"> 
+								<img src="<?php echo $baseURL; ?>img/veg.png" style="width: 12%"/>
+								<img src="<?php echo $baseURL; ?>img/nonveg.png" style="width: 12%"/>
+									<?php echo $row_brand['food_type'];  ?> 
+					    </span>
+				
 					
 					<?php 
-						$fav_class = 'fa-heart-o';
+				
+						$fav_class = 'fa fa-thumbs-o-up';
 						$user_id = 0;
 						if(!empty($_SESSION['user_id']))
 						{
@@ -224,7 +226,7 @@
 						$resultString = mysqli_query($db, $queryString);
 						
 						if($resultString->num_rows > 0){ 
-							$fav_class = 'fa-heart heartColor';	
+							$fav_class = 'fa fa-thumbs-up';	
 						}
 
 					?>
@@ -414,25 +416,25 @@
 						success: function(result){
 							if(result == 1)
 							{
-								$('#fav-i').addClass('fa-heart-o');
-								$('#fav-i').removeClass('fa-heart');
-								$('#fav-i').removeClass('heartColor'); 							
+								$('#fav-i').addClass('fa-thumbs-o-up');
+								$('#fav-i').removeClass('fa-thumbs-up');
+								$('#fav-i').removeClass('fa-thumbs-up'); 							
 								alert('Removed from favourite list !');
 								
 							}
 							if(result == 2)
 							{
-								$('#fav-i').removeClass('fa-heart-o');
-								$('#fav-i').addClass('fa-heart'); 
-								$('#fav-i').addClass('heartColor'); 
+								$('#fav-i').removeClass('fa-thumbs-o-up');
+								$('#fav-i').addClass('fa-thumbs-up'); 
+								$('#fav-i').addClass('fa-thumbs-up'); 
 								alert('Brand added to favourite list !');
 								
 							}
 							if(result == 3)
 							{
-								$('#fav-i').removeClass('fa-heart-o');
-								$('#fav-i').removeClass('fa-heart'); 
-								$('#fav-i').removeClass('heartColor');
+								$('#fav-i').removeClass('fa-thumbs-o-up');
+								$('#fav-i').removeClass('fa-thumbs-up'); 
+								$('#fav-i').removeClass('fa-thumbs-up');
 								alert('Something went wrong !');
 								
 							}
