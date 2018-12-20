@@ -1,0 +1,8 @@
+User-Agent: *
+Allow: /
+Disallow: /index.html
+Disallow: /privacy-policy.html
+
+
+Sitemap: http://franchisediscovery.in/sitemap.xml
+

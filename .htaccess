@@ -1,0 +1,34 @@
+<IfModule mod_rewrite.c>
+ Options +FollowSymLinks -MultiViews
+ 
+ErrorDocument 404 http://franchisediscovery.in/
+ErrorDocument 500 http://franchisediscovery.in/ 
+ 
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.franchisediscovery\.in [NC]
+RewriteRule ^(.*)$ http://franchisediscovery.in/$1 [L,R=301]
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^food/([A-Za-z0-9-]+)/?$ product-list.php?data_row=$1
+
+RewriteRule ^chart/([A-Za-z0-9-]+)/?$ chart_detail.php?rowValue=$1
+
+RewriteRule ^blog/([A-Za-z0-9-]+)/?$ blog.php?rowCatData=$1
+
+RewriteRule ^news/([A-Za-z0-9-]+)/?$ news.php?rowCatData=$1
+
+RewriteRule ^brand-video/([A-Za-z0-9-]+)/?$ brand-video.php?rowCatData=$1
+
+RewriteRule ^brand-detail/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ product-details.php?data_row=$1&rowvalue=$2
+
+RewriteRule ^newsdetails/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ news-details.php?catseoname=$1&rowData=$2
+
+RewriteRule ^blogdetail/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ news-details.php?catseoname=$1&rowData=$2
+
+RewriteRule ^videodetail/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$ news-details.php?catseoname=$1&rowData=$2
+
+##RewriteRule ^newsdetails/([^/]+)(/([^/]+))(/([^/]+))?$ /franchisediscovery/news-details.php?rowData=$3&rowtype=$4 [L,QSA]
+
+ </IfModule>

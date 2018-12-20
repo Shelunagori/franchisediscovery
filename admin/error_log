@@ -1,0 +1,9 @@
+[03-Nov-2018 14:09:05 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
+[05-Nov-2018 06:32:34 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
+[05-Nov-2018 06:36:45 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/category.php on line 360
+[05-Nov-2018 06:36:52 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
+[05-Nov-2018 06:50:13 Etc/GMT] PHP Notice:  Undefined index: login_user in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/header.php on line 47
+[05-Nov-2018 07:23:39 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
+[05-Nov-2018 08:03:41 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
+[05-Nov-2018 08:04:25 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
+[05-Nov-2018 08:04:46 Etc/GMT] PHP Fatal error:  Call to undefined function base_url() in /home/wwwgarimaartgall/public_html/franchisediscovery/admin/brand_grid.php on line 163
