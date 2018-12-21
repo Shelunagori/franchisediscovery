@@ -49,6 +49,7 @@ $(function () {
 
 <script>
   $(function () {
+	
     var table = $("#example1").DataTable({
 		rowReorder: true,
 		paging:   false,
@@ -62,6 +63,8 @@ $(function () {
    
    table.rowReordering();
    
+   
+   
    $('#example2').DataTable({
       "paging": true,
       "lengthChange": false,
@@ -70,10 +73,19 @@ $(function () {
       "info": true,
       "autoWidth": false
     });
+	
 	$('#example3').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+	  $('#example5').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false
@@ -86,6 +98,7 @@ $(function () {
       "info": true,
       "autoWidth": false
     });
+	
   });
 </script>  
 </body>
