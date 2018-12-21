@@ -146,7 +146,7 @@
                         <div class="col-12 col-md-3">
                             <div class="hero_search_area">
                                 <form action="<?php echo $baseURL; ?>search.php" method="get">
-                                    <input type="text" class="form-control" id="search" aria-describedby="search" placeholder="Search Food brands" name="q" value="<?php echo @$_GET['q']; ?>">
+                                    <input type="text" class="form-control" id="search" aria-describedby="search" placeholder="Search Food & Beverages" name="q" value="<?php echo @$_GET['q']; ?>">
                                     <button type="submit" class="btn"><i class="ti-search"></i></button>
                                 </form>
                             </div>

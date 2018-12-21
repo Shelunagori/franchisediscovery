@@ -3,7 +3,37 @@
 	include('header.php');
 	$status="";
 	$message="";
-	
+	$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'";
+			if(isset($_POST['ok']))
+			{
+				echo$first_name=$_POST['name'];
+				echo$email=$_POST['email'];
+				echo$from=date('Y-m-d',strtotime($_POST['from_datepicker']));
+	   			echo$to=date('Y-m-d',strtotime($_POST['to_datepicker']));
+
+				if(!$first_name==null && $email==null && $from==null && $to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name'";
+				}
+				if($first_name==null && !$email==null && $from==null && $to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email='$email'";
+				}
+
+				if($first_name==null && $email==null && !$from==null && !$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN $from AND $to";
+				}
+				if(!$first_name==null && !$email==null && $from==null && $to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email'";
+				}
+				if(!$first_name==null && !$email==null && !$from==null && !$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email' AND created_on BETWEEN $from AND $to";
+				}
+
+			}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -88,8 +118,28 @@
 }
 </style>
 						</div>
-						
-						
+						<form method="post" enctype="multipart/form-data">
+						<div>
+							<label style="margin-left: 30px; margin-top: 30px; margin-bottom: 30px;" >Name</label>
+							<select name="name">
+								<option value="">--Select Name--</option>
+								<?php
+									$name_query=mysqli_query($db,"SELECT * FROM registration WHERE status='1' AND reg_type='Brand'");
+									while($name_row=mysqli_fetch_array($name_query))
+									{
+										echo"<option value=".$name_row['first_name'].">".$name_row['first_name']."</option>";
+									}	
+								?>
+							</select>
+							<label style="margin-left: 30px;">Email</label>
+							<input type="email" name="email">
+							<label style="margin-left: 30px;">From</label>
+							<input type="date" id="from_datepicker" name="from_datepicker">
+							<label>To</label>
+							<input type="date" id="to_datepicker" name="to_datepicker">&nbsp;
+							<button style="margin-left: 15px;" class="btn-info" type="submit" name="ok">OK</button>
+						</div>
+						</form>
 						<div class="box-body">
 							
 							<div id="exTab2">	
@@ -112,7 +162,7 @@
 										</thead>
 										<tbody>
 											<?php
-												$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'";
+											
 												$result=$db->query($sql);
 												$count=0;
 												while($rows = mysqli_fetch_array($result)){ $count++;
