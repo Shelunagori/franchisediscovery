@@ -87,30 +87,7 @@ require('header.php');
 						  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  List of Brands</h3>
 						</div>
 					<form method="post" enctype="multipart/form-data">
-<<<<<<< HEAD
-						<div>
-							<label style="margin-left: 30px; margin-top: 15px; margin-bottom: 30px;"  >Category</label>
-							<select name="category" id="category">
-								<option value="">--Select Category--</option>
-								<?php
-									$category_query=mysqli_query($db,"SELECT * FROM categories");
-									while($category_row=mysqli_fetch_array($category_query))
-									{
-										echo"<option value=".$category_row['id'].">".$category_row['name']."</option>";
-									}
-								?>
-							</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>Brand Name</label>
-							<select name="brand_name" id="brand_name">
-								<option value="">--Select Brand Name--</option>
-							</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>From</label>
-							<input type="text" id="from_datepicker" name="from_datepicker">
-							<label>To</label>
-							<input type="text" id="to_datepicker" name="to_datepicker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn-info" type="submit" name="ok">OK</button>
-						</div>
-=======
+
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
@@ -150,7 +127,6 @@ require('header.php');
 								</td>
 							</tr>
 						</table>
->>>>>>> e35dc03d00c71dd2a57438757fbc836059eb088f
 					</form>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
