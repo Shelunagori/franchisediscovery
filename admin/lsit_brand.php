@@ -23,7 +23,7 @@ $query="SELECT * FROM brands where status = 'Active' order by id DESC ";
 }
 require('header.php');
 ?>
-
+<link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 <style>
 	.dataTables_wrapper { padding: 0px 30px 0px 30px !important; }
 
@@ -80,28 +80,45 @@ require('header.php');
 						  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  List of Brands</h3>
 						</div>
 					<form method="post" enctype="multipart/form-data">
-						<div>
-							<label style="margin-left: 30px; margin-top: 15px; margin-bottom: 30px;"  >Category</label>
-							<select name="category" id="category">
-								<option value="">--Select Category--</option>
-								<?php
-									$category_query=mysqli_query($db,"SELECT * FROM categories");
-									while($category_row=mysqli_fetch_array($category_query))
-									{
-										echo"<option value=".$category_row['id'].">".$category_row['name']."</option>";
-									}
-								?>
-							</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>Brand Name</label>
-							<select name="brand_name" id="brand_name">
-								<option value="">--Select Brand Name--</option>
-							</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<label>From</label>
-							<input type="date" id="from_datepicker" name="from_datepicker">
-							<label>To</label>
-							<input type="date" id="to_datepicker" name="to_datepicker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn-info" type="submit" name="ok">OK</button>
-						</div>
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<select name="category" class="form-control" id="category">
+										<option value="">--Select Category--</option>
+										<?php
+											$category_query=mysqli_query($db,"SELECT * FROM categories");
+											while($category_row=mysqli_fetch_array($category_query))
+											{
+												echo"<option value=".$category_row['id'].">".$category_row['name']."</option>";
+											} ?>
+									</select>
+								</td>
+								<td width="20%">
+									<select name="brand_name" class="form-control" id="brand_name">
+										<option value="">--Select Brand--</option>
+									</select>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
 					</form>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
@@ -170,11 +187,19 @@ require('header.php');
 <?php
 require('footer.php');
 ?>
-
+<script strc="plugins/datepicker/bootstrap-datepicker.js"></script>
 
 
 <script>
 $( document ).ready(function() {
+	$('#datepicker').datepicker({
+      autoclose: true,
+	  format: 'mm-dd-YYYY'
+    });
+	$('#datepicker1').datepicker({
+      autoclose: true,
+	  format: 'mm-dd-yyyy'
+    });
 	$('#category').on('change',function(){
                 var category_id = $(this).val();
                	$.ajax({
