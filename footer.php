@@ -67,12 +67,15 @@ label.expend {
 							$query=mysqli_query($db,"SELECT * FROM news_blogs where category_id = '$category_id' and type = 'News' and status = 'Active' order by id DESC LIMIT 3 ");  	
 						}else
 						{
-							$query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC LIMIT 3 ");  
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.content,news_blogs.image FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' order by news_blog_contents.id DESC ";
+							$query=mysqli_query($db,$sql); 
+						//	$query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC LIMIT 3 ");  
 						}
 						
 						if($query->num_rows == 0)
 						{
-							$query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC LIMIT 3 ");  	
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' order by news_blog_contents.id DESC ";
+							$query=mysqli_query($db,$sql);  	
 						}
 						
 						$sno = 1;
@@ -85,7 +88,12 @@ label.expend {
 							$recentCatseo = $rowString['seo_name']; 
 						?>		
 							<div class="single_latest_post">
-							   	<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['image']); ?>" alt="<?php echo $row['title']; ?>">
+								<?php if(empty($baseURL.str_replace('../',"",$row['image']))){ ?>
+									<img src="<?php echo $baseURL; ?>img/no-image.png" 
+									alt="">
+								<?php }else{ ?>
+									<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['image']); ?>" alt="<?php echo $row['title']; ?>">
+								<?php } ?>	
 								<a href="<?php echo $baseURL; ?>newsdetails/<?php echo $recentCatseo; ?>/<?php echo $row['seo_name']; ?>"><?php echo $row['title']; ?></a>
 								<p><?php echo substr($row['content'],0,150).'...'; ?></p>
 						    </div>
