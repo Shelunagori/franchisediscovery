@@ -3,7 +3,7 @@
 	$selectedValue = @$_GET['selectedValue'];
 	if(!empty($selectedValue)){
 		if($selectedValue == 'no'){
-			$query=mysqli_query($db,"SELECT brand_grid.id as gridID,brands.id, brands.name , brands.brand_image, brands.investment_range_in_words,brands.category_id,brands.seo_name as brand_seo_name FROM brand_grid INNER JOIN brands ON (brand_grid.brand_id = brands.id)");
+			$query=mysqli_query($db,"SELECT brand_grid.id as gridID,brand_grid.position,brands.id, brands.name , brands.brand_image, brands.investment_range_in_words,brands.category_id,brands.seo_name as brand_seo_name FROM brand_grid INNER JOIN brands ON (brand_grid.brand_id = brands.id) order by brand_grid.position ASC");
 		}else{
 			$query=mysqli_query($db,"SELECT brand_grid.id as gridID,brands.id, brands.name , brands.brand_image, brands.investment_range_in_words,brands.category_id,brands.seo_name as brand_seo_name FROM brand_grid INNER JOIN brands ON (brand_grid.brand_id = brands.id) order by investment_range $selectedValue");
 		}

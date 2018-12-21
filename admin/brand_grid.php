@@ -84,8 +84,7 @@ rel="stylesheet" />
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+            
           </div>
         </div>
         <form role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
@@ -129,13 +128,12 @@ rel="stylesheet" />
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+           
           </div>
         </div>
         <div class="box-body">
         <div id="cStatus"> </div>
-        <form action="admin/update_Sequence" method="post">
+        <form action="update_Sequence.php" method="post" role="form">
           <table id="example1" class="display select">
                 <thead>
                 <tr>
@@ -146,14 +144,19 @@ rel="stylesheet" />
                </tr>
                 </thead>
                 <tbody>
-				<?php $i = 1;
-					$query=mysqli_query($db,"SELECT brand_grid.id , brands.name , brands.brand_image FROM  brand_grid INNER JOIN brands ON (brand_grid.brand_id = brands.id) order by brand_grid.id DESC ");
+				<?php $i = 1; $sequence=1;
+					$query=mysqli_query($db,"SELECT brand_grid.id, brand_grid.position , brands.name , brands.brand_image FROM  brand_grid INNER JOIN brands ON (brand_grid.brand_id = brands.id) order by brand_grid.position ASC ");
 					while($row=mysqli_fetch_array($query)){
 						?>
 						<tr>
-							<td><?php echo $i; $i++;  ?></td>
+							<td><?php echo $i; $i++;  ?>
+							
+							</td>
+							
 							<td><img src="<?php echo $row['brand_image'];?>" style="width: 100px;height: 50px;" /></td>
-							<td><?php echo $row['name']; ?></td>
+							<td><?php echo $row['name']; ?>
+					<input type="hidden" name="position[]" value="<?php echo $row['id']; ?>">
+							</td>
 							
 							<td>
 								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="brand_grid.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
@@ -165,6 +168,13 @@ rel="stylesheet" />
 					}
 				?>                 
                </tbody>
+			   <tfoot>
+					<tr >
+						<td colspan="4">
+<input class="btn btn-success pull-right" type="submit" name="add" value="Update Sequence">
+						</td>
+					</tr>
+			   </tfoot>
               </table>
             </form> 
       </div>

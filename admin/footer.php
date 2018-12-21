@@ -51,10 +51,11 @@ $(function () {
   $(function () {
     var table = $("#example1").DataTable({
 		rowReorder: true,
+		paging:   false,
+       // ordering: false,
 		 "createdRow": function( row, data, dataIndex ) {
          $(row).attr('id', 'row-' + dataIndex);
       },
-		dataSrc: 'saveBrandGrid.php'
 	});
 	
    table.draw();
