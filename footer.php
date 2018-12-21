@@ -498,7 +498,7 @@ label.expend {
                     <!-- Copywrite Content -->
                     <div class="col-12 col-md">
                         <div class="copywrite_text text-left d-flex align-items-center">
-                            <p>Copyright @2018, <a href="http://franchisediscovery.in/">Franchise Discovery Pvt. Ltd</a></p>
+                            <p>Copyright@2018, <a href="http://franchisediscovery.in/">Secoya Franchise India Pvt. Ltd.</a></p>
 						</div>
                     </div>
                     <!-- Payment Method -->

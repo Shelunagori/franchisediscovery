@@ -143,7 +143,8 @@
 							while($row_slider=mysqli_fetch_array($query_slider)){ 
 						?>
 							<div class="single_arrivals_slide">
-								<a href="<?php echo $row_slider['slider_url']; ?>" target="_blank">
+								<a href="<?php echo $row_slider['slider_url']; ?>" 
+									target="_blank">
 								<img src="<?php echo $row_slider['slider_image']; ?>" alt="<?php echo $row_slider['name']; ?>">
 								</a>
 							</div>
