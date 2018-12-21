@@ -1,31 +1,42 @@
 <?php 
 require('config.php');
 
-$query="SELECT * FROM brands where status ='Active' order by id DESC ";
+	$query="SELECT * FROM brands where status ='Active' order by id DESC ";
  if(isset($_POST['ok']))
 {
-	echo$category_id=$_POST['category'];
-	echo$brand_id=$_POST['brand_name'];
-	$from_date=date('Y-m-d',strtotime($_POST['from_datepicker']));
-	$from=$from_date." 00:00:00.000000";
-	$to_date=date('Y-m-d',strtotime($_POST['to_datepicker']));
-	$to=$to_date." 00:00:00.000000";
+	$category_id=$_POST['category'];
+	$brand_id=$_POST['brand_name'];
+	$from_date= $_POST['from_datepicker']?date('Y-m-d',strtotime($_POST['from_datepicker'])):null;
+	if(!$from_date==null)
+		$from=$from_date." 00:00:00.000000";
 
-	if(!$category_id == null && $from ==null && $to ==null && $brand_id==null)
+	$to_date= $_POST['to_datepicker']?date('Y-m-d',strtotime($_POST['to_datepicker'])):null;
+	if(!$to_date==null)
+		$to=$to_date." 00:00:00.000000";
+
+	if(!$category_id == null && @$from ==null && @$to ==null && $brand_id==null)
 	{
-		echo$query="SELECT * FROM brands WHERE status='Active' AND category_id=$category_id";
+		$query="SELECT * FROM brands WHERE status='Active' AND category_id=$category_id";
 	}
 	elseif(!$category_id==null && !$brand_id==null)
 	{
-	echo $query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id";
+	 $query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id";
 	}
-	elseif(!$from==null && !$to==null &&$category_id==null && $brand_id==null)
+	elseif(!@$from==null && !@$to==null && $category_id==null && $brand_id==null)
 	{
-		echo$query="SELECT * FROM brands WHERE status ='Active' AND created_on BETWEEN '$from' AND '$to'";
+		$query="SELECT * FROM brands WHERE status ='Active' AND created_on BETWEEN '$from' AND '$to'";
 	}
-	elseif(!$from==null && !$to==null &&!$category_id==null && !$brand_id==null)
+	elseif(!@$from==null && !@$to==null &&!$category_id==null && !$brand_id==null)
 	{
-		echo$query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id AND created_on BETWEEN '$from' AND '$to'";
+		$query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id AND created_on BETWEEN '$from' AND '$to'";
+	}
+	elseif(!@$from==null && @$to==null && $category_id==null && $brand_id==null)
+	{
+		$query="SELECT * FROM brands WHERE status ='Active'  AND created_on > '$from'";
+	}
+	elseif(@$from==null && !@$to==null && $category_id==null && $brand_id==null)
+	{
+		$query="SELECT * FROM brands WHERE status ='Active'  AND created_on < '$to'";
 	}
 }
 require('header.php');
@@ -202,11 +213,9 @@ require('footer.php');
 $( document ).ready(function() {
 	$('#datepicker').datepicker({
       autoclose: true,
-	  format: 'mm-dd-YYYY'
     });
 	$('#datepicker1').datepicker({
       autoclose: true,
-	  format: 'mm-dd-yyyy'
     });
 	$('#category').on('change',function(){
                 var category_id = $(this).val();

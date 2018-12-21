@@ -3,6 +3,49 @@
 	include('header.php');
 	$status="";
 	$message="";
+	$sql="SELECT * FROM registration WHERE reg_type='Investor' AND status='0'";
+	if(isset($_POST['ok']))
+			{
+				$first_name=$_POST['name'];
+				$email=$_POST['email'];
+				$from_date= $_POST['from_datepicker']?date('Y-m-d',strtotime($_POST['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date." 00:00:00.000000";
+
+				$to_date= $_POST['to_datepicker']?date('Y-m-d',strtotime($_POST['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date." 00:00:00.000000";
+				if(!$first_name==null && $email==null && @$from==null && @$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor' AND first_name LIKE='%'.$first_name.'%'";
+				}
+				elseif($first_name==null && !$email==null && @$from==null && @$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor' AND email LIKE='%'.$email.'%'";
+				}
+
+				elseif($first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor' AND created_on BETWEEN '$from' AND '$to'";
+				}
+				elseif(!$first_name==null && !$email==null && @$from==null && @$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%'";
+				}
+				elseif(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%' AND created_on BETWEEN '$from' AND '$to'";
+				}
+				elseif($first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor'AND created_on > '$from'";
+				}
+				elseif($first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Investor'AND created_on < '$to'";
+				}
+
+			}
 		if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -16,6 +59,10 @@
 					}
 			}
 ?>
+<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
+
 <style>
 
 
@@ -86,7 +133,37 @@
 						</div>
 						</div>
 						
-						
+						<form method="post" enctype="multipart/form-data">
+							<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="name" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="email" name="email" placeholder="Enter email" class="form-control">
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+						</form>
 						<div class="box-body">
 							
 							<div id="exTab2">	
@@ -107,7 +184,7 @@
 										</thead>
 										<tbody>
 											<?php
-												$sql="SELECT * FROM registration WHERE reg_type='Investor'";
+												
 												$result=$db->query($sql);
 												$count=0;
 												while($rows = mysqli_fetch_array($result)){ $count++;
@@ -145,6 +222,8 @@
 <?php
 require('footer.php');
 ?>
+<script strc="plugins/datepicker/bootstrap-datepicker.js"></script>
+
         <script>
             $(document).ready(function(){
             $('.employee_name').change(function(){
@@ -159,5 +238,13 @@ require('footer.php');
 				});
 				
 			});
+			 $('#datepicker').datepicker({
+      autoclose: true,
+	  format: 'mm-dd-YYYY'
+	});
+	$('#datepicker1').datepicker({
+      autoclose: true,
+	  format: 'mm-dd-yyyy'
+    });
 		});
 	</script>
