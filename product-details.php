@@ -206,11 +206,37 @@
 				   <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-cutlery" aria-hidden="true"></i> Our Menu </span>
 				    
 					
-						<span style="width: 120px;"> 
+				 
+							<?php
+
+								if($row_brand['food_type'] == 'Veg')
+								{
+							?>
+								<span style="width: 70px;">
+								<img src="<?php echo $baseURL; ?>img/veg.png" style="width: 35%; height: 18px;"/>
+								<?php echo $row_brand['food_type'];  ?> 
+								</span>
+							<?php }
+							if($row_brand['food_type'] == 'Non-Veg')
+								{
+							?>
+								<span style="width: 105px; height: 41px;">
+								<img src="<?php echo $baseURL; ?>img/nonveg.png" style="width: 20%; height: 18px;"/>
+								<?php echo $row_brand['food_type'];  ?> 
+								</span>
+							<?php
+								}
+								elseif($row_brand['food_type'] == 'Non + Veg Both')
+								{
+							?>
+								<span style="width: 165px; height: 41px;" >
 								<img src="<?php echo $baseURL; ?>img/veg.png" style="width: 12%"/>
 								<img src="<?php echo $baseURL; ?>img/nonveg.png" style="width: 12%"/>
-									<?php echo $row_brand['food_type'];  ?> 
-					    </span>
+								<?php echo $row_brand['food_type'];  ?> 
+								</span>
+
+							<?php } ?>
+									
 				
 					
 					<?php 
@@ -231,7 +257,7 @@
 
 					?>
 					
-					<span id="fav"> <i class="fa <?php echo $fav_class; ?>" id="fav-i" aria-hidden="true"></i> Favourite </span>
+					<span id="fav"> <i class="fa <?php echo $fav_class; ?>" style="color: #193985;" id="fav-i" aria-hidden="true"></i> Favourite </span>
 				   
 				   </div>
 				   

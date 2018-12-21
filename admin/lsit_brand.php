@@ -1,24 +1,31 @@
 <?php 
 require('config.php');
 
-$query="SELECT * FROM brands where status = 'Active' order by id DESC ";
+$query="SELECT * FROM brands where status ='Active' order by id DESC ";
  if(isset($_POST['ok']))
 {
 	echo$category_id=$_POST['category'];
 	echo$brand_id=$_POST['brand_name'];
-	echo$from=date(strtotime($_POST['from_datepicker']));
-	echo$to=date(strtotime($_POST['to_datepicker']));
-	if(!$category_id==null && !$brand_id==null)
+	$from_date=date('Y-m-d',strtotime($_POST['from_datepicker']));
+	$from=$from_date." 00:00:00.000000";
+	$to_date=date('Y-m-d',strtotime($_POST['to_datepicker']));
+	$to=$to_date." 00:00:00.000000";
+
+	if(!$category_id == null && $from ==null && $to ==null && $brand_id==null)
 	{
-	$query="SELECT * FROM brands WHERE category_id=$category_id AND id=$brand_id";
+		echo$query="SELECT * FROM brands WHERE status='Active' AND category_id=$category_id";
 	}
-	if(!$from==null && !$to==null &&$category_id==null && $brand_id==null)
+	elseif(!$category_id==null && !$brand_id==null)
 	{
-		echo$query="SELECT * FROM brands WHERE created_on BETWEEN $from AND $to";
+	echo $query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id";
 	}
-	if(!$from==null && !$to==null &&!$category_id==null && !$brand_id==null)
+	elseif(!$from==null && !$to==null &&$category_id==null && $brand_id==null)
 	{
-		echo$query="SELECT * FROM brands WHERE category_id=$category_id AND id=$brand_id AND created_on BETWEEN $from AND $to";
+		echo$query="SELECT * FROM brands WHERE status ='Active' AND created_on BETWEEN '$from' AND '$to'";
+	}
+	elseif(!$from==null && !$to==null &&!$category_id==null && !$brand_id==null)
+	{
+		echo$query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id AND created_on BETWEEN '$from' AND '$to'";
 	}
 }
 require('header.php');
@@ -97,9 +104,9 @@ require('header.php');
 								<option value="">--Select Brand Name--</option>
 							</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<label>From</label>
-							<input type="date" id="from_datepicker" name="from_datepicker">
+							<input type="text" id="from_datepicker" name="from_datepicker">
 							<label>To</label>
-							<input type="date" id="to_datepicker" name="to_datepicker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text" id="to_datepicker" name="to_datepicker">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn-info" type="submit" name="ok">OK</button>
 						</div>
 					</form>
@@ -189,4 +196,8 @@ $( document ).ready(function() {
             });
 
 });
+ $('#from_datepicker').datepicker({
+			});
+			 $('#to_datepicker').datepicker({
+			});
 </script>

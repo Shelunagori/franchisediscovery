@@ -8,30 +8,33 @@
 			{
 				echo$first_name=$_POST['name'];
 				echo$email=$_POST['email'];
-				echo$from=date('Y-m-d',strtotime($_POST['from_datepicker']));
-	   			echo$to=date('Y-m-d',strtotime($_POST['to_datepicker']));
+				$from_date=date('Y-m-d',strtotime($_POST['from_datepicker']));
+				$from=$from_date." 00:00:00.000000";
+				$to_date=date('Y-m-d',strtotime($_POST['to_datepicker']));
+				$to=$to_date." 00:00:00.000000";
 
-				if(!$first_name==null && $email==null && $from==null && $to==null)
+				if(!$first_name==null && $email == null && $from == null && $to == null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name'";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name'";
 				}
-				if($first_name==null && !$email==null && $from==null && $to==null)
+				elseif($first_name==null && !$email==null && $from==null && $to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email='$email'";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email='$email'";
 				}
 
-				if($first_name==null && $email==null && !$from==null && !$to==null)
+				elseif($first_name==null && $email==null && !$from==null && !$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN $from AND $to";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
 				}
-				if(!$first_name==null && !$email==null && $from==null && $to==null)
+				elseif(!$first_name==null && !$email==null && $from==null && $to==null)
 				{
 					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email'";
 				}
-				if(!$first_name==null && !$email==null && !$from==null && !$to==null)
+				elseif(!$first_name==null && !$email==null && !$from==null && !$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email' AND created_on BETWEEN $from AND $to";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email' AND created_on BETWEEN '$from' AND '$to'";
 				}
+
 
 			}
 			if(@$_GET["Action"] == "Del")
@@ -134,9 +137,9 @@
 							<label style="margin-left: 30px;">Email</label>
 							<input type="email" name="email">
 							<label style="margin-left: 30px;">From</label>
-							<input type="date" id="from_datepicker" name="from_datepicker">
+							<input type="text" id="from_datepicker" name="from_datepicker">
 							<label>To</label>
-							<input type="date" id="to_datepicker" name="to_datepicker">&nbsp;
+							<input type="text" id="to_datepicker" name="to_datepicker">&nbsp;
 							<button style="margin-left: 15px;" class="btn-info" type="submit" name="ok">OK</button>
 						</div>
 						</form>
@@ -234,5 +237,9 @@ require('footer.php');
 				
 			});
 		});
+            $('#from_datepicker').datepicker({
+			});
+			 $('#to_datepicker').datepicker({
+			});
 	</script>
 
