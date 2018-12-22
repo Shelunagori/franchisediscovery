@@ -2,6 +2,50 @@
 
 require('config.php');
 require('header.php');
+$sql="SELECT * FROM contact_brands order by id DESC ";
+	if(isset($_GET['ok']))
+			{
+				$first_name=$_GET['name'];
+				$email=$_GET['email'];
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date." 00:00:00.000000";
+
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date." 00:00:00.000000";
+				if(!$first_name == null && $email == null  && @$from== null && @$to == null)
+				{
+					$sql="SELECT * FROM contact_brands WHERE name LIKE '%$first_name%' ";
+				}
+				else if($first_name == null && !$email == null  && @$from== null && @$to == null )
+				{
+					$sql="SELECT * FROM contact_brands WHERE email LIKE '%$email%' ";
+				}
+				else if(!$first_name == null && !$email == null  && @$from== null && 
+					@$to == null)
+				{
+					$sql="SELECT * FROM contact_brands WHERE name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
+				}
+				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$sql="SELECT * FROM contact_brands WHERE first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+				}
+				else if($first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$sql="SELECT * FROM contact_brands WHERE  created_on > '$from'";
+				}
+				else if($first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$sql="SELECT * FROM contact_brands WHERE created_on < '$to'";
+				}
+				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$sql="SELECT * FROM contact_brands WHERE created_on BETWEEN '$from' AND '$to'";
+				}
+
+				
+			}
 if(@$_GET["Action"] == "Del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -16,6 +60,8 @@ if(@$_GET["Action"] == "Del")
 		}
 	}
 ?>
+<link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
+
 <style>
 	.dataTables_wrapper { padding: 0px 30px 0px 30px !important; }
 
@@ -70,11 +116,43 @@ if(@$_GET["Action"] == "Del")
 						<div class="box-header">
 						  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Brands Enquire</h3>
 						</div>
+					<form method="get" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="name" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="text" name="email" placeholder="Enter email" class="form-control">
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
-							<?php $query=mysqli_query($db,"SELECT * FROM contact_brands order by id DESC ");  
+							<?php  
+							$query_result=mysqli_query($db,$sql);
 								$sno = 1;
-								if(!empty($query)){  ?>
+								if(!empty($query_result)){  ?>
 							<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 								<thead>
 									<tr role="row">
@@ -90,7 +168,7 @@ if(@$_GET["Action"] == "Del")
 									</tr>
 								</thead>
 								<tbody>
-									<?php while($row=mysqli_fetch_array($query)){ ?>
+									<?php while($row=mysqli_fetch_array($query_result)){ ?>
 									<tr role="row" class="odd">
 									  <td> <?php echo $sno; ?> </td>	
 										<td>
@@ -129,3 +207,12 @@ if(@$_GET["Action"] == "Del")
 <?php
 require('footer.php');
 ?>
+<script strc="plugins/datepicker/bootstrap-datepicker.js"></script>
+<script>
+	 $('#datepicker').datepicker({
+      autoclose: true,
+	});
+	$('#datepicker1').datepicker({
+      autoclose: true,
+    });
+</script>

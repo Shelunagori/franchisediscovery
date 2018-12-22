@@ -1,7 +1,95 @@
 <?php 
 require('header.php');
 require('config.php');
+$sql="SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' order by id DESC ";
+$news_query="SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
+$vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
+
+		if(isset($_GET['blog_filter']))
+			{
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				if(!$from_date==null)
+					echo$from=$from_date;
+
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				if(!$to_date==null)
+					echo$to=$to_date;
+
+				
+
+				 if(!@$from== null && !@$to == null)
+				{
+					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' AND 
+					status= 'Active' AND create_on BETWEEN '$from' AND '$to'";
+				}
+				
+				else if(!@$from== null && @$to == null)
+				{
+					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' and status = 'Active' AND create_on > '$from'";
+				}
+				else if(@$from== null && !@$to == null)
+				{
+					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' and status = 'Active' AND create_on < '$to'";
+				}
+				
+			}
+			if(isset($_GET['news_filter']))
+			{
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date;
+
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date;
+
+				
+
+				 if(!@$from== null && !@$to == null)
+				{
+					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on BETWEEN '$from' AND '$to'";
+				}
+				
+				else if(!@$from== null && @$to == null)
+				{
+					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on > '$from'";
+				}
+				else if(@$from== null && !@$to == null)
+				{
+					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on < '$to'";
+				}
+				
+			}
+			if(isset($_GET['vidio_filter']))
+			{
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date;
+
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date;
+
+				
+
+				 if(!@$from== null && !@$to == null)
+				{
+					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on BETWEEN '$from' AND '$to'";
+				}
+				
+				else if(!@$from== null && @$to == null)
+				{
+					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on > '$from'";
+				}
+				else if(@$from== null && !@$to == null)
+				{
+					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on < '$to'";
+				}
+				
+			}
 ?>
+<link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
+
 <style>
 	.dataTables_wrapper { padding: 0px 30px 0px 30px !important; }
 #exTab1 .tab-content {
@@ -109,9 +197,36 @@ require('config.php');
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">
 
-									<?php $query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'Blogs' and status = 'Active' order by id DESC ");  
+									<?php 
+									$sql_result=mysqli_query($db,$sql);
 										$sno = 1;
-										if(!empty($query)){  ?>
+										if(!empty($sql_result)){  ?>
+					<form method="get" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+
+								<td>
+									<button class="btn btn-primary" type="submit" name="blog_filter">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 									<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">
@@ -123,7 +238,7 @@ require('config.php');
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($query)){ ?>
+											<?php while($row=mysqli_fetch_array($sql_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
@@ -157,9 +272,36 @@ require('config.php');
 								</div>
 									<div class="tab-pane" id="2">	
 
-									<?php $query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ");  
+									<?php   
 										$sno = 1;
-										if(!empty($query)){  ?>
+										$news_result=mysqli_query($db,$news_query);
+										if(!empty($news_result)){  ?>
+											<form method="get" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker2" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker3" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+
+								<td>
+									<button class="btn btn-primary" type="submit" name="news_filter">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 									<table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">
@@ -171,7 +313,7 @@ require('config.php');
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($query)){ ?>
+											<?php while($row=mysqli_fetch_array($news_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
@@ -206,9 +348,36 @@ require('config.php');
 									
 									<div class="tab-pane" id="3">
 
-									<?php $query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ");  
+									<?php 
+									$vidio_result=mysqli_query($db,$vidio_query);  
 										$sno = 1;
-										if(!empty($query)){  ?>
+										if(!empty($vidio_result)){  ?>
+											<form method="get" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker4" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker5" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+
+								<td>
+									<button class="btn btn-primary" type="submit" name="vidio_filter">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 									<table id="example4" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">
@@ -220,7 +389,7 @@ require('config.php');
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($query)){ ?>
+											<?php while($row=mysqli_fetch_array($vidio_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
@@ -267,3 +436,26 @@ require('config.php');
 <?php
 require('footer.php');
 ?>
+<script strc="plugins/datepicker/bootstrap-datepicker.js"></script>
+
+   <script>
+            
+   $('#datepicker').datepicker({
+      autoclose: true,
+	});
+	$('#datepicker1').datepicker({
+      autoclose: true,
+    });
+     $('#datepicker2').datepicker({
+      autoclose: true,
+	});
+	$('#datepicker3').datepicker({
+      autoclose: true,
+    });
+    $('#datepicker4').datepicker({
+      autoclose: true,
+	});
+	$('#datepicker5').datepicker({
+      autoclose: true,
+    });
+	</script>

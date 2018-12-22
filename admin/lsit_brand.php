@@ -107,6 +107,7 @@ require('header.php');
 					  <div class="box">
 						<div class="box-header">
 						  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  List of Brands</h3>
+						  <a href="add_brand.php" class="btn btn-primary pull-right">ADD</a>
 						</div>
 					<form method="GET">
 

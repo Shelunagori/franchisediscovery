@@ -213,7 +213,7 @@
 								{
 							?>
 								<span style="width: 70px;">
-								<img src="<?php echo $baseURL; ?>img/veg.png" style="width: 35%; height: 18px;"/>
+								<img src="<?php echo $baseURL; ?>img/veg.png" width= 35%; height= 18px />
 								<?php echo $row_brand['food_type'];  ?> 
 								</span>
 							<?php }
@@ -221,7 +221,7 @@
 								{
 							?>
 								<span style="width: 105px; height: 41px;">
-								<img src="<?php echo $baseURL; ?>img/nonveg.png" style="width: 20%; height: 18px;"/>
+								<img src="<?php echo $baseURL; ?>img/nonveg.png" width=20%; height=18px/>
 								<?php echo $row_brand['food_type'];  ?> 
 								</span>
 							<?php
@@ -230,8 +230,8 @@
 								{
 							?>
 								<span style="width: 165px; height: 41px;" >
-								<img src="<?php echo $baseURL; ?>img/veg.png" style="width: 12%"/>
-								<img src="<?php echo $baseURL; ?>img/nonveg.png" style="width: 12%"/>
+								<img src="<?php echo $baseURL; ?>img/veg.png" width=12%/>
+								<img src="<?php echo $baseURL; ?>img/nonveg.png" width= 12%/>
 								<?php echo $row_brand['food_type'];  ?> 
 								</span>
 

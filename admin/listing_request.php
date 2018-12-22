@@ -3,7 +3,17 @@
 	include('header.php');
 	$status="";
 	$message="";
-	
+	$sql="SELECT * FROM listing_request";
+		if(isset($_GET['ok']))
+			{
+				$brand_name=$_GET['brand_name'];
+				
+				if(!$brand_name == null)
+				{
+					$sql="SELECT * FROM listing_request WHERE brand_name LIKE '%$brand_name%' ";
+				}
+				
+			}
 			if(@$_GET["Action"] == "Del")
 			{
 			 $id = mysqli_real_escape_string($db,base64_decode($_GET['id'])); 
@@ -84,7 +94,20 @@
 }
 </style>
 						</div>
-						
+					<form method="get" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								
+								<td width="20%">
+									<input type="text" name="brand_name" placeholder="Enter brand" class="form-control">
+								</td>
+								
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 						
 						<div class="box-body">
 							
@@ -107,10 +130,10 @@
 										</thead>
 										<tbody>
 											<?php
-												$sql="SELECT * FROM listing_request";
+												
 												$result=$db->query($sql);
 												$count=0;
-												while($rows = mysqli_fetch_array($result)){ $count++;
+												while($rows =mysqli_fetch_array($result)){ $count++;
 												 ?>
 											<tr>
 												<td><?php echo $count;?></td>
