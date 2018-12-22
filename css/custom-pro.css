@@ -1,0 +1,18 @@
+.owl-item{
+	    width: 188px !important;
+}
+
+.search-filter-margin{
+	margin-bottom: -15px;margin-top: 12px;
+}
+
+.img-height{
+	height: 120px !important;
+}
+
+.top-brands .brand-details span{
+    font-size: 12px;
+    color: #333;
+    float: left !important;
+    margin: -17px 2px 3px 2px;
+}

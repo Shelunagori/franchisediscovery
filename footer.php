@@ -38,7 +38,7 @@ label.expend {
 .nav-tabs{ margin-bottom:15px}
 
  </style>
-	 <section class="popular_brands_area top-brands">
+	 <section class=" popular_brands_area_margin top-brands">
         <div class="container advice">
   
                <div class="row">
@@ -295,7 +295,7 @@ label.expend {
     </section>
     <!-- ***** Offer Area End ***** -->
 
-	 <section class="popular_brands_area top-brands">
+	 <section class="popular_brands_area_margin_clents top-brands">
         <div class="container advice">
 				<div class="row">
 			    <div class="col-12">
@@ -359,7 +359,7 @@ label.expend {
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="popular_section_heading mb-50 text-center">
+                    <div class="popular_section_heading mb-30 text-center">
                         <h3>Few Words from Clients</h3>
                     </div>
                 </div>

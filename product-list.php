@@ -62,6 +62,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="<?php echo $baseURL; ?>css/core-style.css">
     <link rel="stylesheet" href="<?php echo $baseURL; ?>style.css">
+    <link rel="stylesheet" href="<?php echo $baseURL; ?>css/custom-pro.css">
 
     <!-- Responsive CSS -->
     <link href="<?php echo $baseURL; ?>css/responsive.css" rel="stylesheet">
@@ -109,7 +110,7 @@
 		$query=mysqli_query($db,"SELECT brands.id,brands.name as bname,brands.seo_name as brand_seo_name ,categories.seo_name as cname,brands.brand_image FROM tobrand_catewise INNER JOIN brands ON (tobrand_catewise.brand_id = brands.id) INNER JOIN categories ON (tobrand_catewise.category_id = categories.id) where brands.status = 'Active' and tobrand_catewise.category_id = '$id' order by tobrand_catewise.id DESC ");
 		if($query->num_rows > 0)
 		{ ?>
-		<section class="header-slider section_padding_100 clearfix" style="background-image: url(http://franchisediscovery.in/img/bg-image-5.jpg)">
+		<section class="header-slider section_padding_100 clearfix" style="background-image: url(http://franchisediscovery.in/img/bg-image-5.jpg);height: 220px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
@@ -127,7 +128,7 @@
 							?>
 								<div class="single_arrivals_slide">
 									<a href="<?php echo $baseURL; ?>brand-detail/<?php echo $cname; ?>/<?php echo $row['brand_seo_name']; ?>"> 
-										<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['brand_image']); ?>" style="height: 250px;"> 
+										<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['brand_image']); ?>" style="height: 150px;"> 
 									</a>
 								</div>
 							<?php }  ?>
@@ -145,11 +146,20 @@
     <section class="new_arrivals_area  clearfix ">
         <div class="container ">
             <div class="row">
-                <div class="col-12">
+                <div class="col-10">
                     <div class="section_heading new_arrivals">
                         <h3>Popular <?php echo $get_Category_name; ?> Brands</h3>
                     </div>
                 </div>
+				<div class="col-2">
+					<div class="form-group">
+						<select class="form-control" id="selectSearch">
+							<option value='no' selected>Search By</option>
+							<option value="asc">Low To High</option>
+							<option value="desc">High To Low</option>
+						</select>
+					</div>
+				</div>
             </div>
 			<div class="row top-brands" id="results">
 				<!-- all data appearing from ajax ajax_productlist_pagination.php  -->

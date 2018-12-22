@@ -65,10 +65,7 @@
 
     <!-- Responsive CSS -->
     <link href="<?php echo $baseURL; ?>css/responsive.css" rel="stylesheet">
-    <style>
-        
-        .popular_brands_area{padding:25px 0 25px 0;}
-    </style>
+   
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125394826-1"></script>
@@ -153,7 +150,7 @@
 					 </div>
 				</div>
             </div>
-			 <div class="row" style="margin-bottom: -15px;margin-top: 12px;">
+			 <div class="row search-filter-margin">
                 <div class="col-10"></div>
                 
                 <div class="col-2">

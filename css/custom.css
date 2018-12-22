@@ -11,6 +11,24 @@
     padding: 0px 0 25px 0 !important;
 }
 
+.popular_brands_area_margin {
+    padding: 21px 0 25px 0 !important;
+}
+
+.popular_brands_area_margin_clents {
+    padding: 0px 0 0px 0 !important;
+}
+
 .section_padding_30{
 	padding : 30px 0 !important;
+}
+
+.brand-name-home{
+	margin: 6px 2px 2px 2px !important;
+}
+
+
+
+.search-filter-margin{
+	margin-bottom: -15px;margin-top: 12px;
 }
