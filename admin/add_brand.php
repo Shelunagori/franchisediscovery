@@ -65,8 +65,8 @@ $status='';
 							<div class="box-body">
 								<div class="col-md-6">
 									<div class="form-group">
-										<select name="category_id" class="form-control select2" style="width: 100%;">
-										  <option selected="selected">Select Category</option>
+										<select name="category_id[]" class="form-control select2" style="width: 100%;" data-placeholder="--- Select Category ---" multiple="multiple">
+										  <option value=''>Select Category</option>
 											<?php
 												$query=mysqli_query($db,"select * from categories where status = 0");
 												while($row=mysqli_fetch_array($query)){

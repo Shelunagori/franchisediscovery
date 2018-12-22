@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['add']))
 {
-	$category_id = mysqli_real_escape_string($db,$_POST['category_id']);
+	$category_id_Arrays = $_POST['category_id'];
 	$chart_id = mysqli_real_escape_string($db,$_POST['chart_id']);
 	$name = mysqli_real_escape_string($db,$_POST['name']);
 	$rating = mysqli_real_escape_string($db,$_POST['rating']);
@@ -221,6 +221,15 @@ if(isset($_POST['add']))
 					}
 				} 
 			}			
+		}
+		
+		if(!empty($category_id_Arrays)){
+			$del_sql ="delete from brand_rows where brand_id=$brand_id";
+			$db->query($del_sql);	
+			foreach($category_id_Arrays as $cat){
+				$sql_br = "INSERT INTO brand_rows(brand_id,category_id)VALUES('$brand_id','$cat')";
+			$save_rows = $db->query($sql_br);
+			}
 		}
 		
 		$_SESSION["status"] = "success";	

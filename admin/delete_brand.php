@@ -10,6 +10,9 @@ require('config.php');
 			$gridsql = "delete from brand_grid where brand_id = '$id' ";
 			$res_gridsql = $db->query($gridsql);
 			
+			$rowssql = "delete from brand_rows where brand_id = '$id' ";
+			$res_rowsql = $db->query($rowssql);
+			
 			$_SESSION["status"] = "delete_success";
 		} else {
 			

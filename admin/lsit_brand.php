@@ -1,44 +1,55 @@
 <?php 
 require('config.php');
 
-	$query="SELECT * FROM brands where status ='Active' order by id DESC ";
- if(isset($_POST['ok']))
+	$where='';$whereCat='';
+ if(isset($_GET['ok']))
 {
-	$category_id=$_POST['category'];
-	$brand_id=$_POST['brand_name'];
-	$from_date= $_POST['from_datepicker']?date('Y-m-d',strtotime($_POST['from_datepicker'])):null;
+	@$category_id=$_GET['category'];
+	$brand_id=$_GET['brand_name'];
+	$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 	if(!$from_date==null)
 		$from=$from_date." 00:00:00.000000";
 
-	$to_date= $_POST['to_datepicker']?date('Y-m-d',strtotime($_POST['to_datepicker'])):null;
+	$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
 	if(!$to_date==null)
 		$to=$to_date." 00:00:00.000000";
 
+	
 	if(!$category_id == null && @$from ==null && @$to ==null && $brand_id==null)
 	{
-		$query="SELECT * FROM brands WHERE status='Active' AND category_id=$category_id";
+		$whereCat="and category_id=$category_id";
 	}
-	elseif(!$category_id==null && !$brand_id==null)
+	elseif(!$brand_id==null)
 	{
-	 $query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id";
+		$where="and id=$brand_id";
+		//$whereCat="and category_id=$category_id";
 	}
 	elseif(!@$from==null && !@$to==null && $category_id==null && $brand_id==null)
 	{
-		$query="SELECT * FROM brands WHERE status ='Active' AND created_on BETWEEN '$from' AND '$to'";
+		$where="and created_on BETWEEN '$from' AND '$to'";
 	}
 	elseif(!@$from==null && !@$to==null &&!$category_id==null && !$brand_id==null)
 	{
-		$query="SELECT * FROM brands WHERE status ='Active' AND category_id=$category_id AND id=$brand_id AND created_on BETWEEN '$from' AND '$to'";
+		$where="AND id=$brand_id AND created_on BETWEEN '$from' AND '$to'";
+		$whereCat="and category_id=$category_id";
 	}
 	elseif(!@$from==null && @$to==null && $category_id==null && $brand_id==null)
 	{
-		$query="SELECT * FROM brands WHERE status ='Active'  AND created_on > '$from'";
+		$where="AND created_on > '$from'";
 	}
 	elseif(@$from==null && !@$to==null && $category_id==null && $brand_id==null)
 	{
-		$query="SELECT * FROM brands WHERE status ='Active'  AND created_on < '$to'";
+		$where="AND created_on < '$to'";
 	}
-}
+	
+}	
+	
+	if(!empty($where)){
+		$query = "select * from brands where status = 'Active' $where order by id DESC ";
+	}else{
+		$query = "select * from brands where status = 'Active' order by id DESC ";
+	}
+	
 require('header.php');
 ?>
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
@@ -97,11 +108,11 @@ require('header.php');
 						<div class="box-header">
 						  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  List of Brands</h3>
 						</div>
-					<form method="post" enctype="multipart/form-data">
+					<form method="GET">
 
 						<table class='table table-striped'>
 							<tr>
-								<td width="20%">
+								<!--<td width="20%">
 									<select name="category" class="form-control" id="category">
 										<option value="">--Select Category--</option>
 										<?php
@@ -111,10 +122,17 @@ require('header.php');
 												echo"<option value=".$category_row['id'].">".$category_row['name']."</option>";
 											} ?>
 									</select>
-								</td>
+								</td>-->
 								<td width="20%">
 									<select name="brand_name" class="form-control" id="brand_name">
 										<option value="">--Select Brand--</option>
+									<?php 
+									$sql="SELECT * FROM brands WHERE status='Active'";
+									$brand_query=mysqli_query($db,$sql);
+									while($category_row=mysqli_fetch_array($brand_query))
+											{
+												echo"<option value=".$category_row['id'].">".$category_row['name']."</option>";
+											} ?>
 									</select>
 								</td>
 								<td width="20%">
@@ -144,11 +162,14 @@ require('header.php');
 							<?php 
 							$query_result=mysqli_query($db,$query); 
 								$sno = 1;
-								if(!empty($query_result)){  ?>
+								if(!empty($query_result)){ 
+									
+									
+								?>
 							<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 								<thead>
 									<tr role="row">
-										<th>Sno</th>
+										<th>S.No.</th>
 										<th>Category Name</th>
 										<th>Image</th>
 										<th>Name</th>
@@ -160,15 +181,39 @@ require('header.php');
 									</tr>
 								</thead>
 								<tbody>
-									<?php while($row=mysqli_fetch_array($query_result)){ ?>
+									<?php while($row=mysqli_fetch_array($query_result)){ 
+									$brand_id = $row['id'];
+									$queryCat="select * from brand_rows where brand_id=$brand_id $whereCat";
+									$query_results=mysqli_query($db,$queryCat);
+									$arrayCategory=array();
+										if($query_results->num_rows > 0){
+										
+											while($row_brands=mysqli_fetch_array($query_results)){ 
+												$arrayCategory[] = $row_brands['category_id'];
+
+											}
+										}
+										
+									?>
 									<tr role="row" class="odd">
 									  <td> <?php echo $sno; ?> </td>	
-										<td>
-										<?php $catId = $row['category_id'];
-											$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
-											while($row_cat=mysqli_fetch_array($query_cat)){
-											echo $row_cat['name'];  } 
-										?>
+										<td width="10%">
+										<select  class="form-control select2" style="width: 100%;" data-placeholder="---Category---" multiple="multiple">
+											<?php
+												$query_cat=mysqli_query($db,"select * from categories where status = 0");
+												while($rows=mysqli_fetch_array($query_cat)){
+											?>
+												 <?php 
+												if(!empty($arrayCategory)){
+												foreach($arrayCategory as $a){
+													if($a == $rows['id']){ ?>
+														<option value="<?php echo $rows['id']; ?>" ><?php echo $rows['name']; ?> </option>
+													<?php }
+												}}?>
+												
+											<?php } ?>
+										</select>
+									  
 									  
 										</td>
 										<td>  <center>

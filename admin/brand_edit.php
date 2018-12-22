@@ -51,10 +51,23 @@ $status='';
 		  <?php }?>		
 		</div>
 		<?php $brand_id = base64_decode($_GET['rowvalue']);
-			  $query_brand=mysqli_query($db,"select * from brands where status = 'Active' and id = '$brand_id' ");
+		
+		 $sql = "select brands.id,brands.chart_id,brands.name,brands.title,brands.contact_no,brands.rating,brands.avg_rating,brands.food_type,brands.area_reqired,brands.investment_range,brands.investment_range_in_words,brands.franchise_outlets,brands.brand_image,brands.address,brands.seo_name,brands.footer_content,brands.status,brand_rows.category_id from brands LEFT JOIN brand_rows ON brand_rows.brand_id=brands.id where status = 'Active' and brands.id = '$brand_id' ";
+		
+			  $query_brand=mysqli_query($db,$sql);
+			  
+			 $query_brands=mysqli_query($db,$sql);
+			 if($query_brands->num_rows > 0){
+				 $arrayCategory=array();
+				while($row_brands=mysqli_fetch_array($query_brands)){ 
+					$arrayCategory[] = $row_brands['category_id'];
+					
+				}
+			 }
+			
 			 if($query_brand->num_rows > 0)
 		     {
-				while($row_brand=mysqli_fetch_array($query_brand)){ 
+				$row_brand=mysqli_fetch_array($query_brand);
 		?>
 		<form role="form" method="post" action="save_edit_brand.php" enctype="multipart/form-data">
 		<input type="hidden" name="brand_id" value="<?php echo $brand_id ?>" />
@@ -72,14 +85,18 @@ $status='';
 							<div class="box-body">
 								<div class="col-md-6">
 									<div class="form-group">
-										<select name="category_id" class="form-control select2" style="width: 100%;">
-										  <option selected="selected">Select Category</option>
+										<select name="category_id[]" class="form-control select2" style="width: 100%;" data-placeholder="---Select Category---" multiple="multiple">
 											<?php
 												$query=mysqli_query($db,"select * from categories where status = 0");
 												while($row=mysqli_fetch_array($query)){
 											?>
-												<option value="<?php echo $row['id']; ?>" <?php if($row_brand['category_id']  == $row['id']) { echo 'selected'; } ?>>
-													<?php echo $row['name']; ?>
+												<option value="<?php echo $row['id']; ?>" <?php 
+												foreach($arrayCategory as $a){
+													if($a == $row['id']){
+														echo 'selected'; 
+													}
+												}?>>
+												<?php echo $row['name']; ?>
 												</option>
 											<?php } ?>
 										</select>
@@ -669,7 +686,7 @@ $query_seo=mysqli_query($db,"SELECT * FROM page_seo where page_id = '3' and bran
 
 		
 		</form>
-			 <?php } } ?>
+			 <?php } ?>
 	</div>
 	</section>
 </div>

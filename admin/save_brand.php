@@ -2,7 +2,7 @@
 require('config.php');
 if(isset($_POST['add']))
 {
-	$category_id = mysqli_real_escape_string($db,$_POST['category_id']);
+	$category_id_Arrays = $_POST['category_id'];
 	$chart_id = mysqli_real_escape_string($db,$_POST['chart_id']);
 	$name = mysqli_real_escape_string($db,$_POST['name']);
 	$rating = mysqli_real_escape_string($db,$_POST['rating']);
@@ -57,7 +57,7 @@ if(isset($_POST['add']))
 		move_uploaded_file($_FILES["slider_image"]["tmp_name"],$url);
 	}
 	
-	$sql = "INSERT INTO brands(category_id,chart_id, name, title, contact_no, rating, avg_rating, food_type, area_reqired, investment_range,investment_range_in_words, franchise_outlets, brand_image,address,seo_name,footer_content) VALUES('$category_id','$chart_id','$name','$description','$contact_no','$rating','$avg_rating','$food_type','$area_reqired','$investment_range','$investment_range_in_words','$franchise_outlets','$url','$address','$seo_name','$footer_content')";
+	$sql = "INSERT INTO brands(chart_id, name, title, contact_no, rating, avg_rating, food_type, area_reqired, investment_range,investment_range_in_words, franchise_outlets, brand_image,address,seo_name,footer_content) VALUES('$chart_id','$name','$description','$contact_no','$rating','$avg_rating','$food_type','$area_reqired','$investment_range','$investment_range_in_words','$franchise_outlets','$url','$address','$seo_name','$footer_content')";
 	
 	if ($db->query($sql) === TRUE) {
 		$brand_id = mysqli_insert_id($db);
@@ -176,6 +176,12 @@ if(isset($_POST['add']))
 	
 		$sql_seo = "INSERT INTO page_seo(page_id,category_id,brand_id,title, meta_description, meta_keywords, meta_robots, meta_abstract, meta_topic, meta_url, g_name, g_description, g_image, t_title, t_description, t_image, og_title, og_type, og_url, og_image, og_description, og_site_name, fb_admins, canonical) VALUES ('$page_id','$category_id','$brand_id','$title','$meta_description','$meta_keywords','$meta_robots','$meta_abstract','$meta_topic','$meta_url','$g_name','$g_description','$g_image','$t_title','$t_description','$t_image','$og_title','$og_type','$og_url','$og_image','$og_description','$og_site_name','$fb_admins','$canonical')";
 		$seo = $db->query($sql_seo);
+		if(!empty($category_id_Arrays)){
+			foreach($category_id_Arrays as $category_id){
+	$sql_br = "INSERT INTO brand_rows(brand_id,category_id)VALUES('$brand_id','$category_id')";
+				$save_rows = $db->query($sql_br);
+			}
+		}
 		
 		$_SESSION["status"] = "success";	
 		
