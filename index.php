@@ -61,6 +61,7 @@
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="<?php echo $baseURL; ?>css/core-style.css">
     <link rel="stylesheet" href="<?php echo $baseURL; ?>style.css">
+    <link rel="stylesheet" href="<?php echo $baseURL; ?>css/custom.css">
 
     <!-- Responsive CSS -->
     <link href="<?php echo $baseURL; ?>css/responsive.css" rel="stylesheet">

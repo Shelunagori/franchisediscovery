@@ -61,20 +61,19 @@ label.expend {
 						
 						if(isset($_GET['data_row']) && !empty($_GET['data_row']))
 						{
-							//$cat_data =  str_replace("/","",$_GET['data_row']);
-							//$category_id = base64_decode($cat_data); 
-		
-							$query=mysqli_query($db,"SELECT * FROM news_blogs where category_id = '$category_id' and type = 'News' and status = 'Active' order by id DESC LIMIT 3 ");  	
+							
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.content,news_blogs.seo_name,news_blogs.image FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' and news_blogs.category_id = '$category_id' order by news_blog_contents.id DESC ";
+							$query=mysqli_query($db,$sql); 
 						}else
 						{
-							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.content,news_blogs.image FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' order by news_blog_contents.id DESC ";
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.content,news_blogs.seo_name,news_blogs.image FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' order by news_blog_contents.id DESC ";
 							$query=mysqli_query($db,$sql); 
 						//	$query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC LIMIT 3 ");  
 						}
 						
 						if($query->num_rows == 0)
 						{
-							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' order by news_blog_contents.id DESC ";
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'News' order by news_blog_contents.id DESC ";
 							$query=mysqli_query($db,$sql);  	
 						}
 						
@@ -88,7 +87,7 @@ label.expend {
 							$recentCatseo = $rowString['seo_name']; 
 						?>		
 							<div class="single_latest_post">
-								<?php if(empty($baseURL.str_replace('../',"",$row['image']))){ ?>
+						<?php if(empty($row['image'])){ ?>
 									<img src="<?php echo $baseURL; ?>img/no-image.png" 
 									alt="">
 								<?php }else{ ?>
@@ -105,18 +104,19 @@ label.expend {
 						<?php
 							if(isset($_GET['data_row']) && !empty($_GET['data_row']))
 							{
-								//$cat_data =  str_replace("/","",$_GET['data_row']);
-								//$category_id = base64_decode($cat_data); 
-			
-								$query=mysqli_query($db,"SELECT * FROM news_blogs where category_id = '$category_id' and type = 'Blogs' and status = 'Active' order by id DESC LIMIT 3 ");  	
+								$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'Blogs' and news_blogs.category_id = '$category_id' order by news_blog_contents.id DESC ";
+								$query=mysqli_query($db,$sql);  
 							}else
 							{
-								$query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'Blogs' and status = 'Active' order by id DESC LIMIT 3 ");  
+								$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'Blogs' order by news_blog_contents.id DESC ";
+								$query=mysqli_query($db,$sql); 
+								
 							}
 							
 							if($query->num_rows == 0)
 							{
-								$query=mysqli_query($db,"SELECT * FROM news_blogs where type = 'Blogs' and status = 'Active' order by id DESC LIMIT 3 ");   	
+								$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'Blogs' order by news_blog_contents.id DESC ";
+								$query=mysqli_query($db,$sql); 			
 							}
 							$sno = 1;
 							if(!empty($query)){ 
@@ -128,7 +128,12 @@ label.expend {
 							$recentCatseo = $rowString['seo_name']; 								
 						?>		
 							<div class="single_latest_post">
-							    <img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['image']); ?>" alt="news">
+								<?php if(empty($row['image'])){ ?>
+									<img src="<?php echo $baseURL; ?>img/no-image.png" 
+									alt="">
+								<?php }else{ ?>
+									<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['image']); ?>" alt="news">
+								<?php } ?>	
 							    <a href="<?php echo $baseURL; ?>blogdetail/<?php echo $recentCatseo; ?>/<?php echo $row['seo_name']; ?>"><?php echo $row['title']; ?></a>
 								<p><?php echo substr($row['content'],0,150).'...'; ?></p>
 						    </div>
@@ -302,18 +307,20 @@ label.expend {
 					
 						if(isset($_GET['data_row']) && !empty($_GET['data_row']))
 						{
-							//$cat_data =  str_replace("/","",$_GET['data_row']);
-							//$category_id = base64_decode($cat_data); 
-		
-							$queryVB=mysqli_query($db,"SELECT * FROM news_blogs where category_id = '$category_id' and type = 'Video' and status = 'Active' order by id DESC LIMIT 6 ");  
+							
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'Video' and news_blogs.category_id = '$category_id' order by news_blog_contents.id DESC ";
+							$queryVB=mysqli_query($db,$sql); 
+							
 						}else
 						{
-							$queryVB=mysqli_query($db,"SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC LIMIT 6 ");  
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'Video' order by news_blog_contents.id DESC ";
+							$queryVB=mysqli_query($db,$sql); 
 						}
 						
 						if($queryVB->num_rows == 0)
 						{
-							$queryVB=mysqli_query($db,"SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC LIMIT 6 ");   	
+							$sql = "SELECT news_blog_contents.id, news_blog_contents.type , news_blogs.title,news_blogs.category_id,news_blogs.seo_name ,news_blogs.content,news_blogs.image  FROM  news_blog_contents INNER JOIN news_blogs ON (news_blog_contents.news_blog_id = news_blogs.id) where news_blog_contents.status ='Active' and news_blog_contents.type = 'Video' order by news_blog_contents.id DESC ";
+							$queryVB=mysqli_query($db,$sql); 		
 						}
 					
 						if(!empty($queryVB)){ 
@@ -329,7 +336,12 @@ label.expend {
 						<div class="col-sm-6 blog_sidebar">
 							<div class="latest_post mb-30 news">
 								<div class="single_latest_post ">
-									<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$rowVB['image']); ?>" alt="news">
+									<?php if(empty($rowVB['image'])){ ?>
+										<img src="<?php echo $baseURL; ?>img/no-image.png" 
+										alt="">
+									<?php }else{ ?>
+										<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$rowVB['image']); ?>" alt="news">
+									<?php } ?>	
 								    <a href="<?php echo $baseURL; ?>videodetail/<?php echo $recentCatseo;?>/<?php echo $rowVB['seo_name']; ?>">
 										<?php echo $rowVB['title']; ?></a>
 									<p><?php echo substr($rowVB['content'],0,150).'...'; ?></p>
@@ -343,7 +355,7 @@ label.expend {
     </section>
 	
 	  <!-- ***** Testimonial Area Start ***** -->
-    <section class="testimonials_area section_padding_50">
+    <section class="testimonials_area">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -376,7 +388,7 @@ label.expend {
     <!-- ***** Testimonial Area End ***** -->
  
  	  <!-- ***** Testimonial Area Start ***** -->
-    <section class="testimonials_area section_padding_50">
+    <section class="testimonials_area section_padding_30">
         <div class="container">
 		 
 		 
