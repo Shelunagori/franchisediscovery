@@ -4,30 +4,33 @@ require('config.php');
 
 $status = '';
 $message = '';
+ $sql="SELECT * FROM enquire where enquire_type = 'franchise' and status = 'Active' order by id DESC ";
+ $sql1="SELECT * FROM enquire where enquire_type = 'brand' and status = 'Active'";
 
 if(isset($_GET['ok']))
 			{
 				$first_name=$_GET['name'];
 				$email=$_GET['email'];
 				$city=$_GET['city'];
-				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				$from_date= $_GET['from_datepicker']?date('d-m-Y',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
 					$from=$from_date;
 
-				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				$to_date= $_GET['to_datepicker']?date('d-m-Y',strtotime($_GET['to_datepicker'])):null;
 				if(!$to_date==null)
 					$to=$to_date;
 
 				if(!$first_name == null && $email == null && $city == null && @$from == null  && @$to == null)
 				{
-					echo$sql="SELECT * FROM `enquire` WHERE enquire_type='franchise' AND name LIKE '%$first_name%' AND status='Active'";
+					$sql="SELECT * FROM `enquire` WHERE enquire_type='franchise' AND name LIKE '%$first_name%' AND status='Active'";
 				}
 				else if($first_name==null && !$email==null && $city==null && @$from== null && @$to == null)
 				{
 					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND email LIKE '%$email%'";
 				}
 
-				else if($first_name==null && !$email==null && !$city==null && @$from== null && @$to == null)
+				else if($first_name==null && $email==null && !$city==null && @$from== null 
+					&& @$to == null)
 				{
 					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND city LIKE '%$city%'";
 				}
@@ -62,6 +65,53 @@ if(isset($_GET['ok']))
 				}
 				
 			}
+			if(isset($_GET['brand_filter']))
+			{
+				$first_name=$_GET['name'];
+				$email=$_GET['email'];
+				$from_date= $_GET['from_datepicker']?date('d-m-Y',strtotime($_GET['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date;
+
+				$to_date= $_GET['to_datepicker']?date('d-m-Y',strtotime($_GET['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date;
+
+				if(!$first_name == null && $email == null && @$from == null  && @$to == null)
+				{
+					echo$sql1="SELECT * FROM `enquire` WHERE enquire_type='brand' AND name LIKE '%$first_name%' AND status='Active'";
+				}
+				else if($first_name==null && !$email==null && @$from== null && @$to == null)
+				{
+					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND email LIKE '%$email%'";
+				}
+
+				
+
+				else if($first_name==null && $email==null && !@$from== null && !@$to == null)
+				{
+					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND enquite_date BETWEEN '$from' AND '$to'";
+				}
+				else if(!$first_name==null && !$email==null && !@$from== null && !@$to == null)
+				{
+					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%'";
+				}
+				else if($first_name==null && $email==null && !@$from== null && @$to == null)
+				{
+					$sql="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND  enquite_date > '$from'";
+				}
+				
+				else if(!$first_name==null && !$email==null && $city==null && @$from== null && @$to == null)
+				{
+					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
+				}
+				
+				else if($first_name==null && $email==null && @$from== null && !@$to == null)
+				{
+					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND enquite_date > '$to'";
+				}
+				
+			}
 	if(@$_GET["del"] == "del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -77,6 +127,8 @@ if(isset($_GET['ok']))
 
 
 ?>
+<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
+
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
 <style>
@@ -154,6 +206,15 @@ if(isset($_GET['ok']))
 									<li class="active"><a  href="#1" data-toggle="tab">Franchise </a></li>
 									<li><a href="#2" data-toggle="tab">Brand</a></li>
 								</ul>
+					
+							<div class="tab-content">
+								<div class="tab-pane active" id="1">
+
+									<?php
+										
+										$query_result=mysqli_query($db,$sql);
+										$sno = 1;
+										if(!empty($query_result)){  ?>
 					<form method="get" enctype="multipart/form-data">
 						<table class='table table-striped'>
 							<tr>
@@ -190,14 +251,6 @@ if(isset($_GET['ok']))
 							</tr>
 						</table>
 					</form>
-							<div class="tab-content">
-								<div class="tab-pane active" id="1">
-
-									<?php
-										 $sql="SELECT * FROM enquire where enquire_type = 'franchise' and status = 'Active' order by id DESC ";
-										$query_result=mysqli_query($db,$sql);
-										$sno = 1;
-										if(!empty($query)){  ?>
 									<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">
@@ -238,10 +291,46 @@ if(isset($_GET['ok']))
 									</table>								
 									<?php  } else {  echo 'No Record Found !';  } ?>									
 								</div>
+								<form method="get" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="name" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="text" name="email" placeholder="Enter email" class="form-control">
+								</td>
+								
+								
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker2" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker3" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+
+								<td>
+									<button class="btn btn-primary" type="submit" name="brand_filter">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 									<div class="tab-pane" id="2">	
-									<?php $sql1=mysqli_query($db,"SELECT * FROM enquire where enquire_type = 'brand' and status = 'Active' order by id DESC ");  
+									<?php  
+							
+									$sql_result=mysqli_query($db,$sql1); 
 										$sno = 1;
-										if(!empty($sql1)){  ?>
+										if(!empty($sql_result)){  ?>
 									<table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">
@@ -257,7 +346,7 @@ if(isset($_GET['ok']))
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($sql1)){ ?>
+											<?php while($row=mysqli_fetch_array($sql_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td> <?php echo $row['enquite_date'];  ?> </td>
@@ -295,12 +384,18 @@ require('footer.php');
 ?>
 <script strc="plugins/datepicker/bootstrap-datepicker.js"></script>
 
-        <script>
+   <script>
             
    $('#datepicker').datepicker({
       autoclose: true,
 	});
 	$('#datepicker1').datepicker({
+      autoclose: true,
+    });
+     $('#datepicker2').datepicker({
+      autoclose: true,
+	});
+	$('#datepicker3').datepicker({
       autoclose: true,
     });
 	</script>
