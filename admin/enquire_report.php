@@ -4,6 +4,28 @@ require('config.php');
 
 $status = '';
 $message = '';
+ $query="SELECT * FROM enquire where enquire_type = 'franchise' and status = 'Active' order by id DESC ";
+if(isset($_POST['ok']))
+			{
+				$first_name=$_POST['name'];
+				$email=$_POST['email'];
+				if(!$first_name==null && $email == null)
+				{
+					echo$sql="SELECT * FROM `enquire` WHERE `enquire_type` LIKE 'franchise' AND `name` LIKE '%'.$first_name.'%' AND `status` LIKE 'active'
+";
+				}
+				else if($first_name==null && !$email==null)
+				{
+					echo$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND email LIKE '%'.$email.'%'";
+				}
+
+				
+				else if(!$first_name==null && !$email==null)
+				{
+					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND email LIKE '%'.$email.'%' AND name LIKE '%'.$first_name.'%'";
+				}
+				
+			}
 	if(@$_GET["del"] == "del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -94,10 +116,27 @@ $message = '';
 									<li class="active"><a  href="#1" data-toggle="tab">Franchise </a></li>
 									<li><a href="#2" data-toggle="tab">Brand</a></li>
 								</ul>
+					<form method="post" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="name" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="email" name="email" placeholder="Enter email" class="form-control">
+								</td>
+								
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">
 
-									<?php $query=mysqli_query($db,"SELECT * FROM enquire where enquire_type = 'franchise' and status = 'Active' order by id DESC ");  
+									<?php
+										$query_result=mysqli_query($db,$query);
 										$sno = 1;
 										if(!empty($query)){  ?>
 									<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
@@ -117,7 +156,7 @@ $message = '';
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($query)){ ?>
+											<?php while($row=mysqli_fetch_array($query_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td> <?php echo $row['enquite_date'];  ?> </td>
@@ -141,9 +180,9 @@ $message = '';
 									<?php  } else {  echo 'No Record Found !';  } ?>									
 								</div>
 									<div class="tab-pane" id="2">	
-									<?php $query=mysqli_query($db,"SELECT * FROM enquire where enquire_type = 'brand' and status = 'Active' order by id DESC ");  
+									<?php $querys=mysqli_query($db,"SELECT * FROM enquire where enquire_type = 'brand' and status = 'Active' order by id DESC ");  
 										$sno = 1;
-										if(!empty($query)){  ?>
+										if(!empty($querys)){  ?>
 									<table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">

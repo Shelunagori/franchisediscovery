@@ -3,7 +3,25 @@
 	include('header.php');
 	$status="";
 	$message="";
-	
+	$sql="SELECT * FROM support_ticket";
+	if(isset($_POST['ok']))
+			{
+				$first_name=$_POST['name'];
+				$ticket_no=$_POST['ticket_no'];
+				if(!$first_name == null && $ticket_no == null)
+				{
+					$sql="SELECT * FROM feedback WHERE name LIKE '%'.$first_name.'%' ";
+				}
+				else if($first_name == null && !$ticket_no == null)
+				{
+					$sql="SELECT * FROM feedback WHERE ticket_no LIKE '%'.$ticket_no.'%' ";
+				}
+				else if(!$first_name == null && !$ticket_no == null )
+				{
+					$sql="SELECT * FROM feedback WHERE name LIKE '%'.$first_name.'%' AND ticket_no LIKE '%'.$ticket_no.'%'  ";
+				}
+				
+			}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -84,7 +102,31 @@
 }
 </style>
 						</div>
-						
+						<form method="post" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="text" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<select name="ticket_not" class="form-control">
+										<option value="">--Select--</option>
+										<?php
+											 $ticket_query=mysqli_query($db,"SELECT * FROM support_ticket");
+											while($ticket_row=mysqli_fetch_array($ticket_query))
+											{
+												echo"<option value=".$ticket_row['ticket_no'].">".$ticket_row['ticket_no']."</option>";
+											}
+										?>
+									</select>
+								</td>
+								
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 						
 						<div class="box-body">
 							
@@ -110,7 +152,7 @@
 										</thead>
 										<tbody>
 											<?php
-												$sql="SELECT * FROM support_ticket";
+												
 												$result=$db->query($sql);
 												$count=0;
 												while($rows = mysqli_fetch_array($result)){ $count++;

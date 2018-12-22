@@ -3,7 +3,31 @@
 	include('header.php');
 	$status="";
 	$message="";
-	
+	$sql="SELECT * FROM advertise_with_us ";
+		
+		if(isset($_POST['ok']))
+			{
+				$first_name=$_POST['name'];
+				$email=$_POST['email'];
+				$company_name=$_POST['company_name'];
+				if(!$first_name == null && $email == null && $company_name== null)
+				{
+					$sql="SELECT * FROM advertise_with_us WHERE name LIKE '%'.$first_name.'%' ";
+				}
+				else if($first_name == null && !$email == null && $company_name== null)
+				{
+					$sql="SELECT * FROM advertise_with_us WHERE email LIKE '%'.$email.'%' ";
+				}
+				else if($first_name == null && $email == null && !$company_name== null)
+				{
+					$sql="SELECT * FROM advertise_with_us WHERE company_name LIKE '%'.$company_name.'%' ";
+				}
+				else if(!$first_name == null && !$email == null && !$company_name== null)
+				{
+					$sql="SELECT * FROM advertise_with_us WHERE company_name LIKE '%'.$company_name.'%' AND name LIKE '%'.$first_name.'%' AND email LIKE '%'.$email.'%'  ";
+				}
+				
+			}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -85,7 +109,24 @@
 </style>
 						</div>
 						
-						
+						<form method="post" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="name" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="email" name="email" placeholder="Enter email" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="text" name="company_name" placeholder="Enter company name" class="form-control">
+								</td>
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 						<div class="box-body">
 							
 							<div id="exTab2">	
@@ -109,7 +150,6 @@
 										</thead>
 										<tbody>
 											<?php
-												$sql="SELECT * FROM advertise_with_us ";
 												$result=$db->query($sql);
 												$count=0;
 												while($rows = mysqli_fetch_array($result)){ $count++;

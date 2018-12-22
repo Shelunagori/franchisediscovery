@@ -21,28 +21,28 @@
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%'";
 				}
-				elseif($first_name==null && !$email==null && @$from==null && @$to==null)
+				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email LIKE='%'.$email.'%'";
 				}
 
-				elseif($first_name==null && $email==null && !@$from==null && !@$to==null)
+				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
 				}
-				elseif(!$first_name==null && !$email==null && @$from==null && @$to==null)
+				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
 					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%'";
 				}
-				elseif(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
+				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%' AND created_on BETWEEN '$from' AND '$to'";
 				}
-				elseif($first_name==null && $email==null && !@$from==null && @$to==null)
+				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on > '$from'";
 				}
-				elseif($first_name==null && $email==null && @$from==null && !@$to==null)
+				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on < '$to'";
 				}
@@ -189,9 +189,10 @@
 										<tbody>
 											<?php
 											
-												$result=$db->query($db,$sql);
+												$result=$db->query($sql);
 												$count=0;
-												while($rows = mysqli_fetch_array($result)){ $count++;
+												while($rows =mysqli_fetch_array($result)){
+												 $count++;
 												 ?>
 											<tr>
 												<td><?php echo $count;?></td>
