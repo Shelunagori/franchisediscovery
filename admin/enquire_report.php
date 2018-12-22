@@ -92,7 +92,7 @@ $message = '';
 							<div id="exTab2">	
 								<ul class="nav nav-tabs">
 									<li class="active"><a  href="#1" data-toggle="tab">Franchise </a></li>
-									<li><a href="#2" data-toggle="tab">Expand</a></li>
+									<li><a href="#2" data-toggle="tab">Brand</a></li>
 								</ul>
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">

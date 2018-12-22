@@ -6,33 +6,45 @@
 	$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'";
 			if(isset($_POST['ok']))
 			{
-				echo$first_name=$_POST['name'];
-				echo$email=$_POST['email'];
-				$from_date=date('Y-m-d',strtotime($_POST['from_datepicker']));
-				$from=$from_date." 00:00:00.000000";
-				$to_date=date('Y-m-d',strtotime($_POST['to_datepicker']));
-				$to=$to_date." 00:00:00.000000";
+				$first_name=$_POST['name'];
+				$email=$_POST['email'];
+				$from_date= $_POST['from_datepicker']?date('Y-m-d',strtotime($_POST['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date." 00:00:00.000000";
 
-				if(!$first_name==null && $email == null && $from == null && $to == null)
+				$to_date= $_POST['to_datepicker']?date('Y-m-d',strtotime($_POST['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date." 00:00:00.000000";
+
+
+				if(!$first_name==null && $email == null && @$from == null && @$to == null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name'";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%'";
 				}
-				elseif($first_name==null && !$email==null && $from==null && $to==null)
+				elseif($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email='$email'";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email LIKE='%'.$email.'%'";
 				}
 
-				elseif($first_name==null && $email==null && !$from==null && !$to==null)
+				elseif($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
 					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
 				}
-				elseif(!$first_name==null && !$email==null && $from==null && $to==null)
+				elseif(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%'";
 				}
-				elseif(!$first_name==null && !$email==null && !$from==null && !$to==null)
+				elseif(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name='$first_name' AND email='$email' AND created_on BETWEEN '$from' AND '$to'";
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%' AND created_on BETWEEN '$from' AND '$to'";
+				}
+				elseif($first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on > '$from'";
+				}
+				elseif($first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on < '$to'";
 				}
 
 
@@ -51,6 +63,8 @@
 			}
 ?>
 <link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
+
 
 <div class="content-wrapper">
     <section class="content">
@@ -121,28 +135,37 @@
 }
 </style>
 						</div>
-						<form method="post" enctype="multipart/form-data">
-						<div>
-							<label style="margin-left: 30px; margin-top: 30px; margin-bottom: 30px;" >Name</label>
-							<select name="name">
-								<option value="">--Select Name--</option>
-								<?php
-									$name_query=mysqli_query($db,"SELECT * FROM registration WHERE status='1' AND reg_type='Brand'");
-									while($name_row=mysqli_fetch_array($name_query))
-									{
-										echo"<option value=".$name_row['first_name'].">".$name_row['first_name']."</option>";
-									}	
-								?>
-							</select>
-							<label style="margin-left: 30px;">Email</label>
-							<input type="email" name="email">
-							<label style="margin-left: 30px;">From</label>
-							<input type="text" id="from_datepicker" name="from_datepicker">
-							<label>To</label>
-							<input type="text" id="to_datepicker" name="to_datepicker">&nbsp;
-							<button style="margin-left: 15px;" class="btn-info" type="submit" name="ok">OK</button>
-						</div>
-						</form>
+					<form method="post" enctype="multipart/form-data">
+						<table class='table table-striped'>
+							<tr>
+								<td width="20%">
+									<input type="name" name="name" placeholder="Enter name" class="form-control">
+								</td>
+								<td width="20%">
+									<input type="email" name="email" placeholder="Enter email" class="form-control">
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+									</div>
+								</td>
+								<td width="20%">
+									<div class="input-group date">
+										<div class="input-group-addon">
+										<i class="fa fa-calendar"></i>
+										</div>
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+									</div>
+								</td>
+								<td>
+									<button class="btn btn-primary" type="submit" name="ok">Filter</button>
+								</td>
+							</tr>
+						</table>
+					</form>
 						<div class="box-body">
 							
 							<div id="exTab2">	
@@ -166,7 +189,7 @@
 										<tbody>
 											<?php
 											
-												$result=$db->query($sql);
+												$result=$db->query($db,$sql);
 												$count=0;
 												while($rows = mysqli_fetch_array($result)){ $count++;
 												 ?>
@@ -220,7 +243,7 @@
 <?php
 require('footer.php');
 ?>
- <script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
+<script strc="plugins/datepicker/bootstrap-datepicker.js"></script>
 
         <script>
             $(document).ready(function(){
@@ -237,9 +260,11 @@ require('footer.php');
 				
 			});
 		});
-            $('#from_datepicker').datepicker({
-			});
-			 $('#to_datepicker').datepicker({
-			});
+   $('#datepicker').datepicker({
+      autoclose: true,
+	});
+	$('#datepicker1').datepicker({
+      autoclose: true,
+    });
 	</script>
 
