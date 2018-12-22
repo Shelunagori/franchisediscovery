@@ -4,47 +4,47 @@
 	$status="";
 	$message="";
 	$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'";
-			if(isset($_POST['ok']))
+			if(isset($_GET['ok']))
 			{
-				$first_name=$_POST['name'];
-				$email=$_POST['email'];
-				$from_date= $_POST['from_datepicker']?date('Y-m-d',strtotime($_POST['from_datepicker'])):null;
+				$first_name=$_GET['name'];
+				$email=$_GET['email'];
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
 					$from=$from_date." 00:00:00.000000";
 
-				$to_date= $_POST['to_datepicker']?date('Y-m-d',strtotime($_POST['to_datepicker'])):null;
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
 				if(!$to_date==null)
 					$to=$to_date." 00:00:00.000000";
 
 
 				if(!$first_name==null && $email == null && @$from == null && @$to == null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE'%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email LIKE='%'.$email.'%'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email LIKE'%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE'%$first_name%' AND email LIKE '%$email%'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%' AND created_on BETWEEN '$from' AND '$to'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on > '$from'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on < '$to'";
+					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on < '$to'";
 				}
 
 
@@ -135,14 +135,14 @@
 }
 </style>
 						</div>
-					<form method="post" enctype="multipart/form-data">
+					<form method="get" enctype="multipart/form-data">
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
 									<input type="name" name="name" placeholder="Enter name" class="form-control">
 								</td>
 								<td width="20%">
-									<input type="email" name="email" placeholder="Enter email" class="form-control">
+									<input type="text" name="email" placeholder="Enter email" class="form-control">
 								</td>
 								<td width="20%">
 									<div class="input-group date">

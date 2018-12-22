@@ -4,21 +4,13 @@
 	$status="";
 	$message="";
 	$sql="SELECT * FROM listing_request";
-		if(isset($_POST['ok']))
+		if(isset($_GET['ok']))
 			{
-				$first_name=$_POST['name'];
-				$brand_name=$_POST['brand_name'];
-				if(!$first_name == null && $brand_name == null)
+				$brand_name=$_GET['brand_name'];
+				
+				if(!$brand_name == null)
 				{
-					$sql="SELECT * FROM listing_request WHERE name LIKE '%'.$first_name.'%' ";
-				}
-				else if($first_name == null && !$brand_name == null)
-				{
-					$sql="SELECT * FROM listing_request WHERE email LIKE '%'.$brand_name.'%' ";
-				}
-				else if(!$first_name == null && !$brand_name == null )
-				{
-					$sql="SELECT * FROM listing_request WHERE name LIKE '%'.$first_name.'%' AND email LIKE '%'.$email.'%'  ";
+					$sql="SELECT * FROM listing_request WHERE brand_name LIKE '%$brand_name%' ";
 				}
 				
 			}
@@ -102,12 +94,10 @@
 }
 </style>
 						</div>
-					<form method="post" enctype="multipart/form-data">
+					<form method="get" enctype="multipart/form-data">
 						<table class='table table-striped'>
 							<tr>
-								<td width="20%">
-									<input type="text" name="customer_name" placeholder="Enter name" class="form-control">
-								</td>
+								
 								<td width="20%">
 									<input type="text" name="brand_name" placeholder="Enter brand" class="form-control">
 								</td>
@@ -143,7 +133,7 @@
 												
 												$result=$db->query($sql);
 												$count=0;
-												while($rows = mysqli_fetch_array($result)){ $count++;
+												while($rows =mysqli_fetch_array($result)){ $count++;
 												 ?>
 											<tr>
 												<td><?php echo $count;?></td>

@@ -2,33 +2,34 @@
 
 require('config.php');
 require('header.php');
-$query="SELECT * FROM contact_brands order by id DESC ";
-	if(isset($_POST['ok']))
+$sql="SELECT * FROM contact_brands order by id DESC ";
+	if(isset($_GET['ok']))
 			{
-				$first_name=$_POST['name'];
-				$email=$_POST['email'];
-				$from_date= $_POST['from_datepicker']?date('Y-m-d',strtotime($_POST['from_datepicker'])):null;
+				$first_name=$_GET['name'];
+				$email=$_GET['email'];
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
 					$from=$from_date." 00:00:00.000000";
 
-				$to_date= $_POST['to_datepicker']?date('Y-m-d',strtotime($_POST['to_datepicker'])):null;
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
 				if(!$to_date==null)
 					$to=$to_date." 00:00:00.000000";
-				if(!$first_name == null && $email == null  && $from== null && $to == null)
+				if(!$first_name == null && $email == null  && @$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE name LIKE '%'.$first_name.'%' ";
+					$sql="SELECT * FROM contact_brands WHERE name LIKE '%$first_name%' ";
 				}
-				else if($first_name == null && !$email == null  && $from== null && $to == null )
+				else if($first_name == null && !$email == null  && @$from== null && @$to == null )
 				{
-					$sql="SELECT * FROM contact_brands WHERE email LIKE '%'.$email.'%' ";
+					$sql="SELECT * FROM contact_brands WHERE email LIKE '%$email%' ";
 				}
-				else if(!$first_name == null && !$email == null  && $from== null && $to == null)
+				else if(!$first_name == null && !$email == null  && @$from== null && 
+					@$to == null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE name LIKE '%'.$first_name.'%' AND email LIKE '%'.$email.'%'  ";
+					$sql="SELECT * FROM contact_brands WHERE name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
 				}
-					else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
+				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE first_name LIKE='%'.$first_name.'%' AND email LIKE='%'.$email.'%' AND created_on BETWEEN '$from' AND '$to'";
+					$sql="SELECT * FROM contact_brands WHERE first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
@@ -40,7 +41,7 @@ $query="SELECT * FROM contact_brands order by id DESC ";
 				}
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM contact_brands WHERE created_on BETWEEN '$from' AND '$to'";
+					$sql="SELECT * FROM contact_brands WHERE created_on BETWEEN '$from' AND '$to'";
 				}
 
 				
@@ -115,14 +116,14 @@ if(@$_GET["Action"] == "Del")
 						<div class="box-header">
 						  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Brands Enquire</h3>
 						</div>
-					<form method="post" enctype="multipart/form-data">
+					<form method="get" enctype="multipart/form-data">
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
 									<input type="name" name="name" placeholder="Enter name" class="form-control">
 								</td>
 								<td width="20%">
-									<input type="email" name="email" placeholder="Enter email" class="form-control">
+									<input type="text" name="email" placeholder="Enter email" class="form-control">
 								</td>
 								<td width="20%">
 									<div class="input-group date">
@@ -149,7 +150,7 @@ if(@$_GET["Action"] == "Del")
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
 							<?php  
-							$query_result=mysqli_query($db,$query);
+							$query_result=mysqli_query($db,$sql);
 								$sno = 1;
 								if(!empty($query_result)){  ?>
 							<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
