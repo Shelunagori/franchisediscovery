@@ -3,7 +3,7 @@
 	include('header.php');
 	$status="";
 	$message="";
-	$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor'";
+	$Where='';
 
 			if(isset($_GET['ok']))
 			{
@@ -19,34 +19,63 @@
 
 				if(!$first_name==null && $email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND first_name LIKE '%$first_name%'";
+					$where=" AND first_name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND email LIKE '%$email%'";
+					echo$where=" AND email LIKE '%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND first_name LIKE '%$first_name%' AND email LIKE '%$email%'";
+					$where=" AND first_name LIKE '%$first_name%' AND email LIKE '%$email%'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor'AND created_on > '$from'";
+					echo$where="AND created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor'AND created_on < '$to'";
+					echo$where="AND created_on < '$to'";
+				}
+				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on < '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND first_name LIKE'%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
 				}
 
+			}
+			if(!empty($where)){
+				$sql= "select * from registration where status = '1' AND reg_type='Investor' $where order by id DESC ";
+			}else{
+				$sql= "select * from registration where status = '1' AND reg_type='Investor' order by id DESC ";
 			}
 	
 			if(@$_GET["Action"] == "Del")

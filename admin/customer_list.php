@@ -1,9 +1,9 @@
 <?php
 	include('config.php');
-	include('header.php');
+	
 	$status="";
 	$message="";
-	$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'";
+	$where='';
 			if(isset($_GET['ok']))
 			{
 				$first_name=$_GET['name'];
@@ -19,36 +19,64 @@
 
 				if(!$first_name==null && $email == null && @$from == null && @$to == null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE'%$first_name%'";
+					$where="AND first_name LIKE'%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND email LIKE'%$email%'";
+					$where="AND email LIKE'%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE'%$first_name%' AND email LIKE '%$email%'";
+					$where=" AND first_name LIKE'%$first_name%' AND email LIKE '%$email%'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand' AND first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on > '$from'";
+					$where="AND created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Brand'AND created_on < '$to'";
+					$where="AND created_on < '$to'";
+				}
+				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on < '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND first_name LIKE'%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
 				}
 
-
-			}
+	}
+		if(!empty($where)){
+			$sql= "select * from registration where status = '1' AND reg_type='Brand' $where order by id DESC ";
+		}else{
+			$sql= "select * from registration where status = '1' AND reg_type='Brand' order by id DESC ";
+		}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -61,6 +89,7 @@
 						$message = 'Something went wrong !';
 					}
 			}
+	include('header.php');
 ?>
 <link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
@@ -189,7 +218,7 @@
 										<tbody>
 											<?php
 											
-												$result=$db->query($sql);
+												$result=mysqli_query($db,$sql);
 												$count=0;
 												while($rows =mysqli_fetch_array($result)){
 												 $count++;

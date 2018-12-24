@@ -1,38 +1,42 @@
 <?php 
 require('header.php');
 require('config.php');
-$sql="SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' order by id DESC ";
-$news_query="SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
-$vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
+$where='';
+$news_where='';
+$vidio_where='';
 
-		if(isset($_GET['blog_filter']))
+if(isset($_GET['blog_filter']))
 			{
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
-					echo$from=$from_date;
+					$from=$from_date;
 
 				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
 				if(!$to_date==null)
-					echo$to=$to_date;
+					$to=$to_date;
 
 				
 
 				 if(!@$from== null && !@$to == null)
 				{
-					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' AND 
-					status= 'Active' AND create_on BETWEEN '$from' AND '$to'";
+					$where="AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' and status = 'Active' AND create_on > '$from'";
+					$where="AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' and status = 'Active' AND create_on < '$to'";
+					$where=" AND create_on < '$to'";
 				}
 				
 			}
+			if(!empty($where)){
+			$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' $where order by id DESC ";
+		}else{
+			$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active'order by id DESC ";
+		}
 			if(isset($_GET['news_filter']))
 			{
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
@@ -47,19 +51,24 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 
 				 if(!@$from== null && !@$to == null)
 				{
-					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on BETWEEN '$from' AND '$to'";
+					$news_where="AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on > '$from'";
+					$news_where=" AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on < '$to'";
+					$news_where="AND create_on < '$to'";
 				}
 				
 			}
+			if(!empty($where)){
+			$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' $where order by id DESC ";
+		}else{
+			$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
+		}
 			if(isset($_GET['vidio_filter']))
 			{
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
@@ -74,19 +83,24 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 
 				 if(!@$from== null && !@$to == null)
 				{
-					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on BETWEEN '$from' AND '$to'";
+					$vidio_where=" AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on > '$from'";
+					$vidio_where="AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on < '$to'";
+					$vidio_where="AND create_on < '$to'";
 				}
 				
 			}
+			if(!empty($where)){
+			$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' $where order by id DESC ";
+		}else{
+			$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
+		}
 ?>
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 

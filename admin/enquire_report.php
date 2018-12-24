@@ -4,8 +4,9 @@ require('config.php');
 
 $status = '';
 $message = '';
- $sql="SELECT * FROM enquire where enquire_type = 'franchise' and status = 'Active' order by id DESC ";
- $sql1="SELECT * FROM enquire where enquire_type = 'brand' and status = 'Active'";
+$where='';
+$brand_where='';
+ 
 
 if(isset($_GET['ok']))
 			{
@@ -22,49 +23,54 @@ if(isset($_GET['ok']))
 
 				if(!$first_name == null && $email == null && $city == null && @$from == null  && @$to == null)
 				{
-					$sql="SELECT * FROM `enquire` WHERE enquire_type='franchise' AND name LIKE '%$first_name%' AND status='Active'";
+					$where=" AND name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && $city==null && @$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND email LIKE '%$email%'";
+					$where="AND email LIKE '%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !$city==null && @$from== null 
 					&& @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND city LIKE '%$city%'";
+					$where="AND city LIKE '%$city%'";
 				}
 
 				else if($first_name==null && $email==null && $city==null && !@$from== null && !@$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND enquite_date BETWEEN '$from' AND '$to'";
+					$where="AND enquite_date BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && !$city==null && !@$from== null && !@$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%' AND city LIKE '%$city%' ";
+					$where="AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%' AND city LIKE '%$city%' ";
 				}
 				else if($first_name==null && $email==null && $city==null && !@$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND  enquite_date > '$from'";
+					$where="AND  enquite_date > '$from'";
 				}
 				else if($first_name==null && $email==null && !$city==null && @$from== null && !@$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND  enquite_date > '$to'";
+					$where="AND  enquite_date > '$to'";
 				}
 				else if(!$first_name==null && !$email==null && $city==null && @$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
+					$where="AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
 				}
 				else if(!$first_name==null && $email==null && !$city==null && @$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND  city LIKE '%$city%' AND name LIKE '%$first_name%'";
+					$where="AND  city LIKE '%$city%' AND name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && !$city==null && @$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='franchise' and status = 'Active' AND  email LIKE '%$email%' AND city LIKE '%$city%'";
+					$where="AND  email LIKE '%$email%' AND city LIKE '%$city%'";
 				}
 				
 			}
+			if(!empty($where)){
+			$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' $where order by id DESC ";
+		}else{
+			$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' order by id DESC ";
+		}
 			if(isset($_GET['brand_filter']))
 			{
 				$first_name=$_GET['name'];
@@ -79,39 +85,44 @@ if(isset($_GET['ok']))
 
 				if(!$first_name == null && $email == null && @$from == null  && @$to == null)
 				{
-					echo$sql1="SELECT * FROM `enquire` WHERE enquire_type='brand' AND name LIKE '%$first_name%' AND status='Active'";
+					echo$brand_where="AND name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from== null && @$to == null)
 				{
-					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND email LIKE '%$email%'";
+					$brand_where="AND email LIKE '%$email%'";
 				}
 
 				
 
 				else if($first_name==null && $email==null && !@$from== null && !@$to == null)
 				{
-					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND enquite_date BETWEEN '$from' AND '$to'";
+					$brand_where="AND enquite_date BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from== null && !@$to == null)
 				{
-					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%'";
+					$brand_where="AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && $email==null && !@$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND  enquite_date > '$from'";
+					$brand_where="AND  enquite_date > '$from'";
 				}
 				
 				else if(!$first_name==null && !$email==null && $city==null && @$from== null && @$to == null)
 				{
-					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
+					$brand_where="AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
 				}
 				
 				else if($first_name==null && $email==null && @$from== null && !@$to == null)
 				{
-					$sql1="SELECT * FROM enquire WHERE enquire_type ='brand' and status = 'Active' AND enquite_date > '$to'";
+					$brand_where="AND enquite_date > '$to'";
 				}
 				
 			}
+			if(!empty($brand_where)){
+			$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' $where order by id DESC ";
+		}else{
+			$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' order by id DESC ";
+		}
 	if(@$_GET["del"] == "del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));

@@ -3,7 +3,7 @@
 	include('header.php');
 	$status="";
 	$message="";
-	$sql="SELECT * FROM feedback ";
+	$where='';
 		if(isset($_GET['ok']))
 			{
 				$first_name=$_GET['name'];
@@ -18,34 +18,63 @@
 
 				if(!$first_name == null && $email == null && @$from == null && @$to == null)
 				{
-					$sql="SELECT * FROM feedback WHERE name LIKE '%'.$first_name.'%'";
+					$where="name LIKE '%'.$first_name.'%'";
 				}
 				else if($first_name == null && !$email == null && @$from == null && @$to == null)
 				{
-					$sql="SELECT * FROM feedback WHERE email LIKE '%'.$email.'%' ";
+					$where="email LIKE '%'.$email.'%' ";
 				}
 				else if(!$first_name == null && !$email == null && @$from == null && @$to == null )
 				{
-					$sql="SELECT * FROM feedback WHERE name LIKE '%'.$first_name.'%' AND email LIKE '%'.$email.'%'  ";
+					$where="name LIKE '%'.$first_name.'%' AND email LIKE '%'.$email.'%'  ";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM feedback WHERE first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where="first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM feedback WHERE  created_on > '$from'";
+					$where="created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM feedback WHERE  created_on < '$to'";
+					$where=" created_on < '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM feedback WHERE created_on BETWEEN '$from' AND '$to'";
+					$where="created_on BETWEEN '$from' AND '$to'";
+				}
+				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on < '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND first_name LIKE'%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
 				}
 				
 			}
+			if(!empty($where)){
+			$sql= "select * from feedback where $where order by id DESC ";
+		}else{
+			$sql= "select * from feedback order by id DESC ";
+		}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));

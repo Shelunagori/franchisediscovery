@@ -3,7 +3,7 @@
 	include('header.php');
 	$status="";
 	$message="";
-	$sql="SELECT * FROM advertise_with_us ";
+	$where='';
 		
 		if(isset($_GET['ok']))
 			{
@@ -21,51 +21,91 @@
 
 				if(!$first_name == null && $email == null && $company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE name LIKE '%$first_name%' ";
+					$where="name LIKE '%$first_name%' ";
 				}
 				else if($first_name == null && !$email == null && $company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE email LIKE '%$email%' ";
+					$where="email LIKE '%$email%' ";
 				}
 				else if($first_name == null && $email == null && !$company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE company_name LIKE '%$company_name%' ";
+					$where="company_name LIKE '%$company_name%' ";
 				}
 				else if(!$first_name == null && !$email == null && !$company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE company_name LIKE '%$company_name%' AND name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
+					$where="company_name LIKE '%$company_name%' AND name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
 				}
 				else if(!$first_name == null && !$email == null && $company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
+					$where="name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
 				}
 				else if(!$first_name == null && $email == null && !$company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE company_name LIKE '%$company_name%' AND name LIKE '%$first_name%'";
+					$where="company_name LIKE '%$company_name%' AND name LIKE '%$first_name%'";
 				}
 				else if($first_name == null && !$email == null && !$company_name== null && @$from == null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE company_name LIKE '%$company_name%' AND email LIKE '%$email%'";
+					$where="company_name LIKE '%$company_name%' AND email LIKE '%$email%'";
 				}
 				else if($first_name==null && $email==null && $company_name== null && 
 					!@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM advertise_with_us WHERE created_on BETWEEN '$from' AND '$to'";
+					echo$where="created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && $company_name== null && !@$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE created_on > '$from'";
+					$where="created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && $company_name== null  && @$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM advertise_with_us WHERE created_on < '$to'";
+					$where="created_on < '$to'";
 				}
 				else if(!$first_name==null && !$email==null  && !$company_name== null  && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM feedback WHERE first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to' AND company_name LIKE'%$company_name%'";
+					$where=" first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to' AND company_name LIKE'%$company_name%'";
 				}
-				
+				else if(!$first_name==null && !$email==null  && !$company_name== null  && !@$from==null && @$to==null)
+				{
+					$where=" first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on > '$from' AND company_name LIKE'%$company_name%'";
+				}
+				else if(!$first_name==null && !$email==null  && !$company_name== null  && @$from==null && !@$to==null)
+				{
+					$where=" first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on < '$to' AND company_name LIKE'%$company_name%'";
+				}
+				else if(!$first_name==null && $email==null  && $company_name== null  && !@$from==null && !@$to==null)
+				{
+					$where="first_name LIKE'%$first_name%'  AND created_on < '$to' ";
+				}
+				else if(!$first_name==null && $email==null  && $company_name== null  && !@$from==null && !@$to==null)
+				{
+					$where="first_name LIKE'%$first_name%'  AND created_on < '$to' ";
+				}
+				else if($first_name==null && !$email==null  && $company_name== null  && !@$from==null && !@$to==null)
+				{
+					$where="email LIKE'%$email%'  AND created_on < '$to' ";
+				}
+				else if($first_name==null && $email==null  && !$company_name== null  && !@$from==null && !@$to==null)
+				{
+					$where="company_name LIKE'%$company_name%'  AND created_on < '$to' ";
+				}
+				else if(!$first_name==null && !$email==null  && !$company_name== null  && @$from==null && @$to==null)
+				{
+					$where=" first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND company_name LIKE'%$company_name%'";
+				}
+				else if(!$first_name==null && !$email==null  && $company_name== null  && !@$from==null && @$to==null)
+				{
+					$where=" first_name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on > '$from'";
+				}
+				else if($first_name==null && !$email==null  && !$company_name== null  && @$from==null && @$to==null)
+				{
+					$where="email LIKE '%$email%' AND company_name LIKE'%$company_name%'";
+				}
 			}
+			if(!empty($where)){
+			$sql= "select * from advertise_with_us where  $where order by id DESC ";
+		}else{
+			$sql= "select * from advertise_with_us  order by id DESC ";
+		}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -207,7 +247,7 @@
 										</thead>
 										<tbody>
 											<?php
-												$result=$db->query($sql);
+												$result=mysqli_query($db,$sql);
 												$count=0;
 												while($rows =mysqli_fetch_array($result)){ $count++;
 												 ?>
