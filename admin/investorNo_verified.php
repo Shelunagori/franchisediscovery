@@ -68,6 +68,15 @@
 				{
 					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
 				}
+				else if(!$first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					echo$where="AND created_on < '$to' AND email LIKE'%$email%' AND first_name LIKE'%$first_name%'";
+				}
+
 
 			}
 			if(!empty($where)){

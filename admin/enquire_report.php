@@ -66,11 +66,7 @@ if(isset($_GET['ok']))
 				}
 				
 			}
-			if(!empty($where)){
-			$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' $where order by id DESC ";
-		}else{
-			$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' order by id DESC ";
-		}
+			
 			if(isset($_GET['brand_filter']))
 			{
 				$first_name=$_GET['name'];
@@ -85,7 +81,7 @@ if(isset($_GET['ok']))
 
 				if(!$first_name == null && $email == null && @$from == null  && @$to == null)
 				{
-					echo$brand_where="AND name LIKE '%$first_name%'";
+					$brand_where="AND name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from== null && @$to == null)
 				{
@@ -117,12 +113,10 @@ if(isset($_GET['ok']))
 					$brand_where="AND enquite_date > '$to'";
 				}
 				
-			}
-			if(!empty($brand_where)){
-			$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' $where order by id DESC ";
-		}else{
-			$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' order by id DESC ";
+			
+
 		}
+			
 	if(@$_GET["del"] == "del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -222,7 +216,11 @@ if(isset($_GET['ok']))
 								<div class="tab-pane active" id="1">
 
 									<?php
-										
+									if(!empty($where)){
+										$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' $where order by id DESC ";
+									}else{
+										echo$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' order by id DESC ";
+										}							
 										$query_result=mysqli_query($db,$sql);
 										$sno = 1;
 										if(!empty($query_result)){  ?>
@@ -338,7 +336,11 @@ if(isset($_GET['ok']))
 					</form>
 									<div class="tab-pane" id="2">	
 									<?php  
-							
+									if(!empty($brand_where)){
+											$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' $where order by id DESC ";
+										}else{
+											echo$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' order by id DESC ";
+										}
 									$sql_result=mysqli_query($db,$sql1); 
 										$sno = 1;
 										if(!empty($sql_result)){  ?>

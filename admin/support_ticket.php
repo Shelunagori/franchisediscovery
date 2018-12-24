@@ -40,7 +40,7 @@
 				}
 				else if($ticket_no==null && !@$from==null && !@$to==null)
 				{
-					$where="created_on BETWEEN '$from' AND '$to'";
+					echo$where="created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$ticket_no==null && !@$from==null && @$to==null)
 				{

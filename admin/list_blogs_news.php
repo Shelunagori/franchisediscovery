@@ -4,6 +4,7 @@ require('config.php');
 $where='';
 $news_where='';
 $vidio_where='';
+$id='';
 
 if(isset($_GET['blog_filter']))
 			{
@@ -19,26 +20,23 @@ if(isset($_GET['blog_filter']))
 
 				 if(!@$from== null && !@$to == null)
 				{
-					$where="AND create_on BETWEEN '$from' AND '$to'";
+					echo$where="AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					$where="AND create_on > '$from'";
+					echo$where="AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					$where=" AND create_on < '$to'";
+					echo$where=" AND create_on < '$to'";
 				}
 				
 			}
-			if(!empty($where)){
-			$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' $where order by id DESC ";
-		}else{
-			$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active'order by id DESC ";
-		}
-			if(isset($_GET['news_filter']))
+		
+		else if(isset($_GET['news_filter']))
 			{
+
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
 					$from=$from_date;
@@ -64,12 +62,8 @@ if(isset($_GET['blog_filter']))
 				}
 				
 			}
-			if(!empty($where)){
-			$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' $where order by id DESC ";
-		}else{
-			$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
-		}
-			if(isset($_GET['vidio_filter']))
+			
+			else if(isset($_GET['vidio_filter']))
 			{
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
@@ -96,11 +90,7 @@ if(isset($_GET['blog_filter']))
 				}
 				
 			}
-			if(!empty($where)){
-			$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' $where order by id DESC ";
-		}else{
-			$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
-		}
+			
 ?>
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
@@ -212,6 +202,11 @@ if(isset($_GET['blog_filter']))
 								<div class="tab-pane active" id="1">
 
 									<?php 
+										if(!empty($where)){
+											$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' $where order by id DESC ";
+										}else{
+											$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active'order by id DESC ";
+										}
 									$sql_result=mysqli_query($db,$sql);
 										$sno = 1;
 										if(!empty($sql_result)){  ?>
@@ -287,6 +282,11 @@ if(isset($_GET['blog_filter']))
 									<div class="tab-pane" id="2">	
 
 									<?php   
+									if(!empty($where)){
+											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' $where order by id DESC ";
+										}else{
+											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
+										}
 										$sno = 1;
 										$news_result=mysqli_query($db,$news_query);
 										if(!empty($news_result)){  ?>
@@ -327,7 +327,8 @@ if(isset($_GET['blog_filter']))
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($news_result)){ ?>
+											<?php
+											 while($row=mysqli_fetch_array($news_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
@@ -363,6 +364,11 @@ if(isset($_GET['blog_filter']))
 									<div class="tab-pane" id="3">
 
 									<?php 
+									if(!empty($where)){
+										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' $where order by id DESC ";
+									}else{
+										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
+									}
 									$vidio_result=mysqli_query($db,$vidio_query);  
 										$sno = 1;
 										if(!empty($vidio_result)){  ?>
@@ -472,4 +478,5 @@ require('footer.php');
 	$('#datepicker5').datepicker({
       autoclose: true,
     });
+   
 	</script>

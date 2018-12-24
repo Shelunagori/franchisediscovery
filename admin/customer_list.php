@@ -28,7 +28,7 @@
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$where=" AND created_on BETWEEN '$from' AND '$to'";
+					echo$where=" AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
@@ -70,7 +70,7 @@
 				{
 					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
 				}
-
+			
 	}
 		if(!empty($where)){
 			$sql= "select * from registration where status = '1' AND reg_type='Brand' $where order by id DESC ";
