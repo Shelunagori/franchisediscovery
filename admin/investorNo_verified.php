@@ -238,6 +238,9 @@
 													<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="InvestorNo_verified.php?Action=Del&id=<?php echo base64_encode($rows['id']); ?>">
 													<span class="fa fa-times"></span>
 													</a>
+													<a class="mb-control1 btn btn-info btn-rounded btn-sm" href="view_userdetail.php?id=<?php echo base64_encode($rows['id']); ?> ">
+													<span class="fa fa-eye"></span>
+													</a>
 												</td>
 											</tr>
 											<?php  } ?>

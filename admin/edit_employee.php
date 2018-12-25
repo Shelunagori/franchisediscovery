@@ -30,7 +30,7 @@ $status='';
 
 		  </div>
         <!-- left column -->
-        <div class="col-md-4">
+       <div class="col-md-4">
 		<form role="form" method="post" action="employee_master.php">
 			<div class="box">
 				<div class="box-header with-border">

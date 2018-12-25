@@ -3,7 +3,15 @@
 	include('header.php');
 	$status="";
 	$message="";
+	$id=base64_decode($_GET['id']);
+	if(!empty($id))
+	{
+		$sql="SELECT * FROM listing_request WHERE register_id='$id'";
+	}
+	else
+	{
 	$sql="SELECT * FROM listing_request";
+	}
 		if(isset($_GET['ok']))
 			{
 				$brand_name=$_GET['brand_name'];

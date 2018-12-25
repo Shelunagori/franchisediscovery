@@ -4,6 +4,14 @@
 	$status="";
 	$message="";
 	$where='';
+	$id=base64_decode($_GET['id']);
+	if(!empty($id))
+	{
+		$sql="SELECT * FROM support_ticket WHERE customer_id='$id'";
+	}
+	else{
+			$sql= "select * from support_ticket order by id DESC ";
+		}
 	if(isset($_GET['ok']))
 			{
 				$ticket_no=$_GET['ticket_no'];
@@ -54,8 +62,6 @@
 			}
 			if(!empty($where)){
 			$sql= "select * from support_ticket where $where order by id DESC ";
-		}else{
-			$sql= "select * from support_ticket order by id DESC ";
 		}
 			if(@$_GET["Action"] == "Del")
 			{
