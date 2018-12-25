@@ -24,7 +24,7 @@
 				
 				if(!$ticket_no == null && @$from == null && @$to == null)
 				{
-					echo$where="ticket_no='$ticket_no'";
+					$where="ticket_no='$ticket_no'";
 				}
 				else if(!$ticket_no==null && !@$from==null && !@$to==null)
 				{

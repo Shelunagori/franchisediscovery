@@ -81,7 +81,7 @@ label.expend {
 						if(!empty($query)){ 
 						while($row=mysqli_fetch_array($query)){
 							$recentCat = $row['category_id'];
-							$queryString = "SELECT * from categories where id = '$recentCat'";
+							$queryString = "SELECT * from new_categories where id = '$recentCat'";
 							$resultString = mysqli_query($db, $queryString);
 							$rowString = mysqli_fetch_assoc($resultString);
 							$recentCatseo = $rowString['seo_name']; 
@@ -122,7 +122,7 @@ label.expend {
 							if(!empty($query)){ 
 							while($row=mysqli_fetch_array($query)){
 							$recentCat = $row['category_id'];
-							$queryString = "SELECT * from categories where id = '$recentCat'";
+							$queryString = "SELECT * from new_categories where id = '$recentCat'";
 							$resultString = mysqli_query($db, $queryString);
 							$rowString = mysqli_fetch_assoc($resultString);
 							$recentCatseo = $rowString['seo_name']; 								
@@ -327,7 +327,7 @@ label.expend {
 						while($rowVB=mysqli_fetch_array($queryVB)){
 							
 							$recentCat = $rowVB['category_id'];
-							$queryString = "SELECT * from categories where id = '$recentCat'";
+							$queryString = "SELECT * from new_categories where id = '$recentCat'";
 							$resultString = mysqli_query($db, $queryString);
 							$rowString = mysqli_fetch_assoc($resultString);
 							$recentCatseo = $rowString['seo_name']; 

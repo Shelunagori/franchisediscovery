@@ -121,6 +121,10 @@
 				<i class="fa fa-fw fa-child"></i> <span>Employee Master</span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
 			</li>
+      <li><a href="new_category.php">
+        <i class="fa fa-fw fa-child"></i> <span>New Categories</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+      </li>
 
 			<li><a href="footer_page.php">
 					<i class="fa fa-fw fa-flag"></i> <span>Footer Pages </span>

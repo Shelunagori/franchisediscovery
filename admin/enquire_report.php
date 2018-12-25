@@ -6,7 +6,7 @@ $status = '';
 $message = '';
 $where='';
 $brand_where='';
- 
+$id='';
 
 if(isset($_GET['ok']))
 			{
@@ -20,6 +20,7 @@ if(isset($_GET['ok']))
 				$to_date= $_GET['to_datepicker']?date('d-m-Y',strtotime($_GET['to_datepicker'])):null;
 				if(!$to_date==null)
 					$to=$to_date;
+				$id='franchise';
 
 				if(!$first_name == null && $email == null && $city == null && @$from == null  && @$to == null)
 				{
@@ -67,55 +68,6 @@ if(isset($_GET['ok']))
 				
 			}
 			
-			if(isset($_GET['brand_filter']))
-			{
-				$first_name=$_GET['name'];
-				$email=$_GET['email'];
-				$from_date= $_GET['from_datepicker']?date('d-m-Y',strtotime($_GET['from_datepicker'])):null;
-				if(!$from_date==null)
-					$from=$from_date;
-
-				$to_date= $_GET['to_datepicker']?date('d-m-Y',strtotime($_GET['to_datepicker'])):null;
-				if(!$to_date==null)
-					$to=$to_date;
-
-				if(!$first_name == null && $email == null && @$from == null  && @$to == null)
-				{
-					$brand_where="AND name LIKE '%$first_name%'";
-				}
-				else if($first_name==null && !$email==null && @$from== null && @$to == null)
-				{
-					$brand_where="AND email LIKE '%$email%'";
-				}
-
-				
-
-				else if($first_name==null && $email==null && !@$from== null && !@$to == null)
-				{
-					$brand_where="AND enquite_date BETWEEN '$from' AND '$to'";
-				}
-				else if(!$first_name==null && !$email==null && !@$from== null && !@$to == null)
-				{
-					$brand_where="AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%'";
-				}
-				else if($first_name==null && $email==null && !@$from== null && @$to == null)
-				{
-					$brand_where="AND  enquite_date > '$from'";
-				}
-				
-				else if(!$first_name==null && !$email==null && $city==null && @$from== null && @$to == null)
-				{
-					$brand_where="AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
-				}
-				
-				else if($first_name==null && $email==null && @$from== null && !@$to == null)
-				{
-					$brand_where="AND enquite_date > '$to'";
-				}
-				
-			
-
-		}
 			
 	if(@$_GET["del"] == "del")
 	{
@@ -219,7 +171,7 @@ if(isset($_GET['ok']))
 									if(!empty($where)){
 										$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' $where order by id DESC ";
 									}else{
-										echo$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' order by id DESC ";
+										$sql= "select * from enquire where status = 'Active' AND enquire_type='franchise' order by id DESC ";
 										}							
 										$query_result=mysqli_query($db,$sql);
 										$sno = 1;
@@ -329,7 +281,7 @@ if(isset($_GET['ok']))
 								</td>
 
 								<td>
-									<button class="btn btn-primary" type="submit" name="brand_filter">Filter</button>
+									<button class="btn btn-primary" type="submit" name="brand_filter" id="brand_filter">Filter</button>
 								</td>
 							</tr>
 						</table>
@@ -338,8 +290,9 @@ if(isset($_GET['ok']))
 									<?php  
 									if(!empty($brand_where)){
 											$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' $where order by id DESC ";
+											$id='brand';
 										}else{
-											echo$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' order by id DESC ";
+											$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' order by id DESC ";
 										}
 									$sql_result=mysqli_query($db,$sql1); 
 										$sno = 1;
@@ -359,7 +312,9 @@ if(isset($_GET['ok']))
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($sql_result)){ ?>
+											<?php 
+											
+											while($row=mysqli_fetch_array($sql_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td> <?php echo $row['enquite_date'];  ?> </td>
@@ -411,4 +366,17 @@ require('footer.php');
 	$('#datepicker3').datepicker({
       autoclose: true,
     });
+  $('#brand_filter').click(function() {
+   	 var sthis = $('#sthis').val();
+      $.ajax({
+         url: 'filter_brand.php' , 
+         type: 'GET',
+         data: 'sthis: ' + sthis,
+         success: function(result){ 
+         alert(result);    
+           $('#example3').html(result)      
+         }
+      });   
+      return false;     
+   });
 	</script>

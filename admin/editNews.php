@@ -84,7 +84,7 @@ $status='';
 										<select name="category_id" class="form-control select2" style="width: 100%;">
 										  <option selected="selected">Select Category</option>
 											<?php
-												$query_cat=mysqli_query($db,"select * from categories where status = 0");
+												$query_cat=mysqli_query($db,"select * from new_categories where status = 0");
 												while($row_cat=mysqli_fetch_array($query_cat)){
 											?>
 												<option value="<?php echo $row_cat['id']; ?>"  

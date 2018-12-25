@@ -252,7 +252,7 @@ if(isset($_GET['blog_filter']))
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
 												<?php $catId = $row['category_id'];
-													$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
+													$query_cat=mysqli_query($db,"select * from new_categories where id = '$catId'");
 													while($row_cat=mysqli_fetch_array($query_cat)){
 													echo $row_cat['name'];  } 
 												?>
@@ -333,7 +333,7 @@ if(isset($_GET['blog_filter']))
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
 												<?php $catId = $row['category_id'];
-													$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
+													$query_cat=mysqli_query($db,"select * from new_categories where id = '$catId'");
 													while($row_cat=mysqli_fetch_array($query_cat)){
 													echo $row_cat['name'];  } 
 												?>
@@ -414,7 +414,7 @@ if(isset($_GET['blog_filter']))
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
 												<?php $catId = $row['category_id'];
-													$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
+													$query_cat=mysqli_query($db,"select * from new_categories where id = '$catId'");
 													while($row_cat=mysqli_fetch_array($query_cat)){
 													echo $row_cat['name'];  } 
 												?>
