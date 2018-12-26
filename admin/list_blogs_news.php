@@ -305,7 +305,7 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 									<table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr role="row">
-												<th>Sno</th>
+												<th>S.No.</th>
 												<th>Category</th>
 												<th>Image</th>
 												<th>Title</th>
