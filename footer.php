@@ -274,9 +274,17 @@ label.expend {
 		   <div class="row ">
 				<div class="offset-sm-1 col-sm-10 col-12">
 					<div class="top-of-chart">
-
 					<?php 
-					$query=mysqli_query($db,"select * from chart");
+					
+					if(isset($_GET['data_row']) && !empty($_GET['data_row']))
+						{
+							$query=mysqli_query($db,"select * from chart where chart.category_id = '$category_id'");
+							
+						}else
+						{
+							$query=mysqli_query($db,"select * from chart limit 6");  
+						}
+					
 					while($row=mysqli_fetch_array($query)){
 						?>
 						<a href="<?php echo $baseURL; ?>chart/<?php echo $row['seo_name']; ?>">

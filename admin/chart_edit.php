@@ -12,7 +12,7 @@ require('header.php');
        <div class="col-md-6">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Add Chart</h3>
+          <h3 class="box-title">Update Chart</h3>
 			<a href="chart.php" class="pull-right"> Add New</a>
         </div>
 		<?php
@@ -24,6 +24,22 @@ require('header.php');
 		<input type="hidden" name="id" value="<?php echo $id; ?>" >
 		<div class="box-body">
           <div class="box-body">
+		   <div class="form-group">
+				<select name="category_id" class="form-control select2" id="cat_id" style="width: 100%;" required>
+				  <option value="" selected="selected">Select Category</option>
+					<?php 
+						$query=mysqli_query($db,"select * from categories where status = 0");
+						
+						while($rows=mysqli_fetch_array($query)){
+							$selected="";
+							if($rows['id'] == $row['category_id']){
+								$selected="selected";
+							}
+					?>
+						<option value="<?php echo $rows['id']; ?>" <?php echo $selected; ?>><?php echo $rows['name']; ?></option>
+					<?php } ?>
+				</select>
+			</div>
 			<div class="form-group">
               <input type="text" required class="form-control" value="<?php echo $row['name']; ?>" placeholder="Chart Name" name="name">
             </div>
@@ -65,6 +81,7 @@ require('header.php');
                 <thead>
                 <tr>
                   <th>S.no</th>
+				  <th>Category</th>
 				  <th>Image</th>
 				  <th>Name</th>
                   <th>Action</th>
@@ -74,10 +91,20 @@ require('header.php');
                  <?php $i = 1;
 					$query=mysqli_query($db,"select * from chart order by id DESC");
 					while($row=mysqli_fetch_array($query)){
+						$category_id=$row['category_id'];
 						?>
                        
                        <tr id='trow_<?php echo $i;?>'>
                        <td><?php echo $i; $i++;?></td>
+					   <td>
+					   <?php 
+									$sql="SELECT * FROM categories where status = 0 and id = $category_id";
+									$categories_query=mysqli_query($db,$sql);
+									$category_row=mysqli_fetch_array($categories_query);
+									echo $category_row['name'];
+									
+									?>
+					   </td>
 						<td>
 							<img src="../<?php echo $row['image_path'];?>" width="100" height="50" id="img_prev"  />
 						</td>
