@@ -4,7 +4,7 @@
 	if(isset($_GET['rowCatData']))
 	{
 		$data =  $_GET['rowCatData']; 
-		$queryString = "SELECT id,footer_content from categories where seo_name = '$data'";
+		$queryString = "SELECT id,footer_content from new_categories where seo_name = '$data'";
 		$resultString = mysqli_query($db, $queryString);
 		$rowString = mysqli_fetch_assoc($resultString);
 		$cat = $rowString['id']; 
@@ -67,7 +67,7 @@
     <link href="<?php echo $baseURL; ?>css/responsive.css" rel="stylesheet">
   
 	<style>
-	/*CATEGORIES BADGE*/
+	/*new_categories BADGE*/
 .badge {
 	font-weight: 600;
 	font-size: 13px;
@@ -155,11 +155,11 @@
 							<?php 
 							if(!empty($cat))
 							{
-								$query=mysqli_query($db,"SELECT news_blogs.id,news_blogs.video_url,news_blogs.type,admin.name as create_by, categories.name,categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on,news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN categories ON (news_blogs.category_id = categories.id) where news_blogs.category_id = '$cat' and news_blogs.type = 'News' order by news_blogs.id ASC LIMIT 3 ");  
+								$query=mysqli_query($db,"SELECT news_blogs.id,news_blogs.video_url,news_blogs.type,admin.name as create_by, new_categories.name,new_categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on,news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN new_categories ON (news_blogs.category_id = new_categories.id) where news_blogs.category_id = '$cat' and news_blogs.type = 'News' order by news_blogs.id ASC LIMIT 3 ");  
 								
 							}else
 							{
-								$query=mysqli_query($db,"SELECT news_blogs.id,news_blogs.video_url,news_blogs.type,admin.name as create_by, categories.name,categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on,news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN categories ON (news_blogs.category_id = categories.id) where news_blogs.type = 'News' order by news_blogs.id ASC LIMIT 3 ");  
+								$query=mysqli_query($db,"SELECT news_blogs.id,news_blogs.video_url,news_blogs.type,admin.name as create_by, new_categories.name,new_categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on,news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN new_categories ON (news_blogs.category_id = new_categories.id) where news_blogs.type = 'News' order by news_blogs.id ASC LIMIT 3 ");  
 							}
 							
 							
@@ -213,7 +213,7 @@
 							while($row=mysqli_fetch_array($query)){
 								
 								$recentCat = $row['category_id'];
-								$queryString = "SELECT * from categories where id = '$recentCat'";
+								$queryString = "SELECT * from new_categories where id = '$recentCat'";
 								$resultString = mysqli_query($db, $queryString);
 								$rowString = mysqli_fetch_assoc($resultString);
 								$recentCatseo = $rowString['seo_name']; 
@@ -236,7 +236,7 @@
                             <ul>
                                <?php
 								$i = 1;
-								$query=mysqli_query($db,"select * from categories where status = 0 order by name ASC ");
+								$query=mysqli_query($db,"select * from new_categories where status = 0 order by name ASC ");
 								while($row=mysqli_fetch_array($query)){
 									$catId = $row['id'];
 								?>

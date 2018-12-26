@@ -151,7 +151,7 @@
 					 <?php $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>
 					  <div class="ratings-1-bottom">
 							<div class="footer_social_area ">
-								<a href="http://www.facebook.com/sharer.php?u=<?php echo $currentURL; ?>" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+								<a href="http://www.facebook.com/sharer.php?u=http://localhost/franchisediscovery/brand-detail/bakery-franchises/srinathjis-franchise" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
 								<a href="https://twitter.com/share?url=<?php echo $currentURL; ?>&amp;text=<?php echo $row_brand['name'];  ?>&amp;hashtags=franchisediscovery" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
 								<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $currentURL; ?>" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
 								

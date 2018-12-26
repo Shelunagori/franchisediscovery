@@ -1,39 +1,12 @@
 <?php 
 require('header.php');
 require('config.php');
-$sql="SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' order by id DESC ";
-$news_query="SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
-$vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
+$where='';
+$news_where='';
+$vidio_where='';
+$id='';
 
-		if(isset($_GET['blog_filter']))
-			{
-				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
-				if(!$from_date==null)
-					echo$from=$from_date;
-
-				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
-				if(!$to_date==null)
-					echo$to=$to_date;
-
-				
-
-				 if(!@$from== null && !@$to == null)
-				{
-					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' AND 
-					status= 'Active' AND create_on BETWEEN '$from' AND '$to'";
-				}
-				
-				else if(!@$from== null && @$to == null)
-				{
-					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' and status = 'Active' AND create_on > '$from'";
-				}
-				else if(@$from== null && !@$to == null)
-				{
-					$sql="SELECT * FROM news_blogs WHERE type ='Blogs' and status = 'Active' AND create_on < '$to'";
-				}
-				
-			}
-			if(isset($_GET['news_filter']))
+if(isset($_GET['blog_filter']))
 			{
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
@@ -47,20 +20,50 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 
 				 if(!@$from== null && !@$to == null)
 				{
-					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on BETWEEN '$from' AND '$to'";
+					echo$where="AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on > '$from'";
+					echo$where="AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					$news_query="SELECT * FROM news_blogs WHERE type ='News' and status = 'Active' AND create_on < '$to'";
+					echo$where=" AND create_on < '$to'";
 				}
 				
 			}
-			if(isset($_GET['vidio_filter']))
+		
+		else if(isset($_GET['news_filter']))
+			{
+
+				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date;
+
+				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date;
+
+				
+
+				 if(!@$from== null && !@$to == null)
+				{
+					$news_where="AND create_on BETWEEN '$from' AND '$to'";
+				}
+				
+				else if(!@$from== null && @$to == null)
+				{
+					$news_where=" AND create_on > '$from'";
+				}
+				else if(@$from== null && !@$to == null)
+				{
+					$news_where="AND create_on < '$to'";
+				}
+				
+			}
+			
+			else if(isset($_GET['vidio_filter']))
 			{
 				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
 				if(!$from_date==null)
@@ -74,19 +77,20 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 
 				 if(!@$from== null && !@$to == null)
 				{
-					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on BETWEEN '$from' AND '$to'";
+					$vidio_where=" AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on > '$from'";
+					$vidio_where="AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					$vidio_query="SELECT * FROM news_blogs WHERE type ='Video' and status = 'Active' AND create_on < '$to'";
+					$vidio_where="AND create_on < '$to'";
 				}
 				
 			}
+			
 ?>
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
@@ -198,6 +202,11 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 								<div class="tab-pane active" id="1">
 
 									<?php 
+										if(!empty($where)){
+											$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active' $where order by id DESC ";
+										}else{
+											$sql= "SELECT * FROM news_blogs where type ='Blogs' and status = 'Active'order by id DESC ";
+										}
 									$sql_result=mysqli_query($db,$sql);
 										$sno = 1;
 										if(!empty($sql_result)){  ?>
@@ -243,7 +252,7 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
 												<?php $catId = $row['category_id'];
-													$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
+													$query_cat=mysqli_query($db,"select * from new_categories where id = '$catId'");
 													while($row_cat=mysqli_fetch_array($query_cat)){
 													echo $row_cat['name'];  } 
 												?>
@@ -273,6 +282,11 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 									<div class="tab-pane" id="2">	
 
 									<?php   
+									if(!empty($where)){
+											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' $where order by id DESC ";
+										}else{
+											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
+										}
 										$sno = 1;
 										$news_result=mysqli_query($db,$news_query);
 										if(!empty($news_result)){  ?>
@@ -313,12 +327,13 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 											</tr>
 										</thead>
 										<tbody>
-											<?php while($row=mysqli_fetch_array($news_result)){ ?>
+											<?php
+											 while($row=mysqli_fetch_array($news_result)){ ?>
 											<tr role="row" class="odd">
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
 												<?php $catId = $row['category_id'];
-													$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
+													$query_cat=mysqli_query($db,"select * from new_categories where id = '$catId'");
 													while($row_cat=mysqli_fetch_array($query_cat)){
 													echo $row_cat['name'];  } 
 												?>
@@ -349,6 +364,11 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 									<div class="tab-pane" id="3">
 
 									<?php 
+									if(!empty($where)){
+										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' $where order by id DESC ";
+									}else{
+										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
+									}
 									$vidio_result=mysqli_query($db,$vidio_query);  
 										$sno = 1;
 										if(!empty($vidio_result)){  ?>
@@ -394,7 +414,7 @@ $vidio_query="SELECT * FROM news_blogs where type = 'Video' and status = 'Active
 											  <td> <?php echo $sno; ?> </td>	
 												<td>
 												<?php $catId = $row['category_id'];
-													$query_cat=mysqli_query($db,"select * from categories where id = '$catId'");
+													$query_cat=mysqli_query($db,"select * from new_categories where id = '$catId'");
 													while($row_cat=mysqli_fetch_array($query_cat)){
 													echo $row_cat['name'];  } 
 												?>
@@ -458,4 +478,5 @@ require('footer.php');
 	$('#datepicker5').datepicker({
       autoclose: true,
     });
+   
 	</script>

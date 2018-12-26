@@ -3,7 +3,15 @@
 	include('header.php');
 	$status="";
 	$message="";
+	@$id=base64_decode($_GET['id']);
+	if(!empty($id))
+	{
+		$sql="SELECT * FROM listing_request WHERE register_id='$id'";
+	}
+	else
+	{
 	$sql="SELECT * FROM listing_request";
+	}
 		if(isset($_GET['ok']))
 			{
 				$brand_name=$_GET['brand_name'];
@@ -27,7 +35,6 @@
 					}
 			}
 ?>
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 
 <div class="content-wrapper">
     <section class="content">
@@ -115,7 +122,7 @@
 								
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">
-								<table id="example1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
+								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr>
 												<th>S.No</th>

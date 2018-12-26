@@ -3,7 +3,15 @@
 	include('header.php');
 	$status="";
 	$message="";
-	$sql="SELECT * FROM support_ticket";
+	$where='';
+	@$id=base64_decode($_GET['id']);
+	if(!empty($id))
+	{
+		$sql="SELECT * FROM support_ticket WHERE customer_id='$id'";
+	}
+	else{
+			$sql= "select * from support_ticket order by id DESC ";
+		}
 	if(isset($_GET['ok']))
 			{
 				$ticket_no=$_GET['ticket_no'];
@@ -24,26 +32,37 @@
 				
 				if(!$ticket_no == null && @$from == null && @$to == null)
 				{
-					echo$sql="SELECT * FROM support_ticket WHERE ticket_no='$ticket_no'";
+					$where="ticket_no='$ticket_no'";
 				}
 				else if(!$ticket_no==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM support_ticket WHERE ticket_no='$ticket_no' AND  created_on BETWEEN '$from' AND '$to'";
+					$where="ticket_no='$ticket_no' AND  created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($ticket_no==null &&!@$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM support_ticket WHEREcreated_on > '$from'";
+					$where="created_on > '$from'";
 				}
 				else if($ticket_no==null && @$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM support_ticket WHERE created_on < '$to'";
+					$where="created_on < '$to'";
 				}
 				else if($ticket_no==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM support_ticket WHERE created_on BETWEEN '$from' AND '$to'";
+					echo$where="created_on BETWEEN '$from' AND '$to'";
+				}
+				else if(!$ticket_no==null && !@$from==null && @$to==null)
+				{
+					$where="created_on > '$from' AND ticket_no='$ticket_no'";
+				}
+				else if(!$ticket_no==null && @$from==null && !@$to==null)
+				{
+					$where="created_on < '$to' AND ticket_no='$ticket_no'";
 				}
 				
 			}
+			if(!empty($where)){
+			$sql= "select * from support_ticket where $where order by id DESC ";
+		}
 			if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -57,7 +76,6 @@
 					}
 			}
 ?>
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
 
@@ -171,7 +189,7 @@
 								
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">
-								<table id="example1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
+								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr>
 												<th>S.No</th>

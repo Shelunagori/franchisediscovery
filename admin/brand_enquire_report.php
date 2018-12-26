@@ -2,6 +2,7 @@
 
 require('config.php');
 require('header.php');
+$where='';
 $sql="SELECT * FROM contact_brands order by id DESC ";
 	if(isset($_GET['ok']))
 			{
@@ -16,36 +17,64 @@ $sql="SELECT * FROM contact_brands order by id DESC ";
 					$to=$to_date." 00:00:00.000000";
 				if(!$first_name == null && $email == null  && @$from== null && @$to == null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE name LIKE '%$first_name%' ";
+					$where="name LIKE '%$first_name%' ";
 				}
 				else if($first_name == null && !$email == null  && @$from== null && @$to == null )
 				{
-					$sql="SELECT * FROM contact_brands WHERE email LIKE '%$email%' ";
+					$where="email LIKE '%$email%' ";
 				}
 				else if(!$first_name == null && !$email == null  && @$from== null && 
 					@$to == null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
+					$where="name LIKE '%$first_name%' AND email LIKE '%$email%'  ";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where="first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE  created_on > '$from'";
+					$where="created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE created_on < '$to'";
+					$where="created_on < '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM contact_brands WHERE created_on BETWEEN '$from' AND '$to'";
+					$where="created_on BETWEEN '$from' AND '$to'";
 				}
-
+				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on < '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND first_name LIKE'%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
+				}
 				
 			}
+			if(!empty($where)){
+			$sql= "SELECT * FROM contact_brands WHERE $where order by id DESC ";
+		}else{
+			$sql= "SELECT * FROM contact_brands order by id DESC ";
+		}
 if(@$_GET["Action"] == "Del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));

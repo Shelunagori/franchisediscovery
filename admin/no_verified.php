@@ -3,7 +3,7 @@
 	include('header.php');
 	$status="";
 	$message="";
-	$sql="SELECT * FROM registration WHERE reg_type='Brand' AND status='0'";
+	$where='';
 	if(isset($_GET['ok']))
 			{
 				$first_name=$_GET['name'];
@@ -18,36 +18,73 @@
 
 				if(!$first_name==null && $email == null && @$from == null && @$to == null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand' AND first_name LIKE '%$first_name%'";
+					$where="AND first_name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand' AND email LIKE '%$email%'";
+					$where="AND email LIKE '%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand' AND first_name LIKE '%$first_name%' AND email LIKE '%$email%'";
+					$where=" AND first_name LIKE '%$first_name%' AND email LIKE '%$email%'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand' AND first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					echo$where="AND first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand'AND created_on > '$from'";
+					echo$where="AND created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='0' AND reg_type='Brand'AND created_on < '$to'";
+					echo$where="AND created_on < '$to'";
+				}
+				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on < '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND first_name LIKE'%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
+				}
+					else if(!$first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					echo$where="AND created_on < '$to' AND email LIKE'%$email%' AND first_name LIKE'%$first_name%'";
 				}
 
 
 			}
+			if(!empty($where)){
+			$sql= "select * from registration where status = '0' AND reg_type='Brand' $where order by id DESC ";
+		}else{
+			$sql= "select * from registration where status = '0' AND reg_type='Brand' order by id DESC ";
+		}
 		if(@$_GET["Action"] == "Del")
 			{
 				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
@@ -199,6 +236,9 @@
 												<td>
 													<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="no_verified.php?Action=Del&id=<?php echo base64_encode($rows['id']); ?>">
 													<span class="fa fa-times"></span>
+													</a>
+													<a class="mb-control1 btn btn-info btn-rounded btn-sm" href="view_userdetail.php?id=<?php echo base64_encode($rows['id']); ?> ">
+													<span class="fa fa-eye"></span>
 													</a>
 												</td>
 											</tr>

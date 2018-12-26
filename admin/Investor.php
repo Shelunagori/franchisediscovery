@@ -3,7 +3,7 @@
 	include('header.php');
 	$status="";
 	$message="";
-	$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor'";
+	$Where='';
 
 			if(isset($_GET['ok']))
 			{
@@ -19,34 +19,72 @@
 
 				if(!$first_name==null && $email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND first_name LIKE '%$first_name%'";
+					$where=" AND first_name LIKE '%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND email LIKE '%$email%'";
+					echo$where=" AND email LIKE '%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND first_name LIKE '%$first_name%' AND email LIKE '%$email%'";
+					$where=" AND first_name LIKE '%$first_name%' AND email LIKE '%$email%'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor' AND first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where=" AND first_name LIKE '%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor'AND created_on > '$from'";
+					echo$where="AND created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					echo$sql="SELECT * FROM registration WHERE status='1' AND reg_type='Investor'AND created_on < '$to'";
+					echo$where="AND created_on < '$to'";
+				}
+				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on < '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND first_name LIKE'%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+				}
+				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+				}
+				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
+				{
+					$where="AND created_on BETWEEN '$from' AND '$to' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && !$email==null && !@$from==null && @$to==null)
+				{
+					$where="AND created_on > '$from' AND email LIKE'%$email%' AND first_name LIKE'%$first_name%'";
+				}
+				else if(!$first_name==null && !$email==null && @$from==null && !@$to==null)
+				{
+					echo$where="AND created_on < '$to' AND email LIKE'%$email%' AND first_name LIKE'%$first_name%'";
 				}
 
+
+			}
+			if(!empty($where)){
+				$sql= "select * from registration where status = '1' AND reg_type='Investor' $where order by id DESC ";
+			}else{
+				$sql= "select * from registration where status = '1' AND reg_type='Investor' order by id DESC ";
 			}
 	
 			if(@$_GET["Action"] == "Del")
@@ -62,7 +100,6 @@
 					}
 			}
 ?>
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
 <div class="content-wrapper">
@@ -172,7 +209,7 @@
 								
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">
-								<table id="example1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
+								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr>
 												<th>S.No</th>
@@ -220,6 +257,9 @@
 												<td>
 													<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="Investor.php?Action=Del&id=<?php echo base64_encode($rows['id']); ?>">
 													<span class="fa fa-times"></span>
+													</a>
+													<a class="mb-control1 btn btn-info btn-rounded btn-sm" href="view_userdetail.php?id=<?php echo base64_encode($rows['id']); ?> ">
+													<span class="fa fa-eye"></span>
 													</a>
 												</td>
 											</tr>

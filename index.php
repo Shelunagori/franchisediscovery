@@ -103,7 +103,7 @@
  <?php include("header.php");?>
 
     <!-- ***** Welcome Slides Area Start ***** -->
-    <section class="welcome_area">
+    <section class="welcome_area" >
         <div class="welcome_slides">
 		<?php 
 			$query_slider=mysqli_query($db,"select * from slider where position = 'slider'");

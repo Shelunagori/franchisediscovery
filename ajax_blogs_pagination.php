@@ -5,11 +5,11 @@
 	
 	if(!empty($cat) and $cat != 0)
 	{
-		$query_nw=mysqli_query($db,"SELECT news_blogs.id,news_blogs.category_id,news_blogs.video_url,news_blogs.type,admin.name as create_by, categories.name,categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on, news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN categories ON (news_blogs.category_id = categories.id) where news_blogs.type = 'Blogs' and news_blogs.category_id = '$cat' order by news_blogs.id DESC LIMIT $limit OFFSET $offset");  
+		$query_nw=mysqli_query($db,"SELECT news_blogs.id,news_blogs.category_id,news_blogs.video_url,news_blogs.type,admin.name as create_by, new_categories.name,new_categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on, news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN new_categories ON (news_blogs.category_id = new_categories.id) where news_blogs.type = 'Blogs' and news_blogs.category_id = '$cat' order by news_blogs.id DESC LIMIT $limit OFFSET $offset");  
 		
 	}else
 	{
-		$query_nw=mysqli_query($db,"SELECT news_blogs.id,news_blogs.category_id,news_blogs.video_url,news_blogs.type,admin.name as create_by, categories.name,categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on, news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN categories ON (news_blogs.category_id = categories.id) where news_blogs.type = 'Blogs' order by news_blogs.id DESC LIMIT $limit OFFSET $offset");  
+		$query_nw=mysqli_query($db,"SELECT news_blogs.id,news_blogs.category_id,news_blogs.video_url,news_blogs.type,admin.name as create_by, new_categories.name,new_categories.seo_name as catSeoName, news_blogs.title, news_blogs.content, news_blogs.image, news_blogs.create_on, news_blogs.seo_name FROM news_blogs INNER JOIN admin ON (news_blogs.create_by = admin.id) INNER JOIN new_categories ON (news_blogs.category_id = new_categories.id) where news_blogs.type = 'Blogs' order by news_blogs.id DESC LIMIT $limit OFFSET $offset");  
 	}							
 	
 	if(!empty($query_nw)){ 

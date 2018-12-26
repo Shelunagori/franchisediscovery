@@ -4,7 +4,7 @@
 		if(isset($_GET['rowCatData']))
 		{
 			$data =  $_GET['rowCatData']; 
-			$queryString = "SELECT id,footer_content from categories where seo_name = '$data'";
+			$queryString = "SELECT id,footer_content from new_categories where seo_name = '$data'";
 			$resultString = mysqli_query($db, $queryString);
 			$rowString = mysqli_fetch_assoc($resultString);
 			$cat = $rowString['id']; 
@@ -68,7 +68,7 @@
     <link href="<?php echo $baseURL; ?>css/responsive.css" rel="stylesheet">
   
 	<style>
-	/*CATEGORIES BADGE*/
+	/*new_categories BADGE*/
 .badge {
 	font-weight: 600;
 	font-size: 13px;
@@ -191,7 +191,7 @@
                             <ul>
                                <?php
 								$i = 1;
-								$query=mysqli_query($db,"select * from categories where status = 0 order by name ASC ");
+								$query=mysqli_query($db,"select * from new_categories where status = 0 order by name ASC ");
 								while($row=mysqli_fetch_array($query)){
 									$catId = $row['id'];
 								?>
