@@ -21,18 +21,17 @@ color : white;
 background-color: #428bca;
 padding : 5px 15px;
 }
-
-
-
-.link{
-padding : 5px 15px;
-}
 .boxs
 {
 	background-color: #50719a;
 	height: 135px;
 	width: 180px;
 }
+
+.link{
+padding : 5px 15px;
+}
+
 
 /* remove border radius for the tab */
 
@@ -58,23 +57,23 @@ padding : 5px 15px;
     <section class="content">
 		<div class="row">
 			
-			<div class="col-md-11">
+			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header">
 						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>User Detail</h3>
 					</div>
 						
 					<div class="box-body">
-					<div class=col-md-12>
-						<div class="col-sm-3">
+					<div class=col-md-11>
+						<div class="col-sm-4">
 							<a  class="btn btn-primary  boxs" href="profile_view.php?id=<?php echo base64_encode($id); ?>"><i class="fa fa-user "></i>  Profile</a>
 						</div>
-					
-				
-						<div class="col-sm-3">
-							<a class="btn btn-primary boxs" href="listing_request.php?id=<?php echo base64_encode($id); ?>"><i class="fa fa-file "></i>   Request Listing</a>
+						<div class="col-sm-4">
+							<a class="btn btn-primary t boxs" href="favrouite_view.php?id=<?php echo base64_encode($id); ?>"><i class="fa fa fa-thumbs-o-up"></i>  Favrouite List</a>
 						</div>
-						<div class="col-sm-3">
+				
+						
+						<div class="col-sm-4">
 							<a class="btn btn-primary boxs" href="support_ticket.php?id=<?php echo base64_encode($id); ?>"><i class="fa fa-ticket "></i>Tickets</a>
 						</div>
 					</div>

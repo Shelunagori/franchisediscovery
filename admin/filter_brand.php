@@ -1,4 +1,5 @@
 <?php
+include('config.php');
 if(isset($_POST['brand_filter']))
 			{
 				$first_name=$_POST['name'];
@@ -45,7 +46,6 @@ if(isset($_POST['brand_filter']))
 				{
 					$brand_where="AND enquite_date > '$to'";
 				}
-				
 				
 				
 
