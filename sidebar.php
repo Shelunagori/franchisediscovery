@@ -19,10 +19,11 @@
 										
 										{?>	
 											<li><a class="<?php if($currentPage == 'Manage Profile') { echo 'active acolor';}?>" href="manage-profile.php"><i class="ti-unlock"></i>Manage Profile</a></li>
+											<li><a class="<?php if($currentPage == 'Brand') { echo 'active acolor';}?>" href="brand_list_brand.php"><i class="ti-wand"></i> Brand List</a></li>
+											
 											<li><a class="<?php if($currentPage == 'CRM Details') { echo 'active acolor';}?>" href="crm-details.php"><i class="ti-user"></i> CRM Details</a></li>
 											<li><a class="<?php if($currentPage == 'Request For Listing') { echo 'active acolor';}?>" href="request-for-listing.php"><i class="ti-menu"></i> Request For Listing</a></li>
 											<li><a class="<?php if($currentPage == 'Marketing With Us') { echo 'active acolor';}?>" href="marketing-with-us.php"><i class="ti-heart"></i> Marketing With Us</a></li>
-											
 											<li><a class="<?php if($currentPage == 'Support') { echo 'active acolor';}?>" href="support.php"><i class="fa fa-life-ring"></i> Support </a></li>
 											<li><a class="<?php if($currentPage == 'My Support Tickets') { echo 'active acolor';}?>" href="my-support-tickets.php"><i class="fa fa-ticket"></i> My Support Tickets </a></li>
 											<li><a class="<?php if($currentPage == 'Notification') { echo 'active acolor';}?>" href="notification.php"><i class="fa fa-bell-o"></i> Notification</a></li>

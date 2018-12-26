@@ -20,16 +20,16 @@ if(isset($_GET['blog_filter']))
 
 				 if(!@$from== null && !@$to == null)
 				{
-					echo$where="AND create_on BETWEEN '$from' AND '$to'";
+					$where="AND create_on BETWEEN '$from' AND '$to'";
 				}
 				
 				else if(!@$from== null && @$to == null)
 				{
-					echo$where="AND create_on > '$from'";
+					$where="AND create_on > '$from'";
 				}
 				else if(@$from== null && !@$to == null)
 				{
-					echo$where=" AND create_on < '$to'";
+					$where=" AND create_on < '$to'";
 				}
 				
 			}
@@ -283,7 +283,7 @@ if(isset($_GET['blog_filter']))
 
 									<?php   
 									if(!empty($where)){
-											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' $where order by id DESC ";
+											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' $news_where order by id DESC ";
 										}else{
 											$news_query= "SELECT * FROM news_blogs where type = 'News' and status = 'Active' order by id DESC ";
 										}
@@ -365,7 +365,7 @@ if(isset($_GET['blog_filter']))
 
 									<?php 
 									if(!empty($where)){
-										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' $where order by id DESC ";
+										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' $vidio_where order by id DESC ";
 									}else{
 										$vidio_query= "SELECT * FROM news_blogs where type = 'Video' and status = 'Active' order by id DESC ";
 									}
@@ -478,5 +478,6 @@ require('footer.php');
 	$('#datepicker5').datepicker({
       autoclose: true,
     });
+    
    
 	</script>

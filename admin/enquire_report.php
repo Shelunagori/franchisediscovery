@@ -68,6 +68,56 @@ if(isset($_GET['ok']))
 				
 			}
 			
+			if(isset($_POST['brand_filter']))
+			{
+				$first_name=$_POST['name'];
+				$email=$_POST['email'];
+				$from_date= $_POST['from_datepicker']?date('d-m-Y',strtotime($_POST['from_datepicker'])):null;
+				if(!$from_date==null)
+					$from=$from_date;
+
+				$to_date= $_POST['to_datepicker']?date('d-m-Y',strtotime($_POST['to_datepicker'])):null;
+				if(!$to_date==null)
+					$to=$to_date;
+
+				if(!$first_name == null && $email == null && @$from == null  && @$to == null)
+				{
+					$brand_where="AND name LIKE '%$first_name%'";
+				}
+				else if($first_name==null && !$email==null && @$from== null && @$to == null)
+				{
+					$brand_where="AND email LIKE '%$email%'";
+				}
+
+				
+
+				else if($first_name==null && $email==null && !@$from== null && !@$to == null)
+				{
+					$brand_where="AND enquite_date BETWEEN '$from' AND '$to'";
+				}
+				else if(!$first_name==null && !$email==null && !@$from== null && !@$to == null)
+				{
+					$brand_where="AND enquite_date BETWEEN '$from' AND '$to' AND email LIKE '%$email%' AND name LIKE '%$first_name%'";
+				}
+				else if($first_name==null && $email==null && !@$from== null && @$to == null)
+				{
+					$brand_where="AND  enquite_date > '$from'";
+				}
+				
+				else if(!$first_name==null && !$email==null && @$from== null 
+					&& @$to == null)
+				{
+					$brand_where="AND  email LIKE '%$email%' AND name LIKE '%$first_name%'";
+				}
+				
+				else if($first_name==null && $email==null && @$from== null && !@$to == null)
+				{
+					$brand_where="AND enquite_date > '$to'";
+				}
+				
+				
+
+		}
 			
 	if(@$_GET["del"] == "del")
 	{
@@ -84,7 +134,6 @@ if(isset($_GET['ok']))
 
 
 ?>
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
@@ -252,7 +301,9 @@ if(isset($_GET['ok']))
 									</table>								
 									<?php  } else {  echo 'No Record Found !';  } ?>									
 								</div>
-								<form method="get" enctype="multipart/form-data">
+								
+				<div class="tab-pane" id="2">	
+					<form class="form2" method="post" enctype="multipart/form-data"  action="#">
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
@@ -261,8 +312,6 @@ if(isset($_GET['ok']))
 								<td width="20%">
 									<input type="text" name="email" placeholder="Enter email" class="form-control">
 								</td>
-								
-								
 								<td width="20%">
 									<div class="input-group date">
 										<div class="input-group-addon">
@@ -286,10 +335,9 @@ if(isset($_GET['ok']))
 							</tr>
 						</table>
 					</form>
-									<div class="tab-pane" id="2">	
 									<?php  
 									if(!empty($brand_where)){
-											$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' $where order by id DESC ";
+											$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' $brand_where order by id DESC ";
 											$id='brand';
 										}else{
 											$sql1= "select * from enquire where status = 'Active' AND enquire_type='brand' order by id DESC ";
@@ -311,7 +359,7 @@ if(isset($_GET['ok']))
 												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody class="main-body">
 											<?php 
 											
 											while($row=mysqli_fetch_array($sql_result)){ ?>
@@ -366,17 +414,11 @@ require('footer.php');
 	$('#datepicker3').datepicker({
       autoclose: true,
     });
-  $('#brand_filter').click(function() {
-   	 var sthis = $('#sthis').val();
-      $.ajax({
-         url: 'filter_brand.php' , 
-         type: 'GET',
-         data: 'sthis: ' + sthis,
-         success: function(result){ 
-         alert(result);    
-           $('#example3').html(result)      
-         }
-      });   
-      return false;     
+     $('#brand_filter').on('click', function(){
+     	
+    	$('#1').removeClass('active');
+    	$('#2').addClass('active');
+
    });
+
 	</script>

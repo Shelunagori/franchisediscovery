@@ -14,7 +14,7 @@ if(isset($_POST['edit']))
 	$reg_type=$_POST['reg_type'];
 	$employee_id=$_POST['employee_id'];
 
-	$update_user="UPDATE registration set first_name='$first_name',last_name='$last_name',mobile_no='$mobile_no',email='$email',company_name='$company_name',brand_name='$brand_name',reg_type='$reg_type',employee_id=$employee_id where id='$id'";
+	$update_user="UPDATE registration set first_name='$first_name',last_name='$last_name',mobile_no='$mobile_no',email='$email',company_name='$company_name',brand_name='$brand_name',reg_type='$reg_type',employee_id='$employee_id' where id='$id'";
 	if ($db->query($update_user) === TRUE)
 	{
 		$status="success";
@@ -109,32 +109,32 @@ padding : 5px 15px;
 					<div class="box-body">
 						<div class="form-group">
 							<label for="name">First Name</label>
-							<input class="form-control" name="first_name" type="text" value='<?php echo $edit_result['first_name']; ?>' required>
+							<input class="form-control" name="first_name" type="text" value='<?php echo $edit_result['first_name']; ?>' >
 							<label for="name">Last Name</label>
-							<input class="form-control" name="last_name" type="text" value='<?php echo $edit_result['last_name']; ?>' required>
+							<input class="form-control" name="last_name" type="text" value='<?php echo $edit_result['last_name']; ?>' >
 							<label for="name">Email</label>
-							<input class="form-control" name="email" type="email" value='<?php echo $edit_result['email']; ?>' required>
+							<input class="form-control" name="email" type="email" value='<?php echo $edit_result['email']; ?>' >
 							<label for="name">Mobile No</label>
-							<input class="form-control" name="mobile_no" type="text" value='<?php echo $edit_result['mobile_no']; ?>' required>
+							<input class="form-control" name="mobile_no" type="text" value='<?php echo $edit_result['mobile_no']; ?>' >
 							<label for="name">Company Name</label>
-							<input class="form-control" name="company_name" type="text" value='<?php echo $edit_result['company_name']; ?>' required>
+							<input class="form-control" name="company_name" type="text" value='<?php echo $edit_result['company_name']; ?>' >
 							<label for="name">Brand Name</label>
-							<input class="form-control" name="brand_name" type="text" value='<?php echo $edit_result['brand_name']; ?>' required>
+							<input class="form-control" name="brand_name" type="text" value='<?php echo $edit_result['brand_name']; ?>' >
 							<label for="name">Registration Type</label>
-							<input class="form-control" name="reg_type" type="text" value='<?php echo $edit_result['reg_type']; ?>' required>
+							<input class="form-control" name="reg_type" type="text" value='<?php echo $edit_result['reg_type']; ?>' 	>
 							<label for="name">Employee</label>
-							<select name="employee_id" class="form-control">
-								<option value=""><?php 
-								$employee_id=$edit_result['employee_id']; 
-								$employee_query=mysqli_query($db,"select * from employee_master where id=$employee_id");
-									$employee_result=mysqli_fetch_array($employee_query);
-										echo $employee_result['name'];
-								?></option>
+							<select  name="employee_id" class="form-control select2" style="width: 100%;">
+								<option value="">Select Employee</option>
 								<?php
-									$employee=mysqli_query($db,"select * from employee_master");
-									while($employee_row=mysqli_fetch_array($employee))
-									{
-										echo"<option value=".$employee_row['id'].">".$employee_row['name']."</option>";
+									$employee_id=$edit_result['employee_id'];
+									$employee_query=mysqli_query($db,"SELECT * FROM employee_master");
+									while($employee_row=mysqli_fetch_array($employee_query)){
+										if($employee_id == $employee_row['id']){
+											echo "<option value=".$employee_row['id']." selected>".$employee_row['name']."</option>";
+										}
+										else{
+											echo "<option value=".$employee_row['id'].">".$employee_row['name']."</option>";
+										}
 									}
 								?>
 							</select>

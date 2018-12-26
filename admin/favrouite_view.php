@@ -8,9 +8,24 @@ if(isset($_POST['add']))
 	$add_result=mysqli_query($db,$add_fav);
 }
 
+		if(@$_GET["Action"] == "Del")
+			{
+				$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
+				echo$delete_query = "delete from favrouite where id=$id";
+					if ($db->query($delete_query) === TRUE) {
+						header('location:favrouite_view.php');
+					} else {
+						$status = 'fail';
+						$message = 'Something went wrong !';
+					}
+			}
 include('header.php');
 ?>
 <style>
+.favr
+{
+	padding-right:290px;
+}
 .top
 {
 	margin-top: 35px;
@@ -75,17 +90,36 @@ padding : 5px 15px;
 			<div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
-						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>User Detail</h3>
+						<?php
+							$sql=mysqli_query($db,"select first_name from registration where id=$id");
+							$result=mysqli_fetch_array($sql);
+
+						?>
+						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>Favrouite List Of <?= $result['first_name'] ?></h3>
 						 
 					</div>
 						
 					<div class="box-body">
 					
-			<div class="col-md-6">
-				<form role="form" method="post" action="#" enctype="multipart/form-data">
+			<div class="col-md-">
+				<div class="box box-primary">
+			<div class="box-header with-border">
+			  <h3 class="box-title">Add to Favrouite</h3>
+
+			  <div class="box-tools pull-right">
+				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+				  <i class="fa fa-minus"></i></button>
+				<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+				  <i class="fa fa-times"></i></button>
+			  </div>
+			</div>
+			<div class="box-body">
+				<div class="box-body">
+					<div class="form-group">
+					<form role="form" method="post" action="#" enctype="multipart/form-data">
 					<table>
 						<tr>
-							<td><select name="brand_id" class="form-control">
+							<td><select  name="brand_id" class="form-control favr select2 employee_name " style="width: 100%;" userid=<?php echo $rows['id']; ?>>
 								<option value="">--select brand--</option>
 								<?php
 									$brand_options="select * from brands";
@@ -99,43 +133,63 @@ padding : 5px 15px;
 								</select>
 								</td>
 								<td>
-							<button type="submit" name="add" class="btn btn-primary pull-right">Add</button>
+							<button type="submit" name="add" class="btn btn-primary ">Add</button>
 						</td>
 					</tr>
 				</table>
 			</form>
-			<div class="box top">
-				
-				<?php 
-				$fav_query="select * FROM favrouite WHERE user_id=$id";
-					$fav_row=mysqli_query($db,$fav_query);
-						while($fav_result=mysqli_fetch_array($fav_row))
-						{
-				?>
-					<div class="box-body">
-							<label for="name">Brand: </label>
-							<?php
-								$brand_id=$fav_result['brand_id'];
-								$brand_query="select * from brands where id=$brand_id";
-								$brand_row=mysqli_query($db,$brand_query);
-								while($brand_result=mysqli_fetch_array($brand_row))
-								{
-									echo $brand_result['name'];
-								}
-							?>
-							
-							
 					</div>
-				<?php } ?> 
-			</div>
+				 </div>
+			</div>       
+        </div>
 
-			
-			
+
+					
+				
+				
       <!-- /.box -->
   </div> 
 				</div>
 			</div>
+			<div>
+			<table class="table table-striped">
+				<tr>
+					<th>S.no</th>
+					<th>Brand</th>
+					<th>Action</th>
+				</tr>
+					<?php 
+						$i=0;
+						$fav_query="select * FROM favrouite WHERE user_id=$id";
+						$fav_row=mysqli_query($db,$fav_query);
+						while($fav_result=mysqli_fetch_array($fav_row))
+						{
+							$i++;
+					?>
+				<tr>
+					<td><?= $i ?></td>
+					<td><?php
+							$brand_id=$fav_result['brand_id'];
+							$brand_query="select * from brands where id=$brand_id";
+							$brand_row=mysqli_query($db,$brand_query);
+							while($brand_result=mysqli_fetch_array($brand_row))
+							{
+								echo $brand_result['name'];
+							}
+						?></td>
+						<td>
+							<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="favrouite_view.php?Action=Del&id=<?php echo base64_encode($fav_result['id']); ?>">
+							<span class="fa fa-times"></span>
+							</a></td>
+					</tr>		
+							
+				<?php } ?> 
+					
+			</table>
 		</div>
+		</div>
+		
+	</div>
 	</section>
 </div>	
 <?php

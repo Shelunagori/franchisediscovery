@@ -7,7 +7,7 @@ if(isset($_POST['add']))
 	$brand_id = mysqli_real_escape_string($db,$_POST['brand_id']);
 	if(!empty($brand_id) || !empty($category_id))
 	{
-		$sql = "INSERT INTO tobrand_catewise(category_id,brand_id) VALUES ('$category_id','$brand_id')";
+		$sql = "INSERT INTO tobrand_catewise (category_id,brand_id) VALUES ($category_id,$brand_id)";
 		if ($db->query($sql) === TRUE) {
 			$status = 'success';
 			$message = 'Brand added successfully in list !';
@@ -95,7 +95,7 @@ require('header.php');
 				</select>
 			</div>
             <div class="form-group" id="brand_div">
-				<select name="brand_id" class="form-control select2" style="width: 100%;" required>
+				<select id="brand_id" name="brand_id" class="form-control select2" style="width: 100%;" required>
 				  <option value="" selected="selected">Select Brand</option>
 					
 				</select>
@@ -170,21 +170,22 @@ require('header.php');
 
  <script>
 $(document).ready(function() {  
-	$('select[name=category_id]').on('change',function() { 
-		if($(this).val())
-		{
-			$('#brand_div').html('<i style= margin-top: 32px;margin-left: 65px; class=fa fa-refresh fa-spin fa-1x fa-fw></i><b> Loading... </b>');
-			var category_id=$('select[name=category_id] option:selected').val();
-			var url='ajaxFetchBrand.php?cat_id=';
-			url=url+category_id,
-				$.ajax({
-					url: url,
-					type: 'GET',
-				}).done(function(response) {
-					$('#brand_div').html(response);
-					$('select[name=brand_id]').select2();
-				});
-		}
-	});
+	
+	
+	  $('#cat_id').on('change',function(){
+                //Selected value
+            
+                var cat_id = $(this).val();
+               
+                $.ajax({
+                type:'json',
+                 url : 'According_category.php?cat_id='+cat_id,    
+                    success: function(result){
+                       $('#brand_id').html(result);
+                       
+                    }
+                });
+                
+            });
 });
  </script>

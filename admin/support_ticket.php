@@ -183,7 +183,6 @@
 						</table>
 					</form>
 						
-						<div class="box-body">
 							
 							<div id="exTab2">	
 								
@@ -274,7 +273,6 @@
 								</div>
 							</div>						
 											
-						</div>
 					  </div>
 					  <!-- /.box -->
 					</div>		

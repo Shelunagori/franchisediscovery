@@ -231,8 +231,8 @@
 												<td><?php echo $rows['email']; ?></td>
 												<td><?php echo $rows['reg_type']; ?></td>
 												<td>
-													<select name="employee_name" class="employee_name" userid=<?php echo $rows['id']; ?>>
-															<option value="">Select Employee</option>
+													<select  name="employee_name" class="form-control select2 employee_name" style="width: 100%;" userid=<?php echo $rows['id']; ?>>
+														<option value="">Select Employee</option>
 															<?php
 																$employee_id=$rows['employee_id'];
 																$employee_query=mysqli_query($db,"SELECT * FROM employee_master");
