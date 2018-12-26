@@ -33,7 +33,7 @@ padding : 5px 15px;
 .Ticket
 {
 	margin-left: 6px;
-	width: 112px;
+	width: 118px;
 }
 .link{
 padding : 5px 15px;

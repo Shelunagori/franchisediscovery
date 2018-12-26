@@ -1,6 +1,6 @@
 <?php
 include('config.php');
-$id=base64_decode($_GET['id']);
+@$id=base64_decode($_GET['id']);
 if(isset($_POST['add']))
 {
 	$brand_id=$_POST['brand_id'];
@@ -72,7 +72,6 @@ padding : 5px 15px;
 <div class="content-wrapper">
     <section class="content">
 		<div class="row">
-			
 			<div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
@@ -81,31 +80,30 @@ padding : 5px 15px;
 					</div>
 						
 					<div class="box-body">
-					<form method="post" enctype="multipart/form-data">
 					
-	<div class="col-md-6">
-		<form role="form" method="post" action="#" enctype="multipart/form-data">
-			<table>
-				<tr>
-					<td><select name="brand_id" class="form-control">
-						<option value="">--select brand--</option>
-						<?php
-							$brand_options="select * from brands";
-								$brand=mysqli_query($db,$brand_options);
-								while($brand_results=mysqli_fetch_array($brand))
-								{
-									echo"<option value=".$brand_results['id'].">".$brand_results['name']."</option>";
-								}
-						?>
-						
-					</select>
-					</td>
-					<td>
-						<button type="submit" name="add" class="btn btn-primary pull-right">Add</button>
-					</td>
-				</tr>
-			</table>
-		</form>
+			<div class="col-md-6">
+				<form role="form" method="post" action="#" enctype="multipart/form-data">
+					<table>
+						<tr>
+							<td><select name="brand_id" class="form-control">
+								<option value="">--select brand--</option>
+								<?php
+									$brand_options="select * from brands";
+										$brand=mysqli_query($db,$brand_options);
+										while($brand_results=mysqli_fetch_array($brand))
+										{
+											echo"<option value=".$brand_results['id'].">".$brand_results['name']."</option>";
+										}
+								?>
+								
+								</select>
+								</td>
+								<td>
+							<button type="submit" name="add" class="btn btn-primary pull-right">Add</button>
+						</td>
+					</tr>
+				</table>
+			</form>
 			<div class="box top">
 				
 				<?php 
@@ -115,7 +113,6 @@ padding : 5px 15px;
 						{
 				?>
 					<div class="box-body">
-						<div class="form-group">
 							<label for="name">Brand: </label>
 							<?php
 								$brand_id=$fav_result['brand_id'];
@@ -128,7 +125,6 @@ padding : 5px 15px;
 							?>
 							
 							
-					   </div>
 					</div>
 				<?php } ?> 
 			</div>
@@ -137,11 +133,9 @@ padding : 5px 15px;
 			
       <!-- /.box -->
   </div> 
-					</div>
 				</div>
 			</div>
 		</div>
-			<!-- /.box -->
 	</section>
 </div>	
 <?php
