@@ -16,3 +16,23 @@
     float: left !important;
     margin: -17px 2px 3px 2px;
 }
+
+.cursorPointer{
+	    cursor: pointer;
+		color:#201e1e !important;
+}
+
+.brand-details-inner p, span {
+    color: #faf5f5 !important;
+}
+
+.vegclass{
+	width: 70px !important;
+}
+
+.nonvegclass{
+	width: 105px; height: 41px;
+}
+.bothclass{
+	width: 165px; height: 41px;
+}

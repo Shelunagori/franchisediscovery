@@ -63,6 +63,7 @@
 
     <!-- Core Style CSS -->
     <link rel="stylesheet" href="<?php echo $baseURL; ?>css/core-style.css">
+    <link rel="stylesheet" href="<?php echo $baseURL; ?>css/custom-pro.css">
     <link rel="stylesheet" href="<?php echo $baseURL; ?>style.css">
 
     <!-- Responsive CSS -->
@@ -111,9 +112,9 @@
 			$brand_id = $row_brand['id'];
 			$footer_content = $row_brand['footer_content'];
 	 ?>
-	
+	<!--background-image: url(http://franchisediscovery.in/img/bg-image-5.jpg)-->
 			<!-- ***** New Arrivals Area Start ***** -->
-			<section class="header-slider section_padding_100 clearfix" style="background-image: url(http://franchisediscovery.in/img/bg-image-5.jpg)">
+			<section class="header-slider section_padding_100 clearfix" style="">
 				<div class="container brand-details-inner">
 				
 				   <div class="row">
@@ -126,6 +127,7 @@
 					 <div class="brand-details-inner-content">
 				   <h1> <?php echo $row_brand['name'];  ?></h1>
 				   <p> <?php echo $row_brand['address'];  ?></p>
+				   <p> <?php echo $row_brand['investment_range_in_words'];  ?></p>
 					<span><?php $catID = $row_brand['category_id'];
 								$query_cat = "SELECT name FROM categories where id = '$catID'";
 								$result_cat = mysqli_query($db, $query_cat);
@@ -203,7 +205,7 @@
 				  </div>	
 				 
 				   <div class="rating-footer">
-				   <span data-toggle="modal" data-target="#myModal"> <i class="fa fa-cutlery" aria-hidden="true"></i> Our Menu </span>
+				   <span data-toggle="modal" data-target="#myModal" class="cursorPointer"> <i class="fa fa-cutlery" aria-hidden="true"></i> Our Menu </span>
 				    
 					
 				 
@@ -212,7 +214,7 @@
 								if($row_brand['food_type'] == 'Veg')
 								{
 							?>
-								<span style="width: 70px;">
+								<span  class="cursorPointer vegclass">
 								<img src="<?php echo $baseURL; ?>img/veg.png" width= 35%; height= 18px />
 								<?php echo $row_brand['food_type'];  ?> 
 								</span>
@@ -220,7 +222,7 @@
 							if($row_brand['food_type'] == 'Non-Veg')
 								{
 							?>
-								<span style="width: 105px; height: 41px;">
+								<span class="cursorPointer nonvegclass">
 								<img src="<?php echo $baseURL; ?>img/nonveg.png" width=20%; height=18px/>
 								<?php echo $row_brand['food_type'];  ?> 
 								</span>
@@ -229,7 +231,7 @@
 								elseif($row_brand['food_type'] == 'Non + Veg Both')
 								{
 							?>
-								<span style="width: 165px; height: 41px;" >
+								<span class="cursorPointer bothclass">
 								<img src="<?php echo $baseURL; ?>img/veg.png" width=12%/>
 								<img src="<?php echo $baseURL; ?>img/nonveg.png" width= 12%/>
 								<?php echo $row_brand['food_type'];  ?> 
@@ -257,7 +259,7 @@
 
 					?>
 					
-					<span id="fav"> <i class="fa <?php echo $fav_class; ?>" style="color: #193985;" id="fav-i" aria-hidden="true"></i> Favourite </span>
+					<span id="fav" class="cursorPointer"> <i class="fa <?php echo $fav_class; ?>" style="color: #193985;" id="fav-i" aria-hidden="true"></i> Favourite </span>
 				   
 				   </div>
 				   

@@ -110,7 +110,11 @@
 		$query=mysqli_query($db,"SELECT brands.id,brands.name as bname,brands.seo_name as brand_seo_name ,categories.seo_name as cname,brands.brand_image FROM tobrand_catewise INNER JOIN brands ON (tobrand_catewise.brand_id = brands.id) INNER JOIN categories ON (tobrand_catewise.category_id = categories.id) where brands.status = 'Active' and tobrand_catewise.category_id = '$id' order by tobrand_catewise.id DESC ");
 		if($query->num_rows > 0)
 		{ ?>
-		<section class="header-slider section_padding_100 clearfix" style="background-image: url(http://franchisediscovery.in/img/bg-image-5.jpg);height: 220px;">
+	
+		<!-- background-image: url(http://franchisediscovery.in/img/bg-image-5.jpg);
+	-->
+	
+		<section class="header-slider section_padding_100 clearfix" style="height: 220px;">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
@@ -186,12 +190,15 @@
 	  var catId = <?php echo $id; ?>;	
 	  var url_data = $('#url').val();
 	  var cname = $('#cname').val();
+	  
       function displayRecords(lim, off) {  
+	  var selectedValue = $('#selectSearch option:selected').val();
+	 
         $.ajax({
           type: "GET",
           async: false,
           url: url_data,
-          data: "limit="+lim+"&offset="+off+"&catId="+catId+"&cname="+cname,
+          data: "limit="+lim+"&offset="+off+"&catId="+catId+"&cname="+cname+"&selectedValue="+selectedValue,
           cache: false,
           beforeSend: function() {
             $("#loader_message").html("").hide();
@@ -199,7 +206,7 @@
           },
           success: function(html) {
            $('#loader_image').hide();
-		   
+		 //  alert(html);
 			if (html.length == 4) {
               $("#loader_message").html('<button class="btn btn-default" type="button">No more records.</button>').show()
             } else {
@@ -211,6 +218,26 @@
         });
       }
 
+	     $('#selectSearch').on('change',function() {
+			   var limit = 12;
+				var offset = 0;
+				$("#results").html('');
+			if (busy == false) {
+			
+			  busy = true;
+			  displayRecords(limit, offset);
+			}
+			
+			$(window).scroll(function() {
+				if ($(window).scrollTop() + $(window).height() > $("#results").height() && !busy) {
+				busy = true;
+				offset = limit + offset;
+					setTimeout(function() { displayRecords(limit, offset); }, 500);
+				}
+			});		
+		});
+		
+		
       $(document).ready(function() {  
         // start to load the first set of data
         if (busy == false) {

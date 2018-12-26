@@ -3,8 +3,9 @@ require('config.php');
 $status = '';
 $message = '';
 	if(isset($_POST['AddSlider']))
-	{	$name = mysqli_real_escape_string($db,$_POST['name']);
-		
+	{	
+		$name = mysqli_real_escape_string($db,$_POST['name']);
+		$category_id =  mysqli_real_escape_string($db,$_POST['category_id']);
 		  $type = explode('.',$_FILES["slider_image"]["name"]);
 		  $type = $type[count($type)-1];
 		  $url_folder = "../chart_image/";
@@ -12,10 +13,11 @@ $message = '';
 		  $url = $url_folder.$url_name;
 		  $url_insert = "chart_image/".$url_name;
 		  $seo_name = seo_url($name);
+		  
 		  if(in_array($type,array("jpg","jpeg","gif","png")))
 		  {
 		  if(move_uploaded_file($_FILES["slider_image"]["tmp_name"],$url))
-			$sql = "INSERT INTO chart(name,image_path,seo_name)VALUES('$name','$url_insert','$seo_name')";
+			$sql = "INSERT INTO chart(name,image_path,seo_name,category_id)VALUES('$name','$url_insert','$seo_name','$category_id')";
 			if ($db->query($sql) === TRUE) {
 				$status = 'success';
 				$message = 'New chart created successfully !';
@@ -34,6 +36,7 @@ $message = '';
 	if(isset($_POST['updateChart']))
 	{	$name = mysqli_real_escape_string($db,$_POST['name']);
 		$seo_name = seo_url($name);
+		$category_id =  mysqli_real_escape_string($db,$_POST['category_id']);
 		$id = mysqli_real_escape_string($db,$_POST['id']);
 		  $err = $_FILES["slider_image"]["error"];	
 		  
@@ -48,7 +51,7 @@ $message = '';
 			  if(in_array($type,array("jpg","jpeg","gif","png")))
 			  {
 				  if(move_uploaded_file($_FILES["slider_image"]["tmp_name"],$url))
-					$sql = "update chart set name = '$name', image_path = '$url_insert', seo_name = '$seo_name' where id = '$id' ";
+					$sql = "update chart set name = '$name', image_path = '$url_insert', seo_name = '$seo_name' , category_id='$category_id' where id = '$id' ";
 					if ($db->query($sql) === TRUE) {
 						$status = 'success';
 						$message = 'Chart updated successfully !';
@@ -63,7 +66,7 @@ $message = '';
 			  }			  
 			}else 
 			{
-				$sql = "update chart set name = '$name', seo_name = '$seo_name' where id = '$id' ";
+				$sql = "update chart set name = '$name', seo_name = '$seo_name', category_id='$category_id' where id = '$id' ";
 				if ($db->query($sql) === TRUE) {
 					$status = 'success';
 					$message = 'Chart updated successfully !';
@@ -137,6 +140,17 @@ require('header.php');
         <form role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>" enctype='multipart/form-data'>
 		<div class="box-body">
           <div class="box-body">
+			 <div class="form-group">
+				<select name="category_id" class="form-control select2" id="cat_id" style="width: 100%;" required>
+				  <option value="" selected="selected">Select Category</option>
+					<?php
+						$query=mysqli_query($db,"select * from categories where status = 0");
+						while($row=mysqli_fetch_array($query)){
+					?>
+						<option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+					<?php } ?>
+				</select>
+			</div>
 			<div class="form-group">
               <input type="text" required class="form-control" placeholder="Chart Name" name="name">
             </div>
@@ -176,6 +190,7 @@ require('header.php');
                 <thead>
                 <tr>
                   <th>S.no</th>
+                  <th>Category</th>
 				  <th>Image</th>
 				  <th>Name</th>
                   <th>Action</th>

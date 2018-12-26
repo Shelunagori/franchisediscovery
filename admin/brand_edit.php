@@ -192,8 +192,8 @@ $status='';
 				<div class="box-body">
 					<div class="box-body">
 						<div class="form-group">
-							<label>Upload menu images</label>  (Select multiple images)	
-							<input type="file" name="menudetail[]" multiple id="menu-photo-add">
+							<label>Upload menu pdf</label>  (Select multiple pdf files)	
+							<input type="file" name="menudetail[]" accept="application/pdf" multiple id="menu-photo-add">
 						</div>	
 						
 						<div class="menu">
@@ -739,26 +739,30 @@ $query_seo=mysqli_query($db,"SELECT * FROM page_seo where page_id = '3' and bran
     // Multiple images preview in browser
     var imagesPreview = function(input, placeToInsertImagePreview) {
 	var extension = input.value.split('.')[1];
+	var menuAdd = document.getElementById("menu-photo-add");
         if (input.files) {
-            var filesAmount = input.files.length;
+			if(extension == 'pdf'){
+				var filesAmount = input.files.length;
 
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
+				for (i = 0; i < filesAmount; i++) {
+					var reader = new FileReader();
 
-                reader.onload = function(event) {
-                   
-					if(extension == 'pdf')
-					{	
-						$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview);
-					}else
-					{
-						$($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+					reader.onload = function(event) {
+					   
+						if(extension == 'pdf')
+						{	
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview);
+						}
+
 					}
 
-                }
-
-                reader.readAsDataURL(input.files[i]);
-            }
+					reader.readAsDataURL(input.files[i]);
+				}
+			}else {
+				alert("Upload pdf  files only");
+				menuAdd.focus();
+				return false;
+			}	
         }
 
     };
