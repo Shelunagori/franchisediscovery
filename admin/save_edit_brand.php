@@ -52,7 +52,7 @@ if(isset($_POST['add']))
 		$seo = $db->query($sql_seo);		
 	}else
 	{   $page_id = 3;
-		$sql_seo = "INSERT INTO page_seo(page_id,category_id,brand_id,title, meta_description, meta_keywords, meta_robots, meta_abstract, meta_topic, meta_url, g_name, g_description, g_image, t_title, t_description, t_image, og_title, og_type, og_url, og_image, og_description, og_site_name, fb_admins, canonical) VALUES ('$page_id','$category_id','$brand_id','$title','$meta_description','$meta_keywords','$meta_robots','$meta_abstract','$meta_topic','$meta_url','$g_name','$g_description','$g_image','$t_title','$t_description','$t_image','$og_title','$og_type','$og_url','$og_image','$og_description','$og_site_name','$fb_admins','$canonical')";
+		$sql_seo = "INSERT INTO page_seo(page_id,brand_id,title, meta_description, meta_keywords, meta_robots, meta_abstract, meta_topic, meta_url, g_name, g_description, g_image, t_title, t_description, t_image, og_title, og_type, og_url, og_image, og_description, og_site_name, fb_admins, canonical) VALUES ('$page_id','$brand_id','$title','$meta_description','$meta_keywords','$meta_robots','$meta_abstract','$meta_topic','$meta_url','$g_name','$g_description','$g_image','$t_title','$t_description','$t_image','$og_title','$og_type','$og_url','$og_image','$og_description','$og_site_name','$fb_admins','$canonical')";
 		$seo = $db->query($sql_seo);
 	}
 	
@@ -138,11 +138,42 @@ if(isset($_POST['add']))
 			
  			$left_menu_name = mysqli_real_escape_string($db,$brand_detail['left_menu_name']);
 			$content = mysqli_real_escape_string($db,$brand_detail['content']); 
+			$content_old = mysqli_real_escape_string($db,$brand_detail['content_old']); 
 			
 			$detail_sql = "update brand_details set left_menu_name = '$left_menu_name',content = '$content',is_country = '$is_country',is_city = '$is_city',is_gallery = '$is_gallery',is_state = '$is_state' where id = '$brndDetailID' ";
 	
 			$res = $db->query($detail_sql);
 			$brand_detail_id = $brndDetailID;
+			
+			if($left_menu_name == "ROI"){ 
+			
+			$types='';$urls='';
+				if(!empty($_FILES['brand_details']["name"])){
+						foreach($_FILES['brand_details']["name"] as $a){
+						
+						$types = explode('.',$a['content']);
+						$types = $types[count($types)-1];
+						$urls = "../roi_images/".'_'.$left_menu_name.'_'.uniqid(rand()).'.'.$types;
+					}
+					
+					if(!empty($_FILES['brand_details']["tmp_name"])){
+						foreach($_FILES['brand_details']["tmp_name"] as $b){
+							if(in_array($types,array("pdf","doc","docx","xls","xlsx")))
+							{
+								move_uploaded_file($b["content"],$urls);
+							}
+						}
+					}
+					
+			
+					$detail_sql_roi = "update brand_details set content = '$urls' where brand_id=$brand_id and left_menu_name='ROI'";	
+					$db->query($detail_sql_roi);
+				}
+			
+				
+			}
+			
+			
 			if (array_key_exists("brand_country",$brand_detail))
 			{
 				foreach($brand_detail['brand_country'] as $countryDetail)

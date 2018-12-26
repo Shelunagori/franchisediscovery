@@ -201,12 +201,17 @@ $status='';
 
 						<div class="form-group">
 						<label>Menu Name</label>
-							<input class="form-control" name="brand_details[1][left_menu_name]" type="text" placeholder="Menu name" value='ROI' required>
+							<input class="form-control" name="brand_details[1][left_menu_name]" type="text" placeholder="Menu name" value='ROI' required readonly>
 						</div>
+						
 						<div class="form-group">
 							<div class="box-body pad">
-								<textarea id="editor1" name="brand_details[1][content]" rows="10" cols="80">
-								</textarea>
+								<!--<textarea id="editor1" name="brand_details[1][content]" rows="10" cols="80">
+								</textarea>-->
+								
+								<label>Upload ROI pdf/excel/word</label>  (Select pdf/excel/word files)	
+								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
+								<div class="roi"></div>
 							</div>
 						</div>	
 
@@ -534,7 +539,7 @@ $status='';
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace('brand_details[0][content]');
-	CKEDITOR.replace('brand_details[1][content]');
+	//CKEDITOR.replace('brand_details[1][content]');
 	CKEDITOR.replace('brand_details[2][content]');
 	CKEDITOR.replace('brand_details[3][content]');
 	CKEDITOR.replace('brand_details[4][content]');
@@ -601,8 +606,44 @@ $status='';
 
     };
 
+	var imagesPreviewRoi = function(input, placeToInsertImagePreview) {
+	var extension = input.value.split('.')[1];
+	var menuAdd = document.getElementById("roi-photo-add");
+        if (input.files) {
+			if(extension == 'pdf' || extension == 'doc'|| extension == 'docx'|| extension == 'xls'|| extension == 'xlsx'){	
+				var filesAmount = input.files.length;
+
+				for (i = 0; i < filesAmount; i++) {
+					var reader = new FileReader();
+
+					reader.onload = function(event) {
+						if(extension == 'pdf')
+						{	
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview).css('height','120px');;
+						}else if(extension == 'doc' || extension == 'docx'){
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/word-icon-png-6.png').appendTo(placeToInsertImagePreview).css('height','120px');
+						}else if(extension == 'xls'|| extension == 'xlsx'){
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/Excel.png').appendTo(placeToInsertImagePreview).css('height','120px');;
+						}
+					}
+
+					reader.readAsDataURL(input.files[i]);
+				}
+			}else {
+				alert("Upload pdf / word/excel  files only");
+				menuAdd.focus();
+				return false;
+			}
+		}	
+
+    };
+
     $('#menu-photo-add').on('change', function() {
         imagesPreview(this, 'div.menu');
+    });
+
+	$('#roi-photo-add').on('change', function() {
+        imagesPreviewRoi(this, 'div.roi');
     });
 }); 
   

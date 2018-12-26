@@ -244,9 +244,40 @@ $status='';
 						</div>
 						<div class="form-group">
 							<div class="box-body pad">
+							<?php if($row_detail['left_menu_name'] == "ROI"){ ?>
+								<label>Upload ROI pdf/excel/word</label>  (Select pdf/excel/word files)	
+								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
+								<input type="hidden" name="brand_details[1][content_old]" value="<?php echo $row_detail['content']; ?>">
+								<div class="roi">
+									<?php  
+									if (strpos($row_detail['content'], '.pdf') !== false) { ?>
+
+										<img src="admin_assest/img/pdficon.png" style="height:120px"   />
+										
+										<a href="<?php echo $row_detail['content']; ?>" target="_blank"></a>
+									<?php }else if (strpos($row_detail['content'], '.xls') !== false || strpos($row_detail['content'], '.xlsx') !== false){ ?>
+									
+										
+										
+										<a href="<?php echo $row_detail['content']; ?>" target="_blank"><img src="admin_assest/img/Excel.png" style="height:120px"  /></a>
+										
+									<?php }else if (strpos($row_detail['content'], '.doc') !== false || strpos($row_detail['content'], '.docx') !== false){ ?>
+									
+										<img src="admin_assest/img/word-icon-png-6.png" style="height:120px" />
+										
+										<a href="<?php echo $row_detail['content']; ?>" target="_blank"></a>
+										
+					<?php } else { echo '<center>No menu card found</center>';  } ?>
+								
+								
+								
+								</div>
+							<?php }else{ ?>
 								<textarea id="editor1" name="brand_details[<?php echo $no;?>][content]" rows="10" cols="80">
 									<?php echo $row_detail['content']; ?>
 								</textarea>
+							<?php } ?>
+								
 							</div>
 						</div>
 						<?php  if($row_detail['is_country'] == 'Yes') { ?>
@@ -698,7 +729,7 @@ $query_seo=mysqli_query($db,"SELECT * FROM page_seo where page_id = '3' and bran
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace('brand_details[0][content]');
-	CKEDITOR.replace('brand_details[1][content]');
+	//CKEDITOR.replace('brand_details[1][content]');
 	CKEDITOR.replace('brand_details[2][content]');
 	CKEDITOR.replace('brand_details[3][content]');
 	CKEDITOR.replace('brand_details[4][content]');
@@ -766,9 +797,44 @@ $query_seo=mysqli_query($db,"SELECT * FROM page_seo where page_id = '3' and bran
         }
 
     };
+	
+	var imagesPreviewRoi = function(input, placeToInsertImagePreview) {
+	var extension = input.value.split('.')[1];
+	var menuAdd = document.getElementById("roi-photo-add");
+        if (input.files) {
+			if(extension == 'pdf' || extension == 'doc'|| extension == 'docx'|| extension == 'xls'|| extension == 'xlsx'){	
+				var filesAmount = input.files.length;
+
+				for (i = 0; i < filesAmount; i++) {
+					var reader = new FileReader();
+
+					reader.onload = function(event) {
+						if(extension == 'pdf')
+						{	
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview).css('height','120px');;
+						}else if(extension == 'doc' || extension == 'docx'){
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/word-icon-png-6.png').appendTo(placeToInsertImagePreview).css('height','120px');
+						}else if(extension == 'xls'|| extension == 'xlsx'){
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/Excel.png').appendTo(placeToInsertImagePreview).css('height','120px');;
+						}
+					}
+
+					reader.readAsDataURL(input.files[i]);
+				}
+			}else {
+				alert("Upload pdf / word/excel  files only");
+				menuAdd.focus();
+				return false;
+			}
+		}	
+
+    };
 
     $('#menu-photo-add').on('change', function() {
         imagesPreview(this, 'div.menu');
+    });
+	$('#roi-photo-add').on('change', function() {
+        imagesPreviewRoi(this, 'div.roi');
     });
 }); 
   
@@ -855,6 +921,9 @@ $(document).ready(function() {
 
 			});
 	});
+	
+	
+	
 
 	
 });
