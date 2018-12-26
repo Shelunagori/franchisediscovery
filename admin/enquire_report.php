@@ -84,7 +84,6 @@ if(isset($_GET['ok']))
 
 
 ?>
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 
 <link href="plugins/datepicker/datepicker3.css" rel="stylesheet">
 
@@ -252,7 +251,7 @@ if(isset($_GET['ok']))
 									</table>								
 									<?php  } else {  echo 'No Record Found !';  } ?>									
 								</div>
-								<form method="get" enctype="multipart/form-data">
+								<form class="form2" method="post" enctype="multipart/form-data"  action="filter_brand.php">
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
@@ -261,8 +260,6 @@ if(isset($_GET['ok']))
 								<td width="20%">
 									<input type="text" name="email" placeholder="Enter email" class="form-control">
 								</td>
-								
-								
 								<td width="20%">
 									<div class="input-group date">
 										<div class="input-group-addon">
@@ -311,7 +308,7 @@ if(isset($_GET['ok']))
 												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody class="main-body">
 											<?php 
 											
 											while($row=mysqli_fetch_array($sql_result)){ ?>
@@ -366,17 +363,13 @@ require('footer.php');
 	$('#datepicker3').datepicker({
       autoclose: true,
     });
-  $('#brand_filter').click(function() {
-   	 var sthis = $('#sthis').val();
-      $.ajax({
-         url: 'filter_brand.php' , 
-         type: 'GET',
-         data: 'sthis: ' + sthis,
-         success: function(result){ 
-         alert(result);    
-           $('#example3').html(result)      
-         }
-      });   
-      return false;     
-   });
+$(document).on('submit','form.form1', function( event ) {
+        event.preventDefault();
+        url = $(this).attr('action');
+        
+        $.post(url, $(this).serialize(), function(result) {
+        	
+            $('.main-body').html(result);
+        });
+    });
 	</script>

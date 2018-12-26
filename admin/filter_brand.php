@@ -1,13 +1,13 @@
 <?php
-if(isset($_GET['brand_filter']))
+if(isset($_POST['brand_filter']))
 			{
-				$first_name=$_GET['name'];
-				$email=$_GET['email'];
-				$from_date= $_GET['from_datepicker']?date('d-m-Y',strtotime($_GET['from_datepicker'])):null;
+				$first_name=$_POST['name'];
+				$email=$_POST['email'];
+				$from_date= $_POST['from_datepicker']?date('d-m-Y',strtotime($_POST['from_datepicker'])):null;
 				if(!$from_date==null)
 					$from=$from_date;
 
-				$to_date= $_GET['to_datepicker']?date('d-m-Y',strtotime($_GET['to_datepicker'])):null;
+				$to_date= $_POST['to_datepicker']?date('d-m-Y',strtotime($_POST['to_datepicker'])):null;
 				if(!$to_date==null)
 					$to=$to_date;
 
@@ -46,8 +46,8 @@ if(isset($_GET['brand_filter']))
 					$brand_where="AND enquite_date > '$to'";
 				}
 				
-					echo $brand_where;
-
+				
+				
 
 		}
 ?>
