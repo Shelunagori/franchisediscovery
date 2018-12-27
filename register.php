@@ -247,6 +247,10 @@
   margin: 0 10px 0 10px;
 }
 }
+.colors
+{
+	color: #2126c5  !important;
+}
 .body
 {
 	font-size:14px !important;
@@ -286,7 +290,9 @@
             <div class="row justify-content-center">
 		
                 <div class="col-12 col-md-8">
-				
+				<div class="pull-right colors">
+					<a href="Secret.pdf" target="_blank">How to Register</a>
+				</div>
                     <div class="register_form text-center">
 						<?php if($status == 'success')
 						{ ?>
@@ -305,6 +311,7 @@
 								<strong><?php echo $message; ?></strong> 
 							</div>
 						<?php }?>	
+
                         <h3 class="register-title">Sign up for free</h3>
                         <form name="frm" id="regfrm" action="#" method="post" class="text-left" enctype="multipart/form-data">
 							<div class="form-group">

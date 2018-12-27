@@ -106,7 +106,7 @@
 							<tr>
 								
 								<td width="20%">
-									<input type="text" name="brand_name" placeholder="Enter brand" class="form-control" value="<?php echo $brand_name; ?>">
+									<input type="text" name="brand_name" placeholder="Enter brand" class="form-control" >
 								</td>
 								
 								<td>

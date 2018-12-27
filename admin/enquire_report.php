@@ -415,7 +415,6 @@ require('footer.php');
       autoclose: true,
     });
      $('#brand_filter').on('click', function(){
-     	
     	$('#1').removeClass('active');
     	$('#2').addClass('active');
 

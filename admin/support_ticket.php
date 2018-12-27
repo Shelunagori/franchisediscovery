@@ -144,7 +144,15 @@
 }
 </style>
 						</div>
-						<form method="get" enctype="multipart/form-data">
+						
+						
+							
+							<div id="exTab2">	
+								
+								<div class="tab-content">
+								<div class="tab-pane active" id="1">
+						<div>
+								<form method="get" enctype="multipart/form-data">
 						<table class='table table-striped'>
 							<tr>
 								
@@ -182,12 +190,8 @@
 							</tr>
 						</table>
 					</form>
-						
-							
-							<div id="exTab2">	
-								
-								<div class="tab-content">
-								<div class="tab-pane active" id="1">
+					</div>
+					<div>
 								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr>
@@ -267,7 +271,7 @@
 											<?php  } ?>
 										</tbody>
 									</table>								
-																	
+								</div>								
 								</div>
 							
 								</div>
