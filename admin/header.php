@@ -280,7 +280,16 @@
 				</li>	
 			</ul>
         </li> 		
-		
+		<li class="treeview">
+          <a href="sms_bulks.php">
+            <i class="fa fa-fw fa-bullseye"></i> <span> SMS Bulk </span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+        </li>
+		<li class="treeview">
+          <a href="content_limit_page.php">
+            <i class="fa fa-fw fa-bullseye"></i> <span>Content Limit </span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+        </li>
 		
        </ul>
     </section>

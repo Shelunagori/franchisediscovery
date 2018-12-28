@@ -76,8 +76,7 @@ require('header.php');
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+            
           </div>
         </div>
         <form role="form" method="post" action="<?php echo $_SERVER["PHP_SELF"];?>">
@@ -120,14 +119,13 @@ require('header.php');
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
+           
           </div>
         </div>
         <div class="box-body">
         <div id="cStatus"> </div>
         <form action="admin/update_Sequence" method="post">
-          <table id="example1" class="display select">
+          <table id="example8" class="display select">
                 <thead>
                 <tr>
                   <th># </th>
