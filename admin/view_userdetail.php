@@ -32,16 +32,14 @@
  
 
 .vc_custom_1537353427517 {
-		margin-left: 258px;
-		margin-right: -177px;
-		margin-top: 42px;
-                height:150px;
+	margin-top: 42px;
+    height:150px;
 
     padding-top: 42px !important;
 
     padding-bottom: 80px !important;
 
-    background-color: #ff4247 !important;
+    background-color: #a5c6ca  !important;
 
     background-position: center !important;
 
@@ -199,9 +197,6 @@ color : white;
 background-color: #428bca;
 padding : 5px 15px;
 }
-.height{
-	padding:70px;
-}
 .small-box .icon-this{
 	    -webkit-transition: all .3s linear;
     -o-transition: all .3s linear;
@@ -214,118 +209,49 @@ padding : 5px 15px;
     color: #fff;
 }
 </style>
+<div class="content-wrapper">
+    <section class="content">
+       <div class="row">
+            <div class="col-lg-12 no-print">
+                <div class="col-lg-3">
+                    <div class="vc_column-inner vc_custom_1537353427517">
+                        <div class="wpb_wrapper">
+                            <h3 style="color: #fff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">			
+                                <a href="profile_view.php?id=<?php echo base64_encode($id); ?>">User Profile</a>
+                            </h3>
+                            <div class="vc_btn3-container vc_btn3-center  icon-this">
+                            <i class="fa fa-user "></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="col-sm-12 no-print" style="padding-bottom:20px;">
+                <div class="col-sm-3">
+                    <div class="vc_column-inner vc_custom_1537353427517">
+                        <div class="wpb_wrapper">
+                            <h3 style="color: #fff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">              <a href="support_ticket.php?id=<?php echo base64_encode($id); ?>">Support Ticket</a>
+                            </h3>
+                            <div class="vc_btn3-container vc_btn3-center icon-this">
+                                <i class="fa fa-ticket "></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="col-sm-3">
-
-<div class="wpb_column vc_column_container vc_col-sm-3 vc_col-has-fill">
-
-<div class="vc_column-inner vc_custom_1537353427517">
-
-<div class="wpb_wrapper">
-
-
-
-<div class="wpb_single_image wpb_content_element vc_align_center  vc_custom_1539408094847">
-
-
-
-<figure class="wpb_wrapper vc_figure">
-
-<div class="vc_single_image-wrapper vc_box_circle  vc_box_border_grey"></div>
-
-</figure>
-
-</div>
-
-<h3 style="color: #ffffff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">			
-			<a href="profile_view.php?id=<?php echo base64_encode($id); ?>">User Profile</a></h3>
-<div class="vc_btn3-container vc_btn3-center icon-this">
-<i class="fa fa-user "></i>
-
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="col-sm-3">
-
-<div class="wpb_column vc_column_container vc_col-sm-3 vc_col-has-fill">
-
-<div class="vc_column-inner vc_custom_1537353427517">
-
-<div class="wpb_wrapper">
-
-
-
-<div class="wpb_single_image wpb_content_element vc_align_center  vc_custom_1539408094847">
-
-
-
-<figure class="wpb_wrapper vc_figure">
-
-<div class="vc_single_image-wrapper vc_box_circle  vc_box_border_grey"></div>
-
-</figure>
-
-</div>
-<h3 style="color: #ffffff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">              <a href="support_ticket.php?id=<?php echo base64_encode($id); ?>">Support Ticket</a></h3>
-
-<div class="vc_btn3-container vc_btn3-center icon-this">
-<i class="fa fa-ticket "></i>
-
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="col-sm-3">
-
-<div class="wpb_column vc_column_container vc_col-sm-3 vc_col-has-fill">
-
-<div class="vc_column-inner vc_custom_1537353427517">
-
-<div class="wpb_wrapper">
-
-
-
-<div class="wpb_single_image wpb_content_element vc_align_center  vc_custom_1539408094847">
-
-
-
-<figure class="wpb_wrapper vc_figure">
-
-<div class="vc_single_image-wrapper vc_box_circle  vc_box_border_grey"></div>
-
-</figure>
-
-</div>
-<h3 style="color: #ffffff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">				<a href="listing_request.php?id=<?php echo base64_encode($id); ?>">   Request Listing</a></h3>
-
-<div class="vc_btn3-container vc_btn3-center icon-this">
-<i class="fa fa-file "></i>
-
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
+                <div class="col-sm-3">
+                    <div class="vc_column-inner vc_custom_1537353427517">
+                        <div class="wpb_wrapper">
+                            <h3 style="color: #ffffff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">				<a href="listing_request.php?id=<?php echo base64_encode($id); ?>">   Request Listing</a>
+                            </h3>
+                            <div class="vc_btn3-container vc_btn3-center icon-this">
+                              <i class="fa fa-file "></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 
 <div class="content-wrapper">

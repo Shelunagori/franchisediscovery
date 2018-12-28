@@ -132,11 +132,11 @@ padding : 5px 15px;
 											</td>
 											
 											<td>
-												<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="favrouite_view.php?Action=Del&ids=<?php echo base64_encode($fav_result['id'])?>user_id=<?php echo base64_encode($fav_result['user-id'])?>">
+												<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="favrouite_view.php?Action=Del&ids=<?php echo base64_encode($fav_result['id'])?>&user_id=<?php echo base64_encode($fav_result['user-id'])?>">
 												<span class="fa fa-times"></span>
 												</a>
 											</td>
-											<input type="hidden" name="user_id" value="<?= $fav_result['user_id'] ?>">
+											
 										</tr>		
 										<?php } ?> 
 									</table>

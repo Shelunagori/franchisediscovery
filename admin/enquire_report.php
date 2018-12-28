@@ -229,13 +229,13 @@ if(isset($_GET['ok']))
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
-									<input type="name" name="name" placeholder="Enter name" class="form-control">
+									<input type="name" name="name" placeholder="Enter name" class="form-control" value="<?= @$first_name ?>">
 								</td>
 								<td width="20%">
-									<input type="text" name="email" placeholder="Enter email" class="form-control">
+									<input type="text" name="email" placeholder="Enter email" class="form-control" value="<?= @$email ?>">
 								</td>
 								<td width="20%">
-									<input type="text" name="city" placeholder="Enter city" class="form-control">
+									<input type="text" name="city" placeholder="Enter city" class="form-control" value="<?= @$city ?>">
 								</td>
 								
 								<td width="20%">
@@ -243,7 +243,7 @@ if(isset($_GET['ok']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$form_date ?>">
 									</div>
 								</td>
 								<td width="20%">
@@ -251,7 +251,7 @@ if(isset($_GET['ok']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date" value="<?= @$to_date ?>">
 									</div>
 								</td>
 
