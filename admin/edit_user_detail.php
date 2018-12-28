@@ -14,7 +14,7 @@ if(isset($_POST['edit']))
 	$reg_type=$_POST['reg_type'];
 	$employee_id=$_POST['employee_id'];
 
-	echo$update_user="UPDATE registration set first_name='$first_name',last_name='$last_name',mobile_no='$mobile_no',email='$email',company_name='$company_name',brand_name='$brand_name',reg_type='$reg_type',employee_id='$employee_id' where id='$id'";
+	$update_user="UPDATE registration set first_name='$first_name',last_name='$last_name',mobile_no='$mobile_no',email='$email',company_name='$company_name',brand_name='$brand_name',reg_type='$reg_type',employee_id='$employee_id' where id='$id'";
 	if ($db->query($update_user) === TRUE)
 	{
 		$status="success";
