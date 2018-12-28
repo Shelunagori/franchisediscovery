@@ -249,7 +249,7 @@
 }
 .colors
 {
-	color: #2126c5  !important;
+	color: #4021bb  !important;
 }
 .body
 {

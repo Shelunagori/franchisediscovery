@@ -10,11 +10,11 @@ if(isset($_POST['add']))
 
 		if(@$_GET["Action"] == "Del")
 			{
-				$user_id = mysqli_real_escape_string($db,base64_decode($_GET['user_id']));
+			
 				$ids = mysqli_real_escape_string($db,base64_decode($_GET['ids']));
 				$delete_query = "delete from favrouite where id=$ids";
 					if ($db->query($delete_query) === TRUE) {
-						header('location:favrouite_view.php?id='.$user_id);
+						header('location:favrouite_view.php?id='.$_GET['user_id']);
 					} else {
 						$status = 'fail';
 						$message = 'Something went wrong !';
@@ -132,7 +132,7 @@ padding : 5px 15px;
 											</td>
 											
 											<td>
-												<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="favrouite_view.php?Action=Del&ids=<?php echo base64_encode($fav_result['id'])?>&user_id=<?php echo base64_encode($fav_result['user-id'])?>">
+												<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="favrouite_view.php?Action=Del&ids=<?php echo base64_encode($fav_result['id'])?>&user_id=<?php echo base64_encode($fav_result['user_id'])?>">
 												<span class="fa fa-times"></span>
 												</a>
 											</td>
