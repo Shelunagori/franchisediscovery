@@ -9,7 +9,7 @@
    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
    
    //$baseURL = 'http://franchisediscovery.in/';
-   $baseURL = 'http://localhost:8012/franchisediscovery/franchisediscovery/';
+   $baseURL = 'http://localhost/franchisediscovery/';
    
 	function seo_url($vp_string)
     {
