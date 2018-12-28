@@ -62,20 +62,21 @@ $status='';
 					  </div>
 					</div>
 					<div class="box-body">
-							<div class="box-body">
+							
 								<div class="col-md-12">
 									<div class="form-group">
 										<label class='control-label'>SMS To</label><br/>
 										<div class="radio-inline">
 											<label>
-									<input type="radio" name="sms_to" class="sms_to" value="customer" checked>Customer
-											</label>	
+								<input type="radio" name="sms_to" class="sms_to"  value="employee" checked>Employee
+											</label>
 										</div>
 										<div class="radio-inline">
 											<label>
-								<input type="radio" name="sms_to" class="sms_to"  value="employee">Employee
-											</label>
+									<input type="radio" name="sms_to" class="sms_to" value="customer" >Customer
+											</label>	
 										</div>
+										
 										
 										
 									</div>
@@ -132,10 +133,7 @@ $status='';
 										<input type="submit" class="btn btn-sm btn-primary pull-right" name="save" value="Submit">
 									</div>
 								</div>
-								
-							
-						</div>
-				</div> 
+					</div> 
 			</div>
 
 		</form>
@@ -145,8 +143,8 @@ $status='';
 				  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  List of SMS Bulks</h3>
 				</div>
 				
-				<div class="box-body table-responsive no-padding">
-					<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+				<div class="box-body table-responsive">
+					<table id="example7" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 						<thead>
 							<tr role="row">
 								<th>S No</th>
@@ -170,9 +168,9 @@ $status='';
 										<span class="fa fa-times"></span>
 									</a>
 									
-									<a class="mb-control1 btn btn-warning btn-rounded btn-sm" onclick="return confirm('Are you sure you want to send SMS?')" href="send_sms.php?id=<?php echo base64_encode($row['id']); ?>">
+									<!--<a class="mb-control1 btn btn-warning btn-rounded btn-sm" onclick="return confirm('Are you sure you want to send SMS?')" href="send_sms.php?id=<?php echo base64_encode($row['id']); ?>">
 										<span class="fa fa-envelope"></span>
-									</a>
+									</a>-->
 								</td>
 							</tr>
 					<?php } ?>		
@@ -189,7 +187,8 @@ $status='';
 <?php require('footer.php'); ?>
 <script>
 	$(document).ready(function() {
-		$('#emp_show').hide();
+		$('#cust_option_show').hide();
+		$('#cust_show').hide();
 			$('.sms_to').on('change',function() { 
 			var value = $(this).val();
 			if(value == 'customer'){
@@ -212,8 +211,14 @@ $status='';
 					type: "GET",
 					async: false,
 					success: function(result){
-						$('#cust_show').show();
-						$('.cust_select').html(result);
+						if(customer_type == 'investor' || customer_type == 'brand'){
+								$('#cust_show').show();
+								$('.cust_select').html(result);
+						}else{
+							$('#cust_show').hide();
+								$('.cust_select').html('');
+						}
+					
 					}
 				});
 			}
@@ -226,7 +231,13 @@ $status='';
 					type: "GET",
 					async: false,
 					success: function(result){
-						$('.cust_select').html(result);
+						if(customer_type == 'investor' || customer_type == 'brand'){
+								$('#cust_show').show();
+								$('.cust_select').html(result);
+						}else{
+							$('#cust_show').hide();
+								$('.cust_select').html('');
+						}
 					}
 				});
 			}
