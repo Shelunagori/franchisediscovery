@@ -218,7 +218,7 @@ if(isset($_GET['blog_filter']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$from_date ?>">
 									</div>
 								</td>
 								<td width="20%">
@@ -226,7 +226,7 @@ if(isset($_GET['blog_filter']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date" value="<?= @$to_date ?>">
 									</div>
 								</td>
 
@@ -298,7 +298,7 @@ if(isset($_GET['blog_filter']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker2" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker2" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$from_date ?>">
 									</div>
 								</td>
 								<td width="20%">
@@ -306,7 +306,7 @@ if(isset($_GET['blog_filter']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker3" name="to_datepicker" placeholder="To Date">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker3" name="to_datepicker" placeholder="To Date" value="<?= @$to_date ?>">
 									</div>
 								</td>
 
@@ -380,7 +380,7 @@ if(isset($_GET['blog_filter']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker4" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker4" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$from_date ?>">
 									</div>
 								</td>
 								<td width="20%">
@@ -388,7 +388,7 @@ if(isset($_GET['blog_filter']))
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker5" name="to_datepicker" placeholder="To Date">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker5" name="to_datepicker" placeholder="To Date" value="<?= @$to_date ?>">
 									</div>
 								</td>
 

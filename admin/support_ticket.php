@@ -144,13 +144,21 @@
 }
 </style>
 						</div>
-						<form method="get" enctype="multipart/form-data">
+						
+						
+							
+							<div id="exTab2">	
+								
+								<div class="tab-content">
+								<div class="tab-pane active" id="1">
+						<div>
+								<form method="get" enctype="multipart/form-data">
 						<table class='table table-striped'>
 							<tr>
 								
 								<td width="20%">
 									<select name="ticket_no" class="form-control">
-										<option value="">--Select--</option>
+										<option value="<?= @$ticket_no ?>">--Select--</option>
 										<?php
 											 $ticket_query=mysqli_query($db,"SELECT * FROM support_ticket");
 											while($ticket_row=mysqli_fetch_array($ticket_query))
@@ -165,7 +173,7 @@
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$from_date?>">
 									</div>
 								</td>
 								<td width="20%">
@@ -173,7 +181,7 @@
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date" value="<?= @$to_date ?>">
 									</div>
 								</td>
 								<td>
@@ -182,12 +190,8 @@
 							</tr>
 						</table>
 					</form>
-						
-							
-							<div id="exTab2">	
-								
-								<div class="tab-content">
-								<div class="tab-pane active" id="1">
+					</div>
+					<div>
 								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
 										<thead>
 											<tr>
@@ -267,7 +271,7 @@
 											<?php  } ?>
 										</tbody>
 									</table>								
-																	
+								</div>								
 								</div>
 							
 								</div>

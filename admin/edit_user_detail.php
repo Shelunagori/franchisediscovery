@@ -2,7 +2,7 @@
 include('config.php');
 $status='';
 $message='';
-$id=base64_decode($_GET['id']);
+@$id=base64_decode($_GET['id']);
 if(isset($_POST['edit']))
 {
 	$first_name=$_POST['first_name'];

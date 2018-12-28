@@ -121,6 +121,10 @@
 				<i class="fa fa-fw fa-child"></i> <span>Employee Master</span> <i class="fa fa-angle-left pull-right"></i>
 				</a>
 			</li>
+      <li><a href="expenses.php">
+        <i class="fa fa-fw fa-child"></i> <span>Expenses Master</span> <i class="fa fa-angle-left pull-right"></i>
+        </a>
+      </li>
       <li><a href="new_category.php">
         <i class="fa fa-fw fa-child"></i> <span>New Categories</span> <i class="fa fa-angle-left pull-right"></i>
         </a>
@@ -221,6 +225,16 @@
             <li><a href="Investor.php"><i class="fa fa-circle-o"></i>Investor</a></li>
           </ul>
         </li> 
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-fw fa-user"></i> <span>Form</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Investor Data Form</a></li>
+            <li><a href="brand_login.php"><i class="fa fa-circle-o"></i>Brand Login</a></li>
+          </ul>
+        </li> 
+
 
 		<li class="treeview">
           <a href="notification.php">

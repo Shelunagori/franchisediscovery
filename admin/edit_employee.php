@@ -38,7 +38,7 @@ $status='';
 					<a href="employee_master.php" class="pull-right"> Add New</a>
 				</div>
 				<?php 
-				$id=base64_decode($_GET['id']); 
+				@$id=base64_decode($_GET['id']); 
 				$edit_query=mysqli_query($db,"select * from employee_master where id = '$id' and status =1");
 				while($row=mysqli_fetch_array($edit_query)){ ?>
 				<div class="box-body">
