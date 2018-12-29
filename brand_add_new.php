@@ -184,8 +184,8 @@
 									<div class="row">
 										<div class="col-md-6 col-md">
 											<div class="form-group">
-												<label>Upload menu pdf</label>  (Select multiple pdf files)	
-												<input type="file" name="menudetail[]" accept="application/pdf" multiple id="menu-photo-add">
+												<label>Upload menu pdf</label>  (Select only pdf file)	
+												<input type="file" name="menudetail[]" accept="application/pdf" id="menu-photo-add">
 											</div>
 											<div class="menu"></div>											
 										</div>
