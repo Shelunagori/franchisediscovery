@@ -160,19 +160,30 @@ $status='';
 				  </div>
 				</div>
 				<div class="box-body">
-					<div class="box-body">
-						<div class="form-group">
-							<label>Upload menu pdf</label>  (Select multiple pdf files)	
-							<input type="file" name="menudetail[]" accept="application/pdf" multiple id="menu-photo-add">
-						</div>	
-						<div class="menu"></div>
-					</div>
+					<div class="form-group">
+						<label>Upload menu pdf</label>  (Select only pdf files)	
+						<input type="file" name="menudetail[]" accept="application/pdf" id="menu-photo-add">
+					</div>	
+					<div class="menu"></div>
 				</div>
 								
 			</div> 
 		</div>					
 			
-			
+		<div class="col-md-12">	
+			<div class="box box-warning">
+				<div class="box-header with-border">
+				  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> ROI Details</h3>
+				</div>
+				<div class="box-body">
+						<div class="form-group">
+							<label>Upload ROI (Select pdf/excel/word files)</label> <br>
+								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
+						</div>
+						<div class="roi"></div>
+				</div>
+			</div>
+		</div>	
 			
 			
 			
@@ -200,22 +211,6 @@ $status='';
 								</textarea>
 							</div>
 						</div>
-
-						<div class="form-group">
-						<label>Menu Name</label>
-							<input class="form-control" name="brand_details[1][left_menu_name]" type="text" placeholder="Menu name" value='ROI' required readonly>
-						</div>
-						
-						<div class="form-group">
-							<div class="box-body pad">
-								<!--<textarea id="editor1" name="brand_details[1][content]" rows="10" cols="80">
-								</textarea>-->
-								
-								<label>Upload ROI pdf/excel/word</label>  (Select pdf/excel/word files)	
-								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
-								<div class="roi"></div>
-							</div>
-						</div>	
 
 						<div class="form-group">
 						<label>Menu Name</label>
