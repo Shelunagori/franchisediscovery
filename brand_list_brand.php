@@ -97,6 +97,7 @@
 					</div>					
 					<?php 
 						 $query = "select * from brands where registration_id = '$user_id' and status = 'Active' order by id DESC ";
+						 
 						  $query_result=mysqli_query($db,$query); 
 						  $sno = 1;
 						  if($query_result->num_rows >0){ 

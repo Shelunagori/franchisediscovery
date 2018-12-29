@@ -197,6 +197,7 @@
 		echo '<script> alert("Sorry ! Something went wrong !"); </script>';	
 	}
 	
-	header("Location: brand_list_brand.php");
+	 header("Refresh:0; url= brand_list_brand.php");
+	//header("Location: brand_list_brand.php");
 	exit();
 ?>
