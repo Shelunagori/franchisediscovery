@@ -100,6 +100,24 @@ $(function () {
       "autoWidth": false
     });
 	
+	$('#example7').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true
+    });
+	
+	$('#example8').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+	
   });
 </script>  
 </body>
