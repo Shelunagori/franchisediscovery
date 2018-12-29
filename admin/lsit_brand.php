@@ -199,7 +199,7 @@ require('header.php');
 									<tr role="row" class="odd">
 									  <td> <?php echo $sno; ?> </td>	
 										<td width="10%">
-										<select  class="form-control select2" style="width: 100%;" data-placeholder="---Category---" multiple="multiple">
+										
 											<?php
 												$query_cat=mysqli_query($db,"select * from categories where status = 0");
 												while($rows=mysqli_fetch_array($query_cat)){
@@ -207,15 +207,14 @@ require('header.php');
 												 <?php 
 												if(!empty($arrayCategory)){
 												foreach($arrayCategory as $a){
-													if($a == $rows['id']){ ?>
-														<option value="<?php echo $rows['id']; ?>" ><?php echo $rows['name']; ?> </option>
+													if($a == $rows['id']){ 
+														$ab = $rows['name'].',';
+													echo $ab; ?> 
 													<?php }
 												}}?>
 												
 											<?php } ?>
-										</select>
-									  
-									  
+										
 										</td>
 										<td>  <center>
 												<img src="<?php echo $row['brand_image']; ?>" style="width: 70px;height: 50px;" />
