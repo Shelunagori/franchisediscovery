@@ -31,23 +31,18 @@ $status='';
 		  </div>
         <!-- left column -->
        <div class="col-md-12">
-		<form role="form" method="post" action="investor_dataform.php">
+		<form role="form" method="post" action="brand_enquiry.php">
 			<div class="box">
 				<div class="box-header with-border">
-				  <h3 class="box-title">Edit Investor Data</h3>
-					<a href="investor_dataform.php" class="pull-right"> Add New</a>
+				  <h3 class="box-title">Edit Brand Enquiry</h3>
+					<a href="brand_enquiry.php" class="pull-right"> Add New</a>
 				</div>
 				<?php 
 				@$id=base64_decode($_GET['id']); 
-				$edit_query=mysqli_query($db,"select * from investor_datas where id = '$id'");
+				$edit_query=mysqli_query($db,"select * from brand_enquiry where id = '$id'");
 				while($row=mysqli_fetch_array($edit_query)){ ?>
 				<div class="box-body">
-						<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">Name</label>
-							<input class="form-control" name="name" type="text" placeholder="edit name" value='<?php echo $row['name']; ?>' required>
-						</div>
-					</div>
+						
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="email">Email</label>
@@ -60,18 +55,8 @@ $status='';
 							<input class="form-control" name="mobile_no" type="text" placeholder="edit mobile-no" value='<?php echo $row['mobile_no']; ?>' required>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">City</label>
-							<input class="form-control" name="city" type="text" placeholder="edit mobile-no" value='<?php echo $row['city']; ?>' required>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">Address</label>
-							<input class="form-control" name="address" type="text" placeholder="edit mobile-no" value='<?php echo $row['address']; ?>' required>
-						</div>
-					</div>
+					
+					
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Brand</label>
@@ -92,30 +77,7 @@ $status='';
 							</select>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">Pin code</label>
-							<input class="form-control" name="pin_code" type="text" placeholder="edit mobile-no" value='<?php echo $row['pin_code']; ?>' required>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">Time Frame</label>
-							<input class="form-control" name="time_frame" type="text" placeholder="edit mobile-no" value='<?php echo $row['time_frame']; ?>' required>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">Status</label>
-							<select  name="status" class="form-control select2" style="width: 100%;">
-								
-								<?php
-										
-									echo"<option value=".$row['status'].">".$row['status']."</option>"
-								?>
-							</select>
-						</div>
-					</div>
+					
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Company_name</label>
@@ -124,16 +86,23 @@ $status='';
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
-							<label for="name">Response</label>
-							<select  name="response" class="form-control select2" style="width: 100%;">
-								
-								<?php
-										
-									echo"<option value=".$row['response'].">".$row['response']."</option>"
-								?>
-							</select>
+							<label for="name">Landline No</label>
+							<input class="form-control" name="landline_no" type="text" placeholder="edit mobile-no" value='<?php echo $row['company_name']; ?>' required>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="name">Brand Origin</label>
+							<input class="form-control" name="brand_origin" type="text" placeholder="edit mobile-no" value='<?php echo $row['company_name']; ?>' required>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="name">Person Name</label>
+							<input class="form-control" name="Person_name" type="text" placeholder="edit mobile-no" value='<?php echo $row['company_name']; ?>' required>
+						</div>
+					</div>
+					
 							<input class="form-control" name="id" type="hidden" value='<?php echo $id; ?>' required>
 				
 				<?php } ?> 
@@ -147,17 +116,17 @@ $status='';
   </div> 
  </div>
   
-   <div class="col-md-12">
+  <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">View Investor Data Form</h3>
+          <h3 class="box-title">View Brand Enquiry</h3>
 
-	          <div class="box-tools pull-right">
-	            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-	              <i class="fa fa-minus"></i></button>
-	            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-	              <i class="fa fa-times"></i></button>
-	          </div>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
         </div>
         <div class="box-body">
         <div id="cStatus"> </div>
@@ -166,25 +135,23 @@ $status='';
                 <thead>
                 <tr>
                   <th># </th>
-                  <th>Name</th>
+                  <th>Company Name</th>
                   <th>Email</th>
                   <th>Mobile No</th>
-				  <th>City</th>
 				  <th>Brand</th>
 				  <th>Action</th>
                </tr>
                 </thead>
                 <tbody>
 				<?php $i = 1;
-					$query=mysqli_query($db,"select * from investor_datas order by id DESC ");
+					$query=mysqli_query($db,"select * from brand_enquiry order by id DESC ");
 					while($row=mysqli_fetch_array($query)){
 						?>
 						<tr>
 							<td><?php echo $i; $i++;  ?></td>
-							<td><?php echo $row['name'];?></td>
+							<td><?php echo $row['company_name'];?></td>
 							<td><?php echo $row['email']; ?></td>
 							<td><?php echo $row['mobile_no']; ?></td>
-							<td><?php echo $row['city']; ?></td>
 							<td><?php 
 								$brand_id=$row['brand_id'];
 									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
@@ -194,13 +161,13 @@ $status='';
 									}
 							?></td>
 							<td>	
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
+								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_login_enquiry.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-edit"></span>
 								</a>
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
+								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_login_enquiry.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-eye"></span>
 								</a>
-								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="investor_dataform.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
+								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="brand_enquiry.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-times"></span>
 								</a>
 							</td>
