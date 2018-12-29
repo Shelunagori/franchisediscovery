@@ -31,18 +31,17 @@ $status='';
 		  </div>
         <!-- left column -->
        <div class="col-md-12">
-		<form role="form" method="post" action="employee_master.php">
+		<form role="form" method="post" action="investor_dataform.php">
 			<div class="box">
 				<div class="box-header with-border">
 				  <h3 class="box-title">Edit Investor Data</h3>
-					<a href="edit_investordata.php" class="pull-right"> Add New</a>
+					<a href="investor_dataform.php" class="pull-right"> Add New</a>
 				</div>
 				<?php 
 				@$id=base64_decode($_GET['id']); 
 				$edit_query=mysqli_query($db,"select * from investor_datas where id = '$id'");
 				while($row=mysqli_fetch_array($edit_query)){ ?>
 				<div class="box-body">
-					<div class="box-body">
 						<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Name</label>
@@ -76,7 +75,7 @@ $status='';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Brand</label>
-							<select  name="employee_id" class="form-control select2" style="width: 100%;">
+							<select  name="brand_id" class="form-control select2" style="width: 100%;">
 								<option value="">Select Brand</option>
 								<?php
 									$brand_id=$row['brand_id'];
@@ -108,7 +107,13 @@ $status='';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Status</label>
-							<input class="form-control" name="status" type="text" placeholder="edit mobile-no" value='<?php echo $row['status']; ?>' required>
+							<select  name="status" class="form-control select2" style="width: 100%;">
+								
+								<?php
+										
+									echo"<option value=".$row['status'].">".$row['status']."</option>"
+								?>
+							</select>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -120,7 +125,7 @@ $status='';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Response</label>
-							<select  name="employee_id" class="form-control select2" style="width: 100%;">
+							<select  name="response" class="form-control select2" style="width: 100%;">
 								
 								<?php
 										
@@ -130,32 +135,29 @@ $status='';
 						</div>
 					</div>
 							<input class="form-control" name="id" type="hidden" value='<?php echo $id; ?>' required>
-					   </div>
-					</div>
-				 </div>
+				
 				<?php } ?> 
+						</div>
 
 			<div class="box-footer">
 			 <button type="submit" class="btn btn-info pull-right" name="edit">Submit</button>
 			</div>
-			
 		 </form>
       <!-- /.box -->
   </div> 
  </div>
-</section>
   
-    <div class="col-md-12">
+   <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">View Investor Data Form</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+	              <i class="fa fa-minus"></i></button>
+	            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+	              <i class="fa fa-times"></i></button>
+	          </div>
         </div>
         <div class="box-body">
         <div id="cStatus"> </div>
@@ -168,18 +170,13 @@ $status='';
                   <th>Email</th>
                   <th>Mobile No</th>
 				  <th>City</th>
-				  <th>Address</th>
 				  <th>Brand</th>
-				  <th>Pin Code</th>
-				  <th>Time Frame</th>
-				  <th>Status</th>
-				  <th>Company Name</th>
 				  <th>Action</th>
                </tr>
                 </thead>
                 <tbody>
 				<?php $i = 1;
-					$query=mysqli_query($db,"select * from investor_datas  order by id DESC ");
+					$query=mysqli_query($db,"select * from investor_datas order by id DESC ");
 					while($row=mysqli_fetch_array($query)){
 						?>
 						<tr>
@@ -188,7 +185,6 @@ $status='';
 							<td><?php echo $row['email']; ?></td>
 							<td><?php echo $row['mobile_no']; ?></td>
 							<td><?php echo $row['city']; ?></td>
-							<td><?php echo $row['address']; ?></td>
 							<td><?php 
 								$brand_id=$row['brand_id'];
 									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
@@ -197,16 +193,13 @@ $status='';
 										echo $brand_row['name'];
 									}
 							?></td>
-							<td><?php echo $row['pin_code']; ?></td>
-							<td><?php echo $row['time_frame']; ?></td>
-							<td><?php echo $row['status']; ?></td>
-							<td><?php echo $row['company_name']; ?></td>
-						 
 							<td>	
 								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-edit"></span>
 								</a>
-							
+								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
+									<span class="fa fa-eye"></span>
+								</a>
 								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="investor_dataform.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-times"></span>
 								</a>

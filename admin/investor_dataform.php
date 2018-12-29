@@ -8,18 +8,18 @@ $status = '';
 $message = '';
 	if(isset($_POST['add']))
 	{
-		echo$name= mysqli_real_escape_string($db,$_POST['name']);
-		echo$email= mysqli_real_escape_string($db,$_POST['email']);
-		echo$mobile_no= mysqli_real_escape_string($db,$_POST['mobile_no']);
-		echo$city= mysqli_real_escape_string($db,$_POST['city']);
-		echo$address= mysqli_real_escape_string($db,$_POST['address']);
-		echo$brand_id= mysqli_real_escape_string($db,$_POST['brand_id']);
-		echo$pin_code= mysqli_real_escape_string($db,$_POST['pin_code']);
-		echo$no= mysqli_real_escape_string($db,$_POST['time_frame']);
-		echo$time= mysqli_real_escape_string($db,$_POST['times']);
-		echo$time_frame="$no"."$time";
-		echo$status= mysqli_real_escape_string($db,$_POST['status']);
-		echo$other= mysqli_real_escape_string($db,$_POST['other']);
+		$name= mysqli_real_escape_string($db,$_POST['name']);
+		$email= mysqli_real_escape_string($db,$_POST['email']);
+		$mobile_no= mysqli_real_escape_string($db,$_POST['mobile_no']);
+		$city= mysqli_real_escape_string($db,$_POST['city']);
+		$address= mysqli_real_escape_string($db,$_POST['address']);
+		$brand_id= mysqli_real_escape_string($db,$_POST['brand_id']);
+		$pin_code= mysqli_real_escape_string($db,$_POST['pin_code']);
+		$no= mysqli_real_escape_string($db,$_POST['time_frame']);
+		$time= mysqli_real_escape_string($db,$_POST['times']);
+		$time_frame="$no"."$time";
+		$status= mysqli_real_escape_string($db,$_POST['status']);
+		$other= mysqli_real_escape_string($db,$_POST['other']);
 		if(!empty($other))
 		{
 			$response= mysqli_real_escape_string($db,$_POST['other']);
@@ -30,7 +30,7 @@ $message = '';
 		}
 		$Company_name= mysqli_real_escape_string($db,$_POST['company_name']);
 	
-		echo$sql="INSERT INTO investor_datas(name,mobile_no,email,city,address,brand_id,pin_code,time_frame,status,company_name,response,created_by,edited_by) VALUES ('$name','$mobile_no','$email','$city','$address','$brand_id','$pin_code','$time_frame','$status','$Company_name','$response','$created_by','$edited_by')";	
+		$sql="INSERT INTO investor_datas(name,mobile_no,email,city,address,brand_id,pin_code,time_frame,status,company_name,response,created_by,edited_by) VALUES ('$name','$mobile_no','$email','$city','$address','$brand_id','$pin_code','$time_frame','$status','$Company_name','$response','$created_by','$edited_by')";	
 		
 		if($db->query($sql) === TRUE)
 		{
@@ -44,7 +44,8 @@ $message = '';
 		}
 	}
 		if(isset($_POST['edit']))
-		{$name= mysqli_real_escape_string($db,$_POST['name']);
+		{
+		$name= mysqli_real_escape_string($db,$_POST['name']);
 		$email= mysqli_real_escape_string($db,$_POST['email']);
 		$mobile_no= mysqli_real_escape_string($db,$_POST['mobile_no']);
 		$city= mysqli_real_escape_string($db,$_POST['city']);
@@ -54,15 +55,14 @@ $message = '';
 		$time_frame= mysqli_real_escape_string($db,$_POST['time_frame']);
 		$status= mysqli_real_escape_string($db,$_POST['status']);
 		$response= mysqli_real_escape_string($db,$_POST['response']);
-		$Company_name= mysqli_real_escape_string($db,$_POST['company_name']);
+		$company_name= mysqli_real_escape_string($db,$_POST['company_name']);
 		$id = mysqli_real_escape_string($db,$_POST['id']);
-			$data_update = "update employee_master set name = '$name',email='$email',mobile_no='$mobile_no',city='$city',address='$address',brand_id='$brand_id',pin_code='$pin_code',time_frame='$time_frame', status='$status',company_name='$company_name' where id = '$id'";
+		$data_update = "update investor_datas set name='$name',email='$email',mobile_no='$mobile_no',city='$city',address='$address',brand_id='$brand_id',pin_code='$pin_code',time_frame='$time_frame', status='$status',response='$response',company_name='$company_name' where id = '$id'";
 			if ($db->query($data_update) === TRUE) {
 				
 				$status='success';
 			}
 			 else {
-				header('location:edit_employee.php');
 				$status = 'fail';
 			}
 		}
@@ -209,39 +209,54 @@ $message = '';
 						<textarea type="text" class="form-control" id="address" name="address" placeholder="Enter address"></textarea>
 					</div>
 				</div>   
-			<div class="col-md-4">
-				
-					<div class="form-group">
-					<div class="col-md-12">	
-						<label>Time Frame</label>
-						
-						<div class="col-md-6>"
-							<input type="text" class="form-control" id="time_frame" name="time_frame" placeholder="Enter time">
-						</div>
-						<div class="col-md-6">
-						<select name="times"  class="form-control " >
-							<option value="">--Time--</option>
-							<option value="Minute">Minute</option>
-							<option value="hour">Hour</option>
-							<option value="day">Day</option>
-							<option value="week">Week</option>
-							<option value="month">Month</option>
-							<option value="year">Year</option>
-						</select>
-						</div>
-					</div>
+			<div class="col-md-2">
+				<label >Time Frame</label>
+				<input type="text" class="form-control" id="time_frame" name="time_frame" placeholder="Enter time">
+			</div>
+			<div class="col-md-2">	
+				<div class="form-group">
+					<label >test</label>
+					<select name="times"  class="form-control " >
+						<option value="">--Time--</option>
+						<option value="Minute">Minute</option>
+						<option value="hour">Hour</option>
+						<option value="day">Day</option>
+						<option value="week">Week</option>
+						<option value="month">Month</option>
+						<option value="year">Year</option>
+					</select>
 				</div>
-			</div>    
-        </div>
+			</div> 
 
-		
+   
+        </div>
+        <div class="row">
+        	<div class="col-md-4">
+        		<div class="form-group">
+        			<label>Comment</label>
+        			<textarea class="form-control" name="comment" id="comment">
+        			</textarea>
+        		</div>
+        	</div>
+        	<div class="col-md-4">
+        		<div class="form-group">
+        			<label>Reminder</label>
+        			<div class='input-group date'  id='datetimepicker1' >
+                    <input type='text' name="reminder" class="form-control"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                	</div>
+        		</div>
+        	</div>
+		</div>
 		<div class="box-footer">
          <button type="submit" class="btn btn-info pull-right" name="add">Submit</button>
         </div>
+    </div>
       </form>
 	</div>
     </div>
-      
 
  
     <div class="col-md-12">
@@ -267,12 +282,7 @@ $message = '';
                   <th>Email</th>
                   <th>Mobile No</th>
 				  <th>City</th>
-				  <th>Address</th>
 				  <th>Brand</th>
-				  <th>Pin Code</th>
-				  <th>Time Frame</th>
-				  <th>Status</th>
-				  <th>Company Name</th>
 				  <th>Action</th>
                </tr>
                 </thead>
@@ -287,7 +297,6 @@ $message = '';
 							<td><?php echo $row['email']; ?></td>
 							<td><?php echo $row['mobile_no']; ?></td>
 							<td><?php echo $row['city']; ?></td>
-							<td><?php echo $row['address']; ?></td>
 							<td><?php 
 								$brand_id=$row['brand_id'];
 									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
@@ -296,16 +305,13 @@ $message = '';
 										echo $brand_row['name'];
 									}
 							?></td>
-							<td><?php echo $row['pin_code']; ?></td>
-							<td><?php echo $row['time_frame']; ?></td>
-							<td><?php echo $row['status']; ?></td>
-							<td><?php echo $row['company_name']; ?></td>
-						 
 							<td>	
 								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-edit"></span>
 								</a>
-							
+								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
+									<span class="fa fa-eye"></span>
+								</a>
 								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="investor_dataform.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-times"></span>
 								</a>
@@ -343,6 +349,13 @@ $message = '';
  		$('#other').hide();
  	}
  });
+ 		$('#datetimepicker').data("DateTimePicker").FUNCTION(
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+          
 });
 
 </script>
+ 
+    
