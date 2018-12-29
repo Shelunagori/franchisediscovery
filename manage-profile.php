@@ -177,65 +177,60 @@
 				</div>
 			<div class="col-12 col-md-9">	
 			<form method="post" id="regfrm" action="" enctype="multipart/form-data" >
-				<div class="col-12 col-md-3">
-                    <div class="profile-thumb">
-						<?php if(empty($profile)) { $profile = 'img/bg-img/user.jpg'; } ?>
-						<img src="<?php echo $baseURL.$profile ?>" style="width:255px; height:255px;" id="img_prev"  />
-					</div>
-					<div class="profile-thumb-upload mt-15">
-						<div class="form-group">
-							<input type="file" id="profile" onchange="readURL(this);" name="profile" class="form-control-file" id="upload-new-thumb">
-						</div>
-					</div>	
-                </div>
-				<div class="col-12 col-md-9">
+				
+				<div class="col-md-12">
                     <div class="profile_form">
 							<div class="row">
-                                <div class="col-12 col-md">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="first_name">First Name</label>
                                         <input type="text" class="form-control" value="<?php echo $first_name;?>" id="first_name" name="first_name" >
                                     </div>
+									<div class="form-group">
+										<label for="email">Email address</label>
+										<label class="form-control"><?php echo $email;?></label>
+									</div>
+									<div class="form-group">
+										<label for="current_password">Current Password</label>
+										<input type="password"  name="current_password" id="current_password" class="form-control" aria-describedby="passwordHelpBlock">
+									</div>											
                                 </div>
-                                <div class="col-12 col-md">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="last_name">Last Name</label>
                                         <input type="text" class="form-control" value="<?php echo $last_name;?>" id="last_name" name="last_name" >
                                     </div>
+									 <div class="form-group">
+										<label for="p_number">Phone Number</label>
+										<label class="form-control"><?php echo $mobile_no;?></label> 
+									</div>
+									<div class="form-group">
+										<label for="create_password">Create Password</label>
+										<input type="password"  name="create_password" id="create_password"class="form-control" aria-describedby="passwordHelpBlock">
+										<small id="passwordHelpBlock" class="form-text text-muted">If you don't want to change password, please leave blank.</small>
+									</div>									
                                 </div>
-                            </div>
-							
+								<div class="col-md-4">
+								        <div class="profile-thumb">
+											<?php if(empty($profile)) { $profile = 'img/bg-img/user.jpg'; } ?>
+											<img src="<?php echo $baseURL.$profile ?>" class="profilePic" id="img_prev"  />
+										</div>
+										<div class="profile-thumb-upload mt-15">
+											<div class="form-group">
+												<input type="file" id="profile" onchange="readURL(this);" name="profile" class="form-control-file" id="upload-new-thumb">
+											</div>
+										</div>	
+										<div class="form-group">
+											<label for="confirm_password">Confirm Password</label>
+											<input type="password"  id="confirm_password"name="confirm_password" class="form-control">
+										</div>
+								</div>
+							</div>
 							<div class="row">
-                                <div class="col-12 col-md">
-                                    
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <label class="form-control"><?php echo $email;?></label>
-                            </div>
-                                </div>
-                                <div class="col-12 col-md">
-                                    <div class="form-group">
-                                <label for="p_number">Phone Number</label>
-                                <label class="form-control"><?php echo $mobile_no;?></label> 
-                            </div>
-                                </div>
-                            </div>
-
-							<div class="form-group">
-                                <label for="current_password">Current Password</label>
-                                <input type="password"  name="current_password" id="current_password" class="form-control" aria-describedby="passwordHelpBlock">
-                            </div>							
-                            
-                            <div class="form-group">
-                                <label for="create_password">Create Password</label>
-                                <input type="password"  name="create_password" id="create_password"class="form-control" aria-describedby="passwordHelpBlock">
-                                <small id="passwordHelpBlock" class="form-text text-muted">If you don't want to change password, please leave blank.</small>
-                            </div>
-                             <div class="form-group">
-                                <label for="confirm_password">Confirm Password</label>
-                                <input type="password"  id="confirm_password"name="confirm_password" class="form-control">
-                            </div>
-                            <button type="submit" name="save" class="btn btn-success ">Update Information</button>
+								<center>
+									<button type="submit" name="save" class="btn btn-success ">Update Information</button>
+								</center>
+							</div> 
                     </div>
                 </div>				
 			</form>	

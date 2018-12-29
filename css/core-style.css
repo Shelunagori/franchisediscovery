@@ -4878,10 +4878,13 @@ h3.register-title {
 .order_list_area td a:hover {
     background-color: rgba(0, 150, 136, 0.8);
 }
-
+.profilePic {
+	width: 150px;
+    height: 100px;
+}
 .profile-thumb {
-    width: 255px;
-    height: 255px;
+	width: 150px;
+    height: 104px;
     background-size: cover;
     background-position: center center;
     border: 1px solid #ddd;
