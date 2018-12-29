@@ -1,5 +1,8 @@
 <?php
 	session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }	
 	require('admin/config.php');
 	$user_id=$_SESSION['user_id'];
 	

@@ -1,5 +1,8 @@
 <?php
 session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }
 require('admin/config.php');
 	$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
 		$sql = "update brands set status = 'Deactive' where id = '$id' ";

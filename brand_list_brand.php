@@ -2,6 +2,9 @@
 <html lang="en">
 <?php 
 	session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }	
 	include('admin/config.php');
 	$user_id=$_SESSION['user_id']; 
 	

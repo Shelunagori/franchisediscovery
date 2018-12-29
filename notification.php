@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }
 	include('admin/config.php'); ?>
 <head>
     <meta charset="UTF-8">
