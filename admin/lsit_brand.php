@@ -226,6 +226,9 @@ require('header.php');
 										<td><?php echo $row['investment_range']; ?></td>
 										<td><?php echo $row['franchise_outlets']; ?></td>
 										<td>
+											<a title="Disapprove" class="mb-control1 btn bg-purple btn-rounded btn-sm" href="disapprove_brand.php?id=<?php echo base64_encode($row['id']); ?>">
+												<span class="fa fa-flag-o"></span>
+											</a>										
 											<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="brand_edit.php?rowvalue=<?php echo base64_encode($row['id']); ?>">
 												<span class="fa fa-edit"></span>
 											</a>

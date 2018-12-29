@@ -36,6 +36,7 @@
     if(in_array($type,array("jpg","jpeg","gif","png")))
 	{
 		move_uploaded_file($_FILES["slider_image"]["tmp_name"],$url);
+		$url = '../'.$url;
 	}
 	
 	$sql = "INSERT INTO brands(registration_id,chart_id, name, title, contact_no, rating, avg_rating, food_type, area_reqired, investment_range,investment_range_in_words, franchise_outlets, brand_image,address,seo_name) VALUES('$registration_id','$chart_id','$name','$description','$contact_no','$rating','$avg_rating','$food_type','$area_reqired','$investment_range','$investment_range_in_words','$franchise_outlets','$url','$address','$seo_name')";

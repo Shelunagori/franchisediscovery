@@ -179,6 +179,7 @@
           <ul class="treeview-menu">
             <li><a href="add_brand.php"><i class="fa fa-circle-o"></i> Add New</a></li>
             <li><a href="lsit_brand.php"><i class="fa fa-circle-o"></i> List View</a></li>
+			<li><a href="pending_list_brand.php"><i class="fa fa-circle-o"></i> Pending Brand List</a></li>
           </ul>
         </li>
 

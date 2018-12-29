@@ -194,21 +194,6 @@
 
 								<div class="box box-warning">
 									<div class="box-header with-border">
-									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> ROI Details</h3>
-									</div>
-									<div class="row">
-										<div class="col-md-12 col-md">
-											<div class="form-group">
-												<label>Upload ROI (Select pdf/excel/word files)</label> <br>
-													<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
-											</div>
-											<div class="roi"></div>
-										</div>
-									</div>
-								</div>									
-
-								<div class="box box-warning">
-									<div class="box-header with-border">
 									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Brand Menu Details</h3>
 									</div>
 									<div class="row">
@@ -347,6 +332,23 @@
 									</div>
 								</div>	
 
+								<div class="box box-warning">
+									<div class="box-header with-border">
+									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> ROI Details</h3>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-md">
+											<div class="form-group">
+												<label>Upload ROI (Select pdf/excel/word files)</label> <br>
+													<input class="form-control" name="brand_details[1][left_menu_name]" type="hidden" placeholder="Menu name" value='ROI' required>
+													<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
+											</div>
+											<div class="roi"></div>
+										</div>
+									</div>
+								</div>										
+								
+								
 								<div class="box box-warning">
 									<div class="box-header with-border">
 									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Gallery Images</h3>
