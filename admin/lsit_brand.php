@@ -128,7 +128,7 @@ require('header.php');
 									<select name="brand_name" class="form-control" id="brand_name">
 										<option value="">--Select Brand--</option>
 									<?php 
-									$sql="SELECT * FROM brands WHERE status='Active'";
+									$sql="SELECT * FROM brands WHERE status='Active' and is_approve='Approved'";
 									$brand_query=mysqli_query($db,$sql);
 									while($category_row=mysqli_fetch_array($brand_query))
 											{
