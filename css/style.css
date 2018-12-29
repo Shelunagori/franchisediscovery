@@ -1,0 +1,32 @@
+.box {
+	position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+	
+    box-shadow: 0px 0px 0px 1px rgba(8, 8, 8, 0.21);
+	padding: 10px;
+}
+
+.box.box-warning {
+    border-top-color: #0056b3;
+}
+.box-header.with-border {
+    border-bottom: 1px solid #eae9e9;
+}
+
+.box-header {
+    color: #444;
+    display: block;
+    padding: 1px;
+    position: relative;
+	margin-bottom: 10px;
+}
+
+.menu > img {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}

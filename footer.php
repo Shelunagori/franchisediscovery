@@ -555,6 +555,7 @@ label.expend {
     <script src="<?php echo $baseURL; ?>js/plugins.js"></script>
     <!-- Active js -->
     <script src="<?php echo $baseURL; ?>js/active.js"></script>
+	<script src="<?php echo $baseURL; ?>js/select2.full.min.js"></script>
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
@@ -574,7 +575,7 @@ s0.parentNode.insertBefore(s1,s0);
 $(document).ready(function() {
 	$('#expandmybrand').hide();
 	$('#top_expandmybrand').hide();
-	
+	 $(".select2").select2();
 	$('input[type=radio][name=enquire_type]').change(function() {
 		if (this.value == 'franchise') {
 			$('#expandmybrand').hide();

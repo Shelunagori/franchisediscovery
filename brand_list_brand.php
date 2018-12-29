@@ -87,46 +87,55 @@
 				</div>
 			
                 <div class="col-12 col-md-9">	
-
+					<div>
+						<a class="btn btn-info btn-rounded btn-sm pull-right" href="brand_add_new.php">
+							<span style="color:#fff;" class="fa fa-plus"></span> Add New Brand
+						</a>
+					</div>					
+					<?php 
+						 $query = "select * from brands where registration_id = '$user_id' and status = 'Active' order by id DESC ";
+						  $query_result=mysqli_query($db,$query); 
+						  $sno = 1;
+						  if(!empty($query_result->num_rows >0)){ 
+					?>
                     <div class="cart-table clearfix">
-						<?php
-							$query = "SELECT brands.name, brands.brand_image,favrouite.id,favrouite.brand_id, brands.seo_name, brands.investment_range_in_words, brands.franchise_outlets, categories.seo_name AS cat_seo FROM favrouite INNER JOIN brands ON (favrouite.brand_id = brands.id)INNER JOIN categories ON (brands.category_id = categories.id) where favrouite.user_id = '$user_id' "; 
-							$fav_query=mysqli_query($db,$query);
-							if($fav_query->num_rows > 0)
-							{
-							?>
-						<table class="table table-responsive">
-                            <thead>
-                                <tr>
-                                    <th><i class="fa fa-trash-o" aria-hidden="true"></i></th>
-                                    <th>Logo</th>
-                                    <th>Brand Name</th>
-                                    <th>Investment Range </th>                                
-                                    <th>Franchise Outlets</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-							
-								<?php
-									while($row=mysqli_fetch_array($fav_query))
-									{
-								?>
-								<tr>
-                                    <td class="action"><a onclick="return confirm('Are you sure ? you want to delete this brand')" href="favourite.php?id=<?php echo $row['id']; ?>"><i class="fa fa-times" aria-hidden="true"></i></a></td>
-                                    <td class="cart_product_img">
-                                        <a href="<?php echo $baseURL; ?>brand-detail/<?php echo $row['cat_seo']; ?>/<?php echo $row['seo_name']; ?>"><img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$row['brand_image']); ?>" alt="brand"></a>
-                                    </td>
-                                    <td class="cart_product_desc">
-                                        <h5><?php echo $row['name']; ?></h5>
-                                    </td>
-                                    <td class="price"><span>INR <?php echo $row['investment_range_in_words']; ?></span></td>
-                                   
-                                    <td class="total_price"><span><?php echo $row['franchise_outlets']; ?></span></td>
-                                </tr>
-									<?php } ?>
-                           </tbody>
-						</table>
-						<?php } else { echo '<p> <center>Empty Favourite List</center> </p>'; } ?>
+						<table class="table table-responsive" style="font-size: 12px!important;">
+                        	<thead>
+									<tr>
+										<th>S.No.</th>
+										<th>Image</th>
+										<th>Name</th>
+										<th>Status</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php while($row=mysqli_fetch_array($query_result)){ 
+									$brand_id = $row['id'];
+									?>
+									<tr role="row" class="odd">
+									  <td> <?php echo $sno; ?> </td>	
+										<td>  <center>
+												<img src="<?php echo str_replace('../',"",$row['brand_image']);?>" style="width: 70px;height: 50px;" />
+											</center> 
+										</td>
+									    <td><?php echo $row['name']; ?></td>
+										<td><?php echo $row['is_approve']; ?></td>
+										<td>
+											<a class="btn btn-info btn-rounded btn-sm" href="brand_edit.php?rowvalue=<?php echo base64_encode($row['id']); ?>">
+												<span style="color:#fff;" class="fa fa-edit"></span>
+											</a>
+
+											<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ? you want to delete this brand !')" href="brand_user_delete.php?id=<?php echo base64_encode($row['id']); ?>">
+												<span style="color:#fff;" class="fa fa-times"></span>
+											</a>
+										</td>
+									</tr>													
+									<?php $sno++; } ?>	
+								</tbody>
+							</table>								
+							<?php  } else {  echo 'No Record Found !';  } ?>	   
+						
                     </div>
 
 
