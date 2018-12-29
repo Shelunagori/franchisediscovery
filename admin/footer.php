@@ -98,9 +98,7 @@ $(function () {
       "info": true,
       "autoWidth": false
     });
-	
-<<<<<<< HEAD
-=======
+
 	$('#example7').DataTable({
       "paging": true,
       "lengthChange": true,
@@ -128,7 +126,6 @@ $(function () {
       "autoWidth": false
     });
 	
->>>>>>> e339c0b59a8427fb50f65e7f20a71ea49337d90b
   });
 </script>  
 </body>
