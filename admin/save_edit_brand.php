@@ -77,7 +77,7 @@ if(isset($_POST['add']))
 	$is_state = 'No';
 	$is_gallery = 'No';
 
-	$sql = "update brands set category_id = '$category_id', chart_id = '$chart_id', name = '$name', title = '$description', contact_no = '$contact_no',rating = '$rating',avg_rating = '$avg_rating',food_type = '$food_type',area_reqired = '$area_reqired',investment_range = '$investment_range',investment_range_in_words = '$investment_range_in_words',franchise_outlets = '$franchise_outlets',address = '$address',seo_name = '$seo_name', footer_content = '$footer_content' where id = '$brand_id'";
+	$sql = "update brands set chart_id = '$chart_id', name = '$name', title = '$description', contact_no = '$contact_no',rating = '$rating',avg_rating = '$avg_rating',food_type = '$food_type',area_reqired = '$area_reqired',investment_range = '$investment_range',investment_range_in_words = '$investment_range_in_words',franchise_outlets = '$franchise_outlets',address = '$address',seo_name = '$seo_name', footer_content = '$footer_content' where id = '$brand_id'";
 	
 	
 	
@@ -105,7 +105,7 @@ if(isset($_POST['add']))
 		
 				
 		foreach($brand_details as $brand_detail)
-		{
+		{ 
 			$brndDetailID = $brand_detail['id'];
 			if (array_key_exists("brand_country",$brand_detail))
 			{
@@ -137,8 +137,9 @@ if(isset($_POST['add']))
 			}
 			
  			$left_menu_name = mysqli_real_escape_string($db,$brand_detail['left_menu_name']);
-			$content = mysqli_real_escape_string($db,$brand_detail['content']); 
-			$content_old = mysqli_real_escape_string($db,$brand_detail['content_old']); 
+			@$content = mysqli_real_escape_string($db,@$brand_detail['content']); 
+			@$content_old = mysqli_real_escape_string($db,@$brand_detail['content_old']); 
+			
 			
 			$detail_sql = "update brand_details set left_menu_name = '$left_menu_name',content = '$content',is_country = '$is_country',is_city = '$is_city',is_gallery = '$is_gallery',is_state = '$is_state' where id = '$brndDetailID' ";
 	
@@ -150,23 +151,34 @@ if(isset($_POST['add']))
 			$types='';$urls='';
 				if(!empty($_FILES['brand_details']["name"])){
 						foreach($_FILES['brand_details']["name"] as $a){
-						
-						$types = explode('.',$a['content']);
-						$types = $types[count($types)-1];
-						$urls = "../roi_images/".'_'.$left_menu_name.'_'.uniqid(rand()).'.'.$types;
+							if(!empty($a['content'])){
+								$types = explode('.',$a['content']);
+								$types = $types[count($types)-1];
+								$urls = "../roi_images/".'_'.$left_menu_name.'_'.uniqid(rand()).'.'.$types;
+							}else{
+								$urls = $content_old;
+							}
 					}
 					
 					if(!empty($_FILES['brand_details']["tmp_name"])){
 						foreach($_FILES['brand_details']["tmp_name"] as $b){
-							if(in_array($types,array("pdf","doc","docx","xls","xlsx")))
-							{
-								move_uploaded_file($b["content"],$urls);
-							}
+							if(!empty($b['content'])){
+								if(in_array($types,array("pdf","doc","docx","xls","xlsx")))
+								{
+									move_uploaded_file($b["content"],$urls);
+								}
+							}else{
+								$urls = $content_old;
+							}	
 						}
 					}
 					
 			
 					$detail_sql_roi = "update brand_details set content = '$urls' where brand_id=$brand_id and left_menu_name='ROI'";	
+					$db->query($detail_sql_roi);
+				}else{
+					$urls = $content_old;
+					//$detail_sql_roi = "update brand_details set content = '$urls' where brand_id=$brand_id and left_menu_name='ROI'";	
 					$db->query($detail_sql_roi);
 				}
 			

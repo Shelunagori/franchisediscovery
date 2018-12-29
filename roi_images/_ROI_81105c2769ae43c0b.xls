@@ -1,0 +1,533 @@
+			
+				<table border="1">
+					<thead>
+						<tr>
+							<td colspan="7" align="center">
+								 Daily Report 
+								28-06-2018 TO 28-06-2018							</td>
+						</tr>
+						<tr>
+							<th>S. No.</th>
+							<th>Transaction Date</th>
+							<th>Ledger Account</th>
+							<th>Source</th>
+							<th>Reference</th>
+							<th>Debit</th>
+							<th>Credit</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+												<tr>
+						<td>1</td>
+						<td>28-06-2018</td>
+						<td>Atul Enterprises</td>
+						<td>Invoice Booking</td>
+						<td>
+						STL/IB-134/BE-3305/18-19						</td>
+						<td >0</td>
+						<td >813</td>
+				</tr>
+										<tr>
+						<td>2</td>
+						<td>28-06-2018</td>
+						<td>Petty Cash - B S Jhala</td>
+						<td>Contra Voucher</td>
+						<td>
+						0043						</td>
+						<td >7,262</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>3</td>
+						<td>28-06-2018</td>
+						<td>Union Bank of India Bank</td>
+						<td>Contra Voucher</td>
+						<td>
+						0043						</td>
+						<td >0</td>
+						<td >7,262</td>
+				</tr>
+										<tr>
+						<td>4</td>
+						<td>28-06-2018</td>
+						<td>Birla Corporation Limited(Unit-Birla cement Works)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-167/BE-3430/18-19						</td>
+						<td >8,371.81</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>5</td>
+						<td>28-06-2018</td>
+						<td>9(CGST 9%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-167/BE-3430/18-19						</td>
+						<td >0</td>
+						<td >287.21</td>
+				</tr>
+										<tr>
+						<td>6</td>
+						<td>28-06-2018</td>
+						<td>9(SGST 9%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-167/BE-3430/18-19						</td>
+						<td >0</td>
+						<td >287.21</td>
+				</tr>
+										<tr>
+						<td>7</td>
+						<td>28-06-2018</td>
+						<td>9(CGST 9%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-167/BE-3430/18-19						</td>
+						<td >0</td>
+						<td >351.32</td>
+				</tr>
+										<tr>
+						<td>8</td>
+						<td>28-06-2018</td>
+						<td>9(SGST 9%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-167/BE-3430/18-19						</td>
+						<td >0</td>
+						<td >351.32</td>
+				</tr>
+										<tr>
+						<td>9</td>
+						<td>28-06-2018</td>
+						<td>Sales Income</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-167/BE-3430/18-19						</td>
+						<td >0</td>
+						<td >7,094.75</td>
+				</tr>
+										<tr>
+						<td>10</td>
+						<td>28-06-2018</td>
+						<td>14(CGST 14 % Input)</td>
+						<td>Invoice Booking</td>
+						<td>
+						STL/IB-134/BE-3305/18-19						</td>
+						<td >88.93</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>11</td>
+						<td>28-06-2018</td>
+						<td>14(SGST 14 % Input)</td>
+						<td>Invoice Booking</td>
+						<td>
+						STL/IB-134/BE-3305/18-19						</td>
+						<td >88.93</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>12</td>
+						<td>28-06-2018</td>
+						<td>Purchase GST</td>
+						<td>Invoice Booking</td>
+						<td>
+						STL/IB-134/BE-3305/18-19						</td>
+						<td >635.24</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>13</td>
+						<td>28-06-2018</td>
+						<td>Discount</td>
+						<td>Invoice Booking</td>
+						<td>
+						STL/IB-134/BE-3305/18-19						</td>
+						<td >0</td>
+						<td >0.1</td>
+				</tr>
+										<tr>
+						<td>14</td>
+						<td>28-06-2018</td>
+						<td>Union Bank of India Bank</td>
+						<td>Contra Voucher</td>
+						<td>
+						0042						</td>
+						<td >0</td>
+						<td >585,000</td>
+				</tr>
+										<tr>
+						<td>15</td>
+						<td>28-06-2018</td>
+						<td>Hindustan Zinc Ltd(Hydro -I ,Unit II)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-166/BE-3164/18-19						</td>
+						<td >93,520</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>16</td>
+						<td>28-06-2018</td>
+						<td>Sales Income</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-166/BE-3164/18-19						</td>
+						<td >0</td>
+						<td >83,500</td>
+				</tr>
+										<tr>
+						<td>17</td>
+						<td>28-06-2018</td>
+						<td>6(CGST 6%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-166/BE-3164/18-19						</td>
+						<td >0</td>
+						<td >5,010</td>
+				</tr>
+										<tr>
+						<td>18</td>
+						<td>28-06-2018</td>
+						<td>6(SGST 6%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-166/BE-3164/18-19						</td>
+						<td >0</td>
+						<td >5,010</td>
+				</tr>
+										<tr>
+						<td>19</td>
+						<td>28-06-2018</td>
+						<td>Hindustan Zinc Ltd(Chanderia Smelter Complex (CPP))</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-165/BE-3079/18-19						</td>
+						<td >920.4</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>20</td>
+						<td>28-06-2018</td>
+						<td>Sales Income</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-165/BE-3079/18-19						</td>
+						<td >0</td>
+						<td >780</td>
+				</tr>
+										<tr>
+						<td>21</td>
+						<td>28-06-2018</td>
+						<td>9(CGST 9%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-165/BE-3079/18-19						</td>
+						<td >0</td>
+						<td >70.2</td>
+				</tr>
+										<tr>
+						<td>22</td>
+						<td>28-06-2018</td>
+						<td>9(SGST 9%)</td>
+						<td>Invoice</td>
+						<td>
+						STL/IN-165/BE-3079/18-19						</td>
+						<td >0</td>
+						<td >70.2</td>
+				</tr>
+										<tr>
+						<td>23</td>
+						<td>28-06-2018</td>
+						<td>Liqtech Industries </td>
+						<td>Purchase Return</td>
+						<td>
+						DN/0003/18-19						</td>
+						<td >13,983</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>24</td>
+						<td>28-06-2018</td>
+						<td>Purchase IGST</td>
+						<td>Purchase Return</td>
+						<td>
+						DN/0003/18-19						</td>
+						<td >0</td>
+						<td >11,850</td>
+				</tr>
+										<tr>
+						<td>25</td>
+						<td>28-06-2018</td>
+						<td>Saint Gobain  India Pvt. Ltd.(Saint Gobain  India Pvt. Ltd.)</td>
+						<td>Receipt Voucher</td>
+						<td>
+						0169						</td>
+						<td >0</td>
+						<td >17,051</td>
+				</tr>
+										<tr>
+						<td>26</td>
+						<td>28-06-2018</td>
+						<td>Union Bank of India Bank</td>
+						<td>Receipt Voucher</td>
+						<td>
+						0169						</td>
+						<td >17,051</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>27</td>
+						<td>28-06-2018</td>
+						<td>Purchase Freight</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >300</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>28</td>
+						<td>28-06-2018</td>
+						<td>Union Bank of India Bank</td>
+						<td>Receipt Voucher</td>
+						<td>
+						0147						</td>
+						<td >196,000</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>29</td>
+						<td>28-06-2018</td>
+						<td>Sales Freight Expenses</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >8,180</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>30</td>
+						<td>28-06-2018</td>
+						<td>Purchase Thela Bhada</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >900</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>31</td>
+						<td>28-06-2018</td>
+						<td>Sales Thela Bhada</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >1,175</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>32</td>
+						<td>28-06-2018</td>
+						<td>Purchase Freight</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >2,070</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>33</td>
+						<td>28-06-2018</td>
+						<td>Labour & Service Charges</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >150</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>34</td>
+						<td>28-06-2018</td>
+						<td>Petty Cash - B S Jhala</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >0</td>
+						<td >12,475</td>
+				</tr>
+										<tr>
+						<td>35</td>
+						<td>28-06-2018</td>
+						<td>Petty Cash - B S Jhala</td>
+						<td>Contra Voucher</td>
+						<td>
+						0041						</td>
+						<td >12,475</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>36</td>
+						<td>28-06-2018</td>
+						<td>Kotak Mahindra Bank</td>
+						<td>Contra Voucher</td>
+						<td>
+						0041						</td>
+						<td >0</td>
+						<td >12,475</td>
+				</tr>
+										<tr>
+						<td>37</td>
+						<td>28-06-2018</td>
+						<td>Purchase Freight</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >140</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>38</td>
+						<td>28-06-2018</td>
+						<td>Sales Freight Expenses</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >500</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>39</td>
+						<td>28-06-2018</td>
+						<td>Sales Thela Bhada</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >1,200</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>40</td>
+						<td>28-06-2018</td>
+						<td>Hindustan Zinc Ltd (Dariba Smelter Complex)</td>
+						<td>Receipt Voucher</td>
+						<td>
+						0147						</td>
+						<td >0</td>
+						<td >196,000</td>
+				</tr>
+										<tr>
+						<td>41</td>
+						<td>28-06-2018</td>
+						<td>Purchase Freight ( Reverse Charge )</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >1,000</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>42</td>
+						<td>28-06-2018</td>
+						<td>Purchase Freight ( Reverse Charge )</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >1,140</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>43</td>
+						<td>28-06-2018</td>
+						<td>Purchase Thela Bhada</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >1,500</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>44</td>
+						<td>28-06-2018</td>
+						<td>GST / VAT Paid Purchases</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >1,020</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>45</td>
+						<td>28-06-2018</td>
+						<td>GST / VAT Paid Purchases</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >240</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>46</td>
+						<td>28-06-2018</td>
+						<td>GST / VAT Paid Purchases</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >182</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>47</td>
+						<td>28-06-2018</td>
+						<td>GST / VAT Paid Purchases</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >40</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>48</td>
+						<td>28-06-2018</td>
+						<td>Petty Cash - B S Jhala</td>
+						<td>Petty Cash Payment Voucher</td>
+						<td>
+						0000						</td>
+						<td >0</td>
+						<td >7,262</td>
+				</tr>
+										<tr>
+						<td>49</td>
+						<td>28-06-2018</td>
+						<td>Bank Charges</td>
+						<td>Non Print Payment Voucher</td>
+						<td>
+						0125						</td>
+						<td >29.76</td>
+						<td >0</td>
+				</tr>
+										<tr>
+						<td>50</td>
+						<td>28-06-2018</td>
+						<td>Union Bank of India Bank</td>
+						<td>Non Print Payment Voucher</td>
+						<td>
+						0125						</td>
+						<td >0</td>
+						<td >29.76</td>
+				</tr>
+										<tr>
+						<td>51</td>
+						<td>28-06-2018</td>
+						<td>Kotak Mahindra Bank</td>
+						<td>Contra Voucher</td>
+						<td>
+						0042						</td>
+						<td >585,000</td>
+						<td >0</td>
+				</tr>
+									</tbody>
+				</table>
+				

@@ -192,8 +192,8 @@ $status='';
 				<div class="box-body">
 					<div class="box-body">
 						<div class="form-group">
-							<label>Upload menu pdf</label>  (Select multiple pdf files)	
-							<input type="file" name="menudetail[]" accept="application/pdf" multiple id="menu-photo-add">
+							<label>Upload menu pdf</label>  (Select Only pdf files)	
+							<input type="file" name="menudetail[]" accept="application/pdf" id="menu-photo-add">
 						</div>	
 						
 						<div class="menu">
@@ -217,6 +217,8 @@ $status='';
 				</div>
 			</div> 
 		</div>					
+
+		
 		<div class="col-md-12">
 			<div class="box box-warning">
 				<div class="box-header with-border">
@@ -232,51 +234,33 @@ $status='';
 				$brandDetail = mysqli_query($db,"select * from brand_details where brand_id = '$brand_id' ");
 				if(!empty($brandDetail))
 				{
+					$roiContent='';$roiid=0;
 					while($row_detail=mysqli_fetch_array($brandDetail)){ 
+					if($no == 1){
+						$no = 2;
+					}
+					
+					if($row_detail['left_menu_name'] == "ROI"){
+						$roiContent = $row_detail['content'];
+						$roiid = $row_detail['id'];
+					}
 					$brand_detail_id = $row_detail['id'];
 					if($row_detail['is_gallery'] == 'No') {
 				?>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label>Menu Name</label>
+							<input class="form-control" name="brand_details[<?php echo $no;?>][id]" type="hidden" placeholder="Menu name" value='<?php echo $row_detail['id']; ?>'>
 							<input type="hidden" name="brand_details[<?php echo $no;?>][id]" value="<?php echo $row_detail['id']; ?>" />
 							<input class="form-control" name="brand_details[<?php echo $no;?>][left_menu_name]" type="text" placeholder="Menu name" value='<?php echo $row_detail['left_menu_name']; ?>'>
 						</div>
 						<div class="form-group">
 							<div class="box-body pad">
-							<?php if($row_detail['left_menu_name'] == "ROI"){ ?>
-								<label>Upload ROI pdf/excel/word</label>  (Select pdf/excel/word files)	
-								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
-								<input type="hidden" name="brand_details[1][content_old]" value="<?php echo $row_detail['content']; ?>">
-								<div class="roi">
-									<?php  
-									if (strpos($row_detail['content'], '.pdf') !== false) { ?>
-
-										<img src="admin_assest/img/pdficon.png" style="height:120px"   />
-										
-										<a href="<?php echo $row_detail['content']; ?>" target="_blank"></a>
-									<?php }else if (strpos($row_detail['content'], '.xls') !== false || strpos($row_detail['content'], '.xlsx') !== false){ ?>
-									
-										
-										
-										<a href="<?php echo $row_detail['content']; ?>" target="_blank"><img src="admin_assest/img/Excel.png" style="height:120px"  /></a>
-										
-									<?php }else if (strpos($row_detail['content'], '.doc') !== false || strpos($row_detail['content'], '.docx') !== false){ ?>
-									
-										<img src="admin_assest/img/word-icon-png-6.png" style="height:120px" />
-										
-										<a href="<?php echo $row_detail['content']; ?>" target="_blank"></a>
-										
-					<?php } else { echo '<center>No menu card found</center>';  } ?>
-								
-								
-								
-								</div>
-							<?php }else{ ?>
+							
 								<textarea id="editor1" name="brand_details[<?php echo $no;?>][content]" rows="10" cols="80">
 									<?php echo $row_detail['content']; ?>
 								</textarea>
-							<?php } ?>
+							
 								
 							</div>
 						</div>
@@ -364,7 +348,47 @@ $status='';
 				</div> 
 			</div>
 		</div>
-	
+		<div class="col-md-12">	
+			<div class="box box-warning">
+				<div class="box-header with-border">
+				  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> ROI Details</h3>
+				</div>
+				
+				<div class="box-body">
+					<div class="form-group">
+							<label>Upload ROI (Select pdf/excel/word files)</label> <br>
+							<input class="form-control" name="brand_details[1][left_menu_name]" type="hidden" placeholder="Menu name" value='ROI'>
+							<input class="form-control" name="brand_details[1][id]" type="hidden" placeholder="Menu name" value='<?php echo $roiid; ?>'>
+							<input class="form-control" name="brand_details[1][content_old]" type="hidden" placeholder="Menu name" value='<?php echo $roiContent; ?>'>
+								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
+						</div>
+						<div class="roi">
+									<?php  
+									if (strpos($roiContent, '.pdf') !== false) { ?>
+
+										<img src="admin_assest/img/pdficon.png" style="height:120px"   />
+										
+										<a href="<?php echo $roiContent; ?>" target="_blank"></a>
+									<?php }else if (strpos($roiContent, '.xls') !== false || strpos($roiContent, '.xlsx') !== false){ ?>
+									
+										
+										
+										<a href="<?php echo $roiContent; ?>" target="_blank"><img src="admin_assest/img/Excel.png" style="height:120px"  /></a>
+										
+									<?php }else if (strpos($roiContent, '.doc') !== false || strpos($roiContent, '.docx') !== false){ ?>
+									
+										<img src="admin_assest/img/word-icon-png-6.png" style="height:120px" />
+										
+										<a href="<?php echo $roiContent; ?>" target="_blank"></a>
+										
+					<?php } else { echo '<center>No menu card found</center>';  } ?>
+								
+								
+								
+								</div>
+				</div>
+			</div>
+		</div>		
 		
         <div class="col-md-12">
 			<div class="box box-warning">

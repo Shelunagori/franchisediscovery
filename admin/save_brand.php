@@ -79,7 +79,7 @@ if(isset($_POST['add']))
 		}
 
 		foreach($brand_details as $brand_detail)
-		{ //print_r($brand_detail);
+		{ 
 			if (array_key_exists("brand_country",$brand_detail))
 			{
 				$is_country = 'Yes';
@@ -129,7 +129,7 @@ if(isset($_POST['add']))
 						move_uploaded_file($b["content"],$urls);
 					}
 				}
-		
+	//	print_r($brand_id);
 				$detail_sql_roi = "update brand_details set content = '$urls' where brand_id=$brand_id and left_menu_name='ROI'";	
 				$db->query($detail_sql_roi);
 				
@@ -202,13 +202,14 @@ if(isset($_POST['add']))
 	
 		$sql_seo = "INSERT INTO page_seo(page_id,brand_id,title, meta_description, meta_keywords, meta_robots, meta_abstract, meta_topic, meta_url, g_name, g_description, g_image, t_title, t_description, t_image, og_title, og_type, og_url, og_image, og_description, og_site_name, fb_admins, canonical) VALUES ('$page_id','$brand_id','$title','$meta_description','$meta_keywords','$meta_robots','$meta_abstract','$meta_topic','$meta_url','$g_name','$g_description','$g_image','$t_title','$t_description','$t_image','$og_title','$og_type','$og_url','$og_image','$og_description','$og_site_name','$fb_admins','$canonical')";
 		$seo = $db->query($sql_seo);
+		
 		if(!empty($category_id_Arrays)){
 			foreach($category_id_Arrays as $category_id){
 	$sql_br = "INSERT INTO brand_rows(brand_id,category_id)VALUES('$brand_id','$category_id')";
 				$save_rows = $db->query($sql_br);
 			}
 		}
-			
+			//exit;
 		$_SESSION["status"] = "success";	
 		
 	}else

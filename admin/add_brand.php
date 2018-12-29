@@ -178,6 +178,7 @@ $status='';
 				<div class="box-body">
 						<div class="form-group">
 							<label>Upload ROI (Select pdf/excel/word files)</label> <br>
+							<input class="form-control" name="brand_details[1][left_menu_name]" type="hidden" placeholder="Menu name" value='ROI'>
 								<input type="file" name="brand_details[1][content]" accept="application/pdf,application/msword, application/vnd.ms-excel" id="roi-photo-add">
 						</div>
 						<div class="roi"></div>
@@ -280,16 +281,7 @@ $status='';
 							</div>
 						</div>	
 						
-						<div class="form-group">
-							<label>Menu Name</label>
-							<input class="form-control" name="brand_details[7][left_menu_name]" type="text" placeholder="Menu name" value=''>
-						</div>
-						<div class="form-group">
-							<div class="box-body pad">
-								<textarea id="editor1" name="brand_details[7][content]" rows="10" cols="80">
-								</textarea>
-							</div>
-						</div>
+						
 						
 						
 						<div class="form-group">
@@ -331,6 +323,18 @@ $status='';
 									<option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
 								<?php } ?>
 							</select>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label>Menu Name</label>
+							<input class="form-control" name="brand_details[7][left_menu_name]" type="text" placeholder="Menu name" value=''>
+						</div>
+						<div class="form-group">
+							<div class="box-body pad">
+								<textarea id="editor1" name="brand_details[7][content]" rows="10" cols="80">
+								</textarea>
+							</div>
 						</div>
 					</div>
 				</div> 
@@ -588,7 +592,7 @@ $status='';
 					reader.onload = function(event) {
 						if(extension == 'pdf')
 						{	
-							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview);
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview).css('height','120px');
 						}
 					}
 
@@ -616,7 +620,7 @@ $status='';
 					reader.onload = function(event) {
 						if(extension == 'pdf')
 						{	
-							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview).css('height','120px');;
+							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/pdficon.png').appendTo(placeToInsertImagePreview).css('height','120px');
 						}else if(extension == 'doc' || extension == 'docx'){
 							$($.parseHTML('<img>')).attr('src', 'admin_assest/img/word-icon-png-6.png').appendTo(placeToInsertImagePreview).css('height','120px');
 						}else if(extension == 'xls'|| extension == 'xlsx'){
