@@ -66,7 +66,6 @@ $message = '';
 ?>
 
 <link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="https://tarruda.github.io/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
  
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -101,8 +100,7 @@ $message = '';
 				<div class="box-tools pull-right">
 				<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 				  <i class="fa fa-minus"></i></button>
-				<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-				  <i class="fa fa-times"></i></button>
+				
 			  </div>
 			</div>
 			<div class="box-body">
@@ -156,7 +154,7 @@ $message = '';
 						<textarea type="text" class="form-control" id="person_name" name="person_name" placeholder="Enter person name"></textarea>
 					</div>
 				</div> 
-				<div class="col-md-4">
+				<div class="col-md-12">
 						<div class="form-group">
 							<div class="box-body pad">
 				              <form>
@@ -248,9 +246,10 @@ $message = '';
 
    <?php require('footer.php'); ?>
 <script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
+
 <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 <script>
-  $(function () {
-    
-    CKEDITOR.replace('brand_origin');
+  $(document).ready(function(){
+    CKEDITOR.replace('editor1');
   });
+  </script>
