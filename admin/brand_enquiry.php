@@ -159,10 +159,13 @@ $message = '';
 				<div class="col-md-4">
 						<div class="form-group">
 							<div class="box-body pad">
-								<label for="mobile_no">Brand Origin</label>
-								<textarea id="editor1" name="brand_origin" rows="10" cols="80">
-								</textarea>
-							</div>
+				              <form>
+				              	<label>Brand Origin</label>
+				                    <textarea id="editor1" name="brand_origin" rows="10" cols="80">
+			                                        	
+				                    </textarea>
+				              </form>
+          			 		 </div>
 						</div>
 					</div> 
 			</div>
@@ -250,4 +253,4 @@ $message = '';
   $(function () {
     
     CKEDITOR.replace('brand_origin');
-});
+  });

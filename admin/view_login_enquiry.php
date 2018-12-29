@@ -22,7 +22,7 @@ include('header.php');
 			<div class="col-md-12">
 				<div class="box">
 					<div class="box-header">
-						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>Profile</h3>
+						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>View Brand Enquiry</h3>
 					</div>
 						
 					<div class="box-body">
