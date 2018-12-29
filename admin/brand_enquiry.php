@@ -205,6 +205,9 @@ $message = '';
                 <tbody>
 				<?php $i = 1;
 					$query=mysqli_query($db,"select * from brand_enquiry order by id DESC ");
+					$result=mysqli_num_rows($query);
+					if($result)
+					{
 					while($row=mysqli_fetch_array($query)){
 						?>
 						<tr>
@@ -232,7 +235,13 @@ $message = '';
 								</a>
 							</td>
 						</tr>
-					<?php } ?>
+					<?php } }
+					else
+					{
+						echo"No Data Found";
+					}
+					?>
+
                </tbody>
               </table>
             </form> 
@@ -252,4 +261,4 @@ $message = '';
   $(document).ready(function(){
     CKEDITOR.replace('editor1');
   });
-  </script>
+ </script>

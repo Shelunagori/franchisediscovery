@@ -87,21 +87,29 @@ $status='';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Landline No</label>
-							<input class="form-control" name="landline_no" type="text" placeholder="edit mobile-no" value='<?php echo $row['company_name']; ?>' required>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="name">Brand Origin</label>
-							<input class="form-control" name="brand_origin" type="text" placeholder="edit mobile-no" value='<?php echo $row['company_name']; ?>' required>
+							<input class="form-control" name="landline_no" type="text" placeholder="edit mobile-no" value='<?php echo $row['landline_no']; ?>' required>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Person Name</label>
-							<input class="form-control" name="Person_name" type="text" placeholder="edit mobile-no" value='<?php echo $row['company_name']; ?>' required>
+							<input class="form-control" name="person_name" type="text" placeholder="edit mobile-no" value='<?php echo $row['consult_person_name']; ?>' required>
 						</div>
 					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<div class="box-body pad">
+				              <form>
+				              	<label>Brand Origin</label>
+				                    <textarea id="editor1" name="brand_origin" rows="10" cols="80"><?php 
+				                    echo $row['brand_origin']; ?>
+			                                        	
+				                    </textarea>
+				              </form>
+          			 		 </div>
+						</div>
+					</div>
+					
 					
 							<input class="form-control" name="id" type="hidden" value='<?php echo $id; ?>' required>
 				
@@ -187,3 +195,9 @@ $status='';
   
  <?php require('footer.php'); ?>
  <script src="<?php echo base_url(); ?>admin_assest/plugins/jQuery/jQuery-2.2.0.min.js"></script>
+ <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<script>
+  $(document).ready(function(){
+    CKEDITOR.replace('editor1');
+  });
+ </script>
