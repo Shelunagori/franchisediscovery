@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> 
-  <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="admin_assest/dist/css/AdminLTE.min.css">
   <link rel="stylesheet" href="admin_assest/dist/css/skins/_all-skins.min.css">
@@ -231,8 +230,8 @@
             <i class="fa fa-fw fa-user"></i> <span>Form</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Investor Data Form</a></li>
-            <li><a href="brand_login.php"><i class="fa fa-circle-o"></i>Brand Login</a></li>
+            <li><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Investor Enquiry</a></li>
+            <li><a href="brand_enquiry.php"><i class="fa fa-circle-o"></i>Brand Enquiry</a></li>
           </ul>
         </li> 
 
@@ -281,16 +280,7 @@
 				</li>	
 			</ul>
         </li> 		
-		<li class="treeview">
-          <a href="sms_bulks.php">
-            <i class="fa fa-fw fa-bullseye"></i> <span> SMS Bulk </span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-        </li>
-		<li class="treeview">
-          <a href="content_limit_page.php">
-            <i class="fa fa-fw fa-bullseye"></i> <span>Content Limit </span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-        </li>
+		
 		
        </ul>
     </section>

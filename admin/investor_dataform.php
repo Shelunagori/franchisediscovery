@@ -84,6 +84,7 @@ $message = '';
 ?>
 
 <link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="https://tarruda.github.io/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
  
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -329,9 +330,13 @@ $message = '';
    </div>
 </div>
 
-  
+   <?php require('footer.php'); ?>
 <script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
- <?php require('footer.php'); ?>
+
+
+<script  src='https://tarruda.github.io/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js'></script>
+
+
  <script>
 
  $(document).ready(function()
@@ -349,12 +354,16 @@ $message = '';
  		$('#other').hide();
  	}
  });
- 		$('#datetimepicker').data("DateTimePicker").FUNCTION(
-            $(function () {
-                $('#datetimepicker1').datetimepicker();
-            });
-          
 });
+
+ $(function() {
+    $('#datetimepicker1').datetimepicker({
+      pickTime: false
+    });
+  });
+ 	
+
+
 
 </script>
  

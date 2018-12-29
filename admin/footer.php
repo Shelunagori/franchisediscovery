@@ -17,7 +17,6 @@ src="https://mpryvkin.github.io/jquery-datatables-row-reordering/1.2.2/jquery.da
 <script src="admin_assest/bootstrap/js/bootstrap.min.js"></script>
 <script src="admin_assest/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <script src="admin_assest/plugins/fastclick/fastclick.js"></script>
-<script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
 <script src="admin_assest/plugins/datatables/dataTables.bootstrap.min.js"></script>
 
@@ -95,24 +94,6 @@ $(function () {
       "paging": true,
       "lengthChange": false,
       "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
-    });
-	
-	$('#example7').DataTable({
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true
-    });
-	
-	$('#example8').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
       "ordering": true,
       "info": true,
       "autoWidth": false

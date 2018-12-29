@@ -3,7 +3,7 @@ include('config.php');
 $status='';
 $message='';
 @$id=base64_decode($_GET['id']);
-$detail_query="select * FROM investor_datas WHERE id=$id";
+$detail_query="select * FROM brand_enquiry WHERE id=$id";
 
 include('header.php');
 ?>
@@ -41,11 +41,6 @@ include('header.php');
 											<div class="col-md-12">
 												<div class="form-group">
 													<div class="form-group">
-													<center><h2 class="dot">
-														<?= $row['name'] ?>
-													</h2></center>
-													</div>
-													<div class="form-group">
 														<label class="form-data">Email:   </label>
 														<?= $row['email'] ?>
 													</div>
@@ -53,10 +48,7 @@ include('header.php');
 														<label class="form-data">Mobile No:   </label>
 														<?= $row['mobile_no'] ?>
 													</div>
-													<div class="form-group">
-														<label class="form-data">City Name:   </label>
-														<?= $row['city'] ?>
-													</div>
+													
 													<div class="form-group">
 														<label class="form-data">Brand Name:   </label>
 														<?php 
@@ -68,51 +60,26 @@ include('header.php');
 																}
 														?>
 													</div>
-													<div class="form-group">
-														<label class="form-data">Pin Code  </label>
-														<?= $row['pin_code'] ?>
-													</div>
-													<div class="form-group">
-														<label class="form-data">Status   </label>
-														<?= $row['status'] ?>
-													</div>
+													
+													
 													<div class="form-group">
 														<label class="form-data">Company Name</label>
 														<?= $row['company_name'] ?>
 													</div>
 													<div class="form-group">
-														<label class="form-data">Response</label>
-														<?= $row['response'] ?>
+														<label class="form-data">Person Name</label>
+														<?= $row['consult_person_name'] ?>
 													</div>
 													<div class="form-group">
-														<label class="form-data">Address</label>
-														<?= $row['address'] ?>
+														<label class="form-data">Brand Origin</label>
+														<?= $row['brand_origin'] ?>
+													</div>
+													<div class="form-group">
+														<label class="form-data">Landline No</label>
+														<?= $row['landline_no'] ?>
 													</div>
 
-													<div class="form-group">
-														<label class="form-data">Time Frame</label>
-														<?= $row['time_frame'] ?>
-													</div>
-													<div class="form-group">
-														<label class="form-data">Comment</label>
-														<?php 
-															$com_query=mysqli_query($db,"SELECT * FROM investor_data_rows WHERE investor_data_id=$id");
-															while($com_result=mysqli_fetch_array($com_query))
-															{
-																echo $com_result['comment'];		
-															}
-														?>
-													</div>
-													<div class="form-group">
-														<label class="form-data">Reminder </label>
-														<?php 
-															$rem_query=mysqli_query($db,"SELECT * FROM investor_data_rows WHERE investor_data_id=$id");
-															while($rem_result=mysqli_fetch_array($rem_query))
-															{
-																echo $rem_result['reminder'];		
-															}
-														?>
-													</div>
+													
 
 												</div>
 												<?php } ?>
