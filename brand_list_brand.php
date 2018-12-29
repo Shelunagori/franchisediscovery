@@ -2,6 +2,9 @@
 <html lang="en">
 <?php 
 	session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }	
 	include('admin/config.php');
 	$user_id=$_SESSION['user_id']; 
 	
@@ -94,9 +97,10 @@
 					</div>					
 					<?php 
 						 $query = "select * from brands where registration_id = '$user_id' and status = 'Active' order by id DESC ";
+						 
 						  $query_result=mysqli_query($db,$query); 
 						  $sno = 1;
-						  if(!empty($query_result->num_rows >0)){ 
+						  if($query_result->num_rows >0){ 
 					?>
                     <div class="cart-table clearfix">
 						<table class="table table-responsive" style="font-size: 12px!important;">

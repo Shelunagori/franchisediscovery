@@ -1,5 +1,8 @@
 <?php
 session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }
 require('admin/config.php');
 	$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
 		$sql = "update brands set status = 'Deactive' where id = '$id' ";
@@ -13,12 +16,13 @@ require('admin/config.php');
 			$rowssql = "delete from brand_rows where brand_id = '$id' ";
 			$res_rowsql = $db->query($rowssql);
 			
-			$_SESSION["status"] = "delete_success";
+			//$_SESSION["status"] = "delete_success";
+			echo '<script> alert("Brand Deleted Successfully !"); </script>';	
 		} else {
-			
-			$_SESSION["status"] = "delete_fail";	
+			echo '<script> alert("Sorry ! Something went wrong !"); </script>';	
+			//$_SESSION["status"] = "delete_fail";	
 		}
-
-	header("Location: brand_list_brand.php");
+	header("Refresh:0; url= brand_list_brand.php");
+	//header("Location: brand_list_brand.php");
 	exit();
 ?>

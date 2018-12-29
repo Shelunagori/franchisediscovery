@@ -4,7 +4,10 @@
 	session_start();
 	include('admin/config.php');
 	$user_id=$_SESSION['user_id']; 
-	
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }
+	//print_r($_SESSION);exit;
 	if(isset($_GET['id']) && !empty($_GET['id']))
 	{
 		$id = $_GET['id'];
@@ -87,7 +90,7 @@
 						</div>
 					</div>	
 					<div class="row">
-							<form role="form" method="post" action="save_brand.php" style="width: 100%;" enctype="multipart/form-data">
+							<form role="form" method="post" action="brand_user_save.php" style="width: 100%;" enctype="multipart/form-data">
 								<div class="box box-warning">
 									<div class="box-header with-border">
 									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  Create New Brand</h3>
@@ -181,8 +184,8 @@
 									<div class="row">
 										<div class="col-md-6 col-md">
 											<div class="form-group">
-												<label>Upload menu pdf</label>  (Select multiple pdf files)	
-												<input type="file" name="menudetail[]" accept="application/pdf" multiple id="menu-photo-add">
+												<label>Upload menu pdf</label>  (Select only pdf file)	
+												<input type="file" name="menudetail[]" accept="application/pdf" id="menu-photo-add">
 											</div>
 											<div class="menu"></div>											
 										</div>
@@ -289,18 +292,6 @@
 											
 											<div class="form-group">
 												<label>Menu Name</label>
-												<input class="form-control" name="brand_details[7][left_menu_name]" type="text" placeholder="Menu name" value=''>
-											</div>
-											<div class="form-group">
-												<div class="box-body pad">
-													<textarea id="editor1" name="brand_details[7][content]" rows="10" cols="80">
-													</textarea>
-												</div>
-											</div>
-											
-											
-											<div class="form-group">
-												<label>Menu Name</label>
 												<input class="form-control" name="brand_details[5][left_menu_name]" type="text" placeholder="Menu name" value='Expansion plan' required>
 											</div>
 											<div class="form-group">
@@ -341,10 +332,45 @@
 											</div>										
 										</div>
 										
-										
+										<div class="col-md-12 col-md">
+											<div class="form-group">
+												<label>Menu Name</label>
+												<input class="form-control" name="brand_details[7][left_menu_name]" type="text" placeholder="Menu name" value=''>
+											</div>
+											<div class="form-group">
+												<div class="box-body pad">
+													<textarea id="editor1" name="brand_details[7][content]" rows="10" cols="80">
+													</textarea>
+												</div>
+											</div>
+										</div>		
 									</div>
 								</div>	
 
+								<div class="box box-warning">
+									<div class="box-header with-border">
+									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Gallery Images</h3>
+									</div>
+									<div class="row">
+										<div class="col-md-12 col-md">
+											<div class="form-group">
+												<label>Upload gallery images</label>  (Select multiple images)<br />
+												<input type="file" name="upload[]" multiple id="gallery-photo-add">
+											</div>	
+											<div class="gallery"></div>
+										</div>
+									</div>
+								</div>									
+								
+								<div class="row">
+									<div class="col-md-12 col-md">
+										<button type="submit" class="btn bigshop-btn" name="submit">Save Brand</button>
+									</div>
+								</div>
+								
+								
+								
+								
 								
 							</form>
 					</div>
@@ -375,7 +401,7 @@ $(function () {
 	CKEDITOR.replace('brand_details[5][content]');
 	CKEDITOR.replace('brand_details[6][content]');
 	CKEDITOR.replace('brand_details[7][content]');
-	CKEDITOR.replace('footer_content'); 
+//	CKEDITOR.replace('footer_content'); 
     //bootstrap WYSIHTML5 - text editor
     $(".textarea").wysihtml5();
   });
@@ -466,9 +492,34 @@ $(function () {
 	$('#roi-photo-add').on('change', function() {
         imagesPreviewRoi(this, 'div.roi');
     });	
-	
+		
  });	
 	
+ $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+
+    $('#gallery-photo-add').on('change', function() {
+        imagesPreview(this, 'div.gallery');
+    });
+}); 
+
 	
 </script>		
 	 

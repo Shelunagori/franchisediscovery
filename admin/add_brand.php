@@ -1,6 +1,9 @@
 <?php 
 require('header.php');
 require('config.php');
+
+
+
 $status='';
  ?>
 <style>
@@ -62,7 +65,6 @@ $status='';
 					  </div>
 					</div>
 					<div class="box-body">
-							<div class="box-body">
 								<div class="col-md-6">
 									<div class="form-group">
 										<select name="category_id[]" class="form-control select2" style="width: 100%;" data-placeholder="--- Select Category ---" multiple="multiple">
@@ -142,7 +144,7 @@ $status='';
 									</div>
 									
 								</div>
-							</div>
+							
 						</div>
 				</div> 
 			</div>

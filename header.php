@@ -241,9 +241,7 @@
                         <!-- Nav Text Area Start -->
                         <span class="nav-text align-to-right"><a data-toggle="modal" data-target="#exampleModal"class="btn enquire-btn">Enquire Now</a></span>
 
-                        <!-- Main Menus Wrapper
-								<a href="<?php echo $baseURL; ?>category/<?php echo  str_replace(" ","-",$row_cat['name']); ?>/list/<?php echo base64_encode($row_cat['id']); ?>"> 
-						-->
+                      
                         <div class="nav-menus-wrapper">
                             <ul class="nav-menu">
                                 <?php

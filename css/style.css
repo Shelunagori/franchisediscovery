@@ -30,3 +30,15 @@
     height: 100px;
     padding: 10px;
 }
+
+.roi > img {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}
+
+.gallery > img {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+}

@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <?php session_start();
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }
 	include('admin/config.php');
 	$email=$_SESSION['email']; 
+	
 	$password=$_SESSION['password'];
 	$mobile_no=$_SESSION['mobile_no'];
 	$first_name = $_SESSION['first_name'];

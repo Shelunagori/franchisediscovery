@@ -3,6 +3,9 @@
 <?php 
 	session_start();
 	include('admin/config.php');
+	 if(!isset($_SESSION['user_id'])){
+	  header("location:login.php");
+   }	
 	$user_id=$_SESSION['user_id']; 
 	
 	if(isset($_GET['id']) && !empty($_GET['id']))

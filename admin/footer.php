@@ -99,6 +99,36 @@ $(function () {
       "autoWidth": false
     });
 	
+<<<<<<< HEAD
+=======
+	$('#example7').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": true
+    });
+	
+	$('#example8').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+	
+	$('#example9').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false
+    });
+	
+>>>>>>> e339c0b59a8427fb50f65e7f20a71ea49337d90b
   });
 </script>  
 </body>

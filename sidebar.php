@@ -1,3 +1,6 @@
+<?php 
+		$reg_type=$_SESSION['reg_type'];
+?>
 <style>
 	#sidebar_wid_menu li a:hover {
 		background-color: #0056b3 !important;
@@ -6,11 +9,6 @@
 	
 	.acolor { color : #fff !important; }
 </style>
- <?php 
-		$reg_type=$_SESSION['reg_type'];
-?>
- 
- 
  <div class="sidebar_widget_menu">
                         <nav id="sidebar_wid_menu">
                             <ul>
