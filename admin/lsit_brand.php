@@ -125,7 +125,7 @@ require('header.php');
 									</select>
 								</td>-->
 								<td width="20%">
-									<select name="brand_name" class="form-control" id="brand_name">
+									<select name="brand_name" class="form-control select2" id="brand_name">
 										<option value="">--Select Brand--</option>
 									<?php 
 									$sql="SELECT * FROM brands WHERE status='Active' and is_approve='Approved'";
