@@ -760,6 +760,7 @@ $query_seo=mysqli_query($db,"SELECT * FROM page_seo where page_id = '3' and bran
 	CKEDITOR.replace('brand_details[5][content]');
 	CKEDITOR.replace('brand_details[6][content]');
 	CKEDITOR.replace('brand_details[7][content]');
+	CKEDITOR.replace('brand_details[8][content]');
 	CKEDITOR.replace('footer_content');
     //bootstrap WYSIHTML5 - text editor
     $(".textarea").wysihtml5();
