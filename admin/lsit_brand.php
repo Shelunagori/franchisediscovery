@@ -45,9 +45,9 @@ require('config.php');
 }	
 	
 	if(!empty($where)){
-		$query = "select * from brands where status = 'Active' $where order by id DESC ";
+		$query = "select * from brands where status = 'Active' and is_approve='Approved' $where order by id DESC ";
 	}else{
-		$query = "select * from brands where status = 'Active' order by id DESC ";
+		$query = "select * from brands where status = 'Active' and is_approve='Approved' order by id DESC ";
 	}
 	
 require('header.php');
@@ -204,14 +204,14 @@ require('header.php');
 												$query_cat=mysqli_query($db,"select * from categories where status = 0");
 												while($rows=mysqli_fetch_array($query_cat)){
 											?>
-												 <?php 
+												 <?php $catData='';
 												if(!empty($arrayCategory)){
-												foreach($arrayCategory as $a){
-													if($a == $rows['id']){ 
-														$ab = $rows['name'].',';
-													echo $ab; ?> 
+												foreach($arrayCategory as $cat){
+													if($cat == $rows['id']){ 
+														$catData.= $rows['name'].'<br>';
+													 ?> 
 													<?php }
-												}}?>
+												}} echo $catData;?>
 												
 											<?php } ?>
 										
