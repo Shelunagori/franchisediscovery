@@ -5,10 +5,9 @@
    define('DB_PASSWORD', '');
    //define('DB_PASSWORD', 'admin');
    //define('DB_DATABASE', 'franchisediscovery');
+
    define('DB_DATABASE', 'francise_discovery');
    $db = mysqli_connect(DB_SERVER,DB_USERNAME,DB_PASSWORD,DB_DATABASE);
-   
-   //$baseURL = 'http://franchisediscovery.in/';
    $baseURL = 'http://localhost:8012/franchisediscovery/franchisediscovery/';
    
    

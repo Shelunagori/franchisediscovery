@@ -74,59 +74,61 @@
 						include('sidebar.php'); ?>
 				</div>
 			<div class="col-12 col-md-9">	
+				<?php if($crm_query->num_rows >0){ ?>
 				<div class="panel panel-info mt-15">
-            <div class="panel-heading">
-		
-              <h3 class="panel-title"><?php
-				while($row=mysqli_fetch_array($crm_query))
-				{
-					$employee_id=$row['employee_id'];
-					$sql_query=mysqli_query($db,"SELECT * FROM employee_master WHERE id='$employee_id'");
-					
-					while($crm_detail=mysqli_fetch_array($sql_query))
-					{ 
-					echo 'CRM Person Name : '. ucfirst($crm_detail['name']); ?></h3>
-            </div>
-            <div class="panel-body">
-              <div class="row">
-             <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table ">
-					<tbody>
-                      <tr>
-                        <td>Department:</td>
-                        <td><?php 
-								$department_id=$crm_detail['department'];
-								$department_query=mysqli_query($db,"SELECT * FROM department WHERE id='$department_id'");
-								while($department_result=mysqli_fetch_array($department_query))
-								{
-									echo $department_result['name'];
-								}
-								
-						?></td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td><?= $crm_detail['email'];?></td>
-                      </tr>
-                        <td>Phone Number</td>
-                        <td><?= $crm_detail['mobile_no'];?></td>
-                        </td>
-                           
-                      </tr>
-						<?php }
-						}
-						?>
-                    </tbody>
-                  </table>
-                  
-              
-                </div>
-              </div>
-            </div>
-              
-            
-          </div>
-          </div>
+					<div class="panel-heading">
+						<h3 class="panel-title"><?php
+						while($row=mysqli_fetch_array($crm_query))
+						{
+							$employee_id=$row['employee_id'];
+							if($employee_id == 0)
+							{  
+								echo 'No Record Found !';
+							} else {
+							
+							$sql_query=mysqli_query($db,"SELECT * FROM employee_master WHERE id='$employee_id'");
+							
+							while($crm_detail=mysqli_fetch_array($sql_query))
+							{ 
+							echo 'CRM Person Name : '. ucfirst($crm_detail['name']); ?></h3>
+					</div>
+					<div class="panel-body">
+					  <div class="row">
+						 <div class=" col-md-9 col-lg-9 "> 
+							  <table class="table ">
+								<tbody>
+								  <tr>
+									<td>Department:</td>
+									<td><?php 
+											$department_id=$crm_detail['department'];
+											$department_query=mysqli_query($db,"SELECT * FROM department WHERE id='$department_id'");
+											while($department_result=mysqli_fetch_array($department_query))
+											{
+												echo $department_result['name'];
+											}
+											
+									?></td>
+								  </tr>
+								  <tr>
+									<td>Email</td>
+									<td><?= $crm_detail['email'];?></td>
+								  </tr>
+									<td>Phone Number</td>
+									<td><?= $crm_detail['mobile_no'];?></td>
+									</td>
+									   
+								  </tr>
+									<?php }
+						} }
+									?>
+								</tbody>
+							  </table>
+							</div>
+					  </div>
+					</div>
+					</div>
+				<?php } else { echo 'No Record Found !';  } ?>	
+				</div>
 			</div>
 			 </div>
         </div>
