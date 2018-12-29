@@ -20,6 +20,10 @@ $message = '';
 		$time_frame="$no"."$time";
 		$status= mysqli_real_escape_string($db,$_POST['status']);
 		$other= mysqli_real_escape_string($db,$_POST['other']);
+		$comment= mysqli_real_escape_string($db,$_POST['comment']);
+		$reminder= mysqli_real_escape_string($db,$_POST['reminder']);
+		$date_on = date('Y-m-d', strtotime($reminder));
+		$time_on = date('H:i:s', strtotime($reminder));
 		if(!empty($other))
 		{
 			$response= mysqli_real_escape_string($db,$_POST['other']);
@@ -34,6 +38,14 @@ $message = '';
 		
 		if($db->query($sql) === TRUE)
 		{
+			$investor_query=mysqli_query($db,"SELECT * FROM investor_datas");
+			while($inv_result=mysqli_fetch_array($investor_query))
+			{
+				$investor_data_id=$inv_result['id'];
+				
+			}
+			echo$inv_rows="INSERT INTO investor_data_rows(comment,investor_datas_id,date_on,time_on) VALUES ('$comment','$investor_data_id','$date_on','$time_on')";
+
 			$status = 'success';
 			$message = 'Data added successfully !';
 		} 
@@ -289,6 +301,9 @@ $message = '';
                 <tbody>
 				<?php $i = 1;
 					$query=mysqli_query($db,"select * from investor_datas order by id DESC ");
+					$result=mysqli_num_rows($query);
+					if($result)
+					{
 					while($row=mysqli_fetch_array($query)){
 						?>
 						<tr>
@@ -317,7 +332,11 @@ $message = '';
 								</a>
 							</td>
 						</tr>
-					<?php } ?>
+					<?php } }
+					else
+						{
+							echo"No Data Found";
+						}?>
                </tbody>
               </table>
             </form> 
