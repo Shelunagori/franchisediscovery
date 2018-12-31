@@ -6,20 +6,7 @@
 	$user_id=$_SESSION['user_id']; 
 	 if(!isset($_SESSION['user_id'])){
 	  header("location:login.php");
-   }
-	//print_r($_SESSION);exit;
-	if(isset($_GET['id']) && !empty($_GET['id']))
-	{
-		$id = $_GET['id'];
-		$sql = "delete from favrouite where id = '$id'";
-		if ($db->query($sql) === TRUE) {
-			echo '<script>alert("Brand removed from favourite list !");</script>';
-			echo ' <script type="text/javascript">  window.location="favourite.php";</script>';	
-		} else {
-			echo '<script>alert("Something went wrong !");</script>';
-			echo '<script type="text/javascript">  window.location="favourite.php";</script>';
-		}	
-	}	
+   }	
 ?>
 <head>
     <meta charset="UTF-8">

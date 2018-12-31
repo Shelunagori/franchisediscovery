@@ -126,7 +126,7 @@
 									    <td><?php echo $row['name']; ?></td>
 										<td><?php echo $row['is_approve']; ?></td>
 										<td>
-											<a class="btn btn-info btn-rounded btn-sm" href="brand_edit.php?rowvalue=<?php echo base64_encode($row['id']); ?>">
+											<a class="btn btn-info btn-rounded btn-sm" href="brand_user_edit.php?rowvalue=<?php echo base64_encode($row['id']); ?>">
 												<span style="color:#fff;" class="fa fa-edit"></span>
 											</a>
 
