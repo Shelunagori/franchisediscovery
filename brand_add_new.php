@@ -166,6 +166,40 @@
 
 								<div class="box box-warning">
 									<div class="box-header with-border">
+									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>Other Details</h3>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-md">
+											<div class="form-group">
+												<input class="form-control" name="company_name" type="text" placeholder="Company Name" value='' required>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="insta_link" type="text" placeholder="Instagram Link" value=''>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="yt_link" type="text" placeholder="YouTube Link" value=''>
+											</div>					
+											<div class="form-group">
+												<input class="form-control" name="other_link" type="text" placeholder="Any other social link" value=''>
+											</div>																
+										</div>
+										<div class="col-md-6">				
+											<div class="form-group">
+												<input class="form-control" name="fb_link" type="text" placeholder="Facebook Link" value=''>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="tw_link" type="text" placeholder="Twitter Link" value=''>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="delivery_partner" type="text" placeholder="Delivery Partner" value=''>
+											</div>
+										</div>										
+									</div>
+								</div>								
+								
+								
+								<div class="box box-warning">
+									<div class="box-header with-border">
 									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Food Menu Details</h3>
 									</div>
 									<div class="row">

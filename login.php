@@ -11,6 +11,7 @@
 		while($row=mysqli_fetch_array($rs))
 		{
 		$user_id=$row['id'];
+		$is_paid_memeber=$row['is_paid_memeber'];
 		$reg_type=$row['reg_type'];
 		$status=$row['status'];
 		$email=$row['email'];
@@ -20,6 +21,7 @@
 		$last_name=$row['last_name'];
 		$profile=$row['profile'];
 	    $_SESSION['user_id']=$user_id;
+		$_SESSION['is_paid_memeber']=$is_paid_memeber;
 		$_SESSION['reg_type']=$reg_type;
 		 $_SESSION['email']=$email;
 		$_SESSION['password']=$password;

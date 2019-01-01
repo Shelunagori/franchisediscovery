@@ -13,7 +13,8 @@ require('admin/config.php');
 	$food_type = mysqli_real_escape_string($db,$_POST['food_type']);
 	$contact_no = mysqli_real_escape_string($db,$_POST['contact_no']);
 	$address = mysqli_real_escape_string($db,$_POST['address']);
-	$footer_content = mysqli_real_escape_string($db,$_POST['footer_content']);
+	
+
 	$investment_range_in_words = mysqli_real_escape_string($db,$_POST['investment_range_in_words']);
 	$brand_details = $_POST['brand_details'];	
 	$brand_id = mysqli_real_escape_string($db,$_POST['brand_id']);
@@ -21,15 +22,25 @@ require('admin/config.php');
 	$total = $_FILES['slider_image']['error'];
 	$seo_name = seo_url($name);
 	$seo_name = $seo_name.'-franchise';
-		
+
+	$company_name = mysqli_real_escape_string($db,$_POST['company_name']);
+	$fb_link = mysqli_real_escape_string($db,$_POST['fb_link']);	
+	$insta_link = mysqli_real_escape_string($db,$_POST['insta_link']);	
+	$tw_link = mysqli_real_escape_string($db,$_POST['tw_link']);	
+	$yt_link = mysqli_real_escape_string($db,$_POST['yt_link']);	
+	$delivery_partner = mysqli_real_escape_string($db,$_POST['delivery_partner']);	
+	$other_link = mysqli_real_escape_string($db,$_POST['other_link']);	
+
+	
 	if($total == 0)
 	{
 		$type = explode('.',$_FILES["slider_image"]["name"]);
 		$type = $type[count($type)-1];
-		$url = "../brand_images/".'_'.$name.'_'.uniqid(rand()).'.'.$type;	
+		$url = "brand_images/".'_'.$name.'_'.uniqid(rand()).'.'.$type;	
 		if(in_array($type,array("jpg","jpeg","gif","png")))
 		{
 			move_uploaded_file($_FILES["slider_image"]["tmp_name"],$url);
+			$url = '../'.$url;
 		}	
 
 		$sql = "update brands set brand_image = '$url' where id = '$brand_id'";
@@ -43,7 +54,7 @@ require('admin/config.php');
 	$is_state = 'No';
 	$is_gallery = 'No';
 
-	$sql = "update brands set chart_id = '$chart_id', name = '$name', title = '$description', contact_no = '$contact_no',rating = '$rating',avg_rating = '$avg_rating',food_type = '$food_type',area_reqired = '$area_reqired',investment_range = '$investment_range',investment_range_in_words = '$investment_range_in_words',franchise_outlets = '$franchise_outlets',address = '$address',seo_name = '$seo_name', footer_content = '$footer_content' where id = '$brand_id'";
+	$sql = "update brands set chart_id = '$chart_id', name = '$name',company_name = '$company_name', title = '$description', contact_no = '$contact_no',rating = '$rating',avg_rating = '$avg_rating',food_type = '$food_type',area_reqired = '$area_reqired',investment_range = '$investment_range',investment_range_in_words = '$investment_range_in_words',franchise_outlets = '$franchise_outlets',address = '$address',seo_name = '$seo_name',fb_link = '$fb_link',insta_link = '$insta_link',tw_link = '$tw_link',yt_link = '$yt_link',delivery_partner = '$delivery_partner',other_link = '$other_link'	where id = '$brand_id'";
 	
 	
 	
@@ -56,13 +67,15 @@ require('admin/config.php');
 			for( $i=0 ; $i < $total ; $i++ ) {
 				$tmpFilePath = $_FILES['menudetail']['tmp_name'][$i];
 				if($tmpFilePath != ""){
-					$newFilePath_menu = "../brand_menu_images/" .uniqid(rand()). $_FILES['menudetail']['name'][$i];
+					$newFilePath_menu = "brand_menu_images/" .uniqid(rand()). $_FILES['menudetail']['name'][$i];
 					//echo $newFilePath_menu;
 					
 					 if(move_uploaded_file($tmpFilePath, $newFilePath_menu)) {
+						$newFilePath_menu = '../'.$newFilePath_menu;
 						$menuImage = "INSERT INTO brand_menu_images(brand_id,image_path) 
 						VALUES('$brand_id','$newFilePath_menu')";					
 						$countryRes = $db->query($menuImage);	
+
 					} 
 				} 
 			}			
@@ -120,7 +133,7 @@ require('admin/config.php');
 							if(!empty($a['content'])){
 								$types = explode('.',$a['content']);
 								$types = $types[count($types)-1];
-								$urls = "../roi_images/".'_'.$left_menu_name.'_'.uniqid(rand()).'.'.$types;
+								$urls = "roi_images/".'_'.$left_menu_name.'_'.uniqid(rand()).'.'.$types;
 							}else{
 								$urls = $content_old;
 							}
@@ -132,6 +145,7 @@ require('admin/config.php');
 								if(in_array($types,array("pdf","doc","docx","xls","xlsx")))
 								{
 									move_uploaded_file($b["content"],$urls);
+									$urls = '../'.$urls;
 								}
 							}else{
 								$urls = $content_old;
@@ -222,11 +236,13 @@ require('admin/config.php');
 			for( $i=0 ; $i < $total ; $i++ ) {
 				$tmpFilePath = $_FILES['upload']['tmp_name'][$i];
 				if($tmpFilePath != ""){
-					$newFilePath = "../brand_gallery/" .uniqid(rand()). $_FILES['upload']['name'][$i];
+					$newFilePath = "brand_gallery/" .uniqid(rand()). $_FILES['upload']['name'][$i];
 					if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+						$newFilePath = '../'.$newFilePath;
 						$gallery = "INSERT INTO brand_gallery(brand_id, brand_detail_id, gallery_image_path) 
 						VALUES('$brand_id','$brand_detail_id','$newFilePath')";					
 						$countryRes = $db->query($gallery);	
+						
 					}
 				} 
 			}			

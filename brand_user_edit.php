@@ -79,7 +79,7 @@
 					<div class="row">
 					<?php $brand_id = base64_decode($_GET['rowvalue']);
 					
-					 $sql = "select brands.id,brands.chart_id,brands.name,brands.title,brands.contact_no,brands.rating,brands.avg_rating,brands.food_type,brands.area_reqired,brands.investment_range,brands.investment_range_in_words,brands.franchise_outlets,brands.brand_image,brands.address,brands.seo_name,brands.footer_content,brands.status,brand_rows.category_id from brands LEFT JOIN brand_rows ON brand_rows.brand_id=brands.id where status = 'Active' and brands.id = '$brand_id' ";
+						$sql = "select brands.id,brands.chart_id,brands.company_name,brands.name,brands.title,brands.contact_no,brands.rating,brands.avg_rating,brands.food_type,brands.area_reqired,brands.investment_range,brands.investment_range_in_words,brands.franchise_outlets,brands.brand_image,brands.address,brands.seo_name,brands.footer_content,brands.status,brand_rows.category_id,brands.fb_link,brands.insta_link,brands.tw_link,brands.yt_link,brands.delivery_partner,brands.other_link from brands LEFT JOIN brand_rows ON brand_rows.brand_id=brands.id where status = 'Active' and brands.id = '$brand_id' ";
 					
 						  $query_brand=mysqli_query($db,$sql);
 						  
@@ -96,7 +96,8 @@
 						 {
 							$row_brand=mysqli_fetch_array($query_brand);
 					?>					
-							<form role="form" method="post" action="brand_user_save.php" style="width: 100%;" enctype="multipart/form-data">
+							<form role="form" method="post" action="brand_user_edit_save.php" style="width: 100%;" enctype="multipart/form-data">
+							<input type="hidden" name="brand_id" value="<?php echo $brand_id ?>" />
 								<div class="box box-warning">
 									<div class="box-header with-border">
 									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Edit New Brand</h3>
@@ -185,7 +186,7 @@
 												  <input type="file" onchange="readURL(this);" id="exampleInputFile" name="slider_image">
 												  <?php $path = ''; 
 														if(!empty($row_brand['brand_image'])) 
-														{ $path = $row_brand['brand_image']; } 
+														{ $path = str_replace('../',"",$row_brand['brand_image']); } 
 														else { $path = 'img/icon.ico';  }
 													?>
 												  <img src="<?php echo $path;?>" width="172" height="183"  id="img_prev" style="float:right;margin-top: -65px;" />
@@ -195,6 +196,40 @@
 									</div>
 								</div>	
 
+								<div class="box box-warning">
+									<div class="box-header with-border">
+									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>Other Details</h3>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-md">
+											<div class="form-group">
+												<input class="form-control" name="company_name" type="text" placeholder="Company Name" value='<?php echo  $row_brand['company_name']; ?>' required>
+											</div>	
+											<div class="form-group">
+												<input class="form-control" name="insta_link" type="text" placeholder="Instagram Link" value='<?php echo  $row_brand['insta_link']; ?>'>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="yt_link" type="text" placeholder="YouTube Link" value='<?php echo  $row_brand['yt_link']; ?>'>
+											</div>					
+											<div class="form-group">
+												<input class="form-control" name="other_link" type="text" placeholder="Any other social link" value='<?php echo  $row_brand['other_link']; ?>'>
+											</div>																
+										</div>
+										<div class="col-md-6">				
+											<div class="form-group">
+												<input class="form-control" name="fb_link" type="text" placeholder="Facebook Link" value='<?php echo  $row_brand['fb_link']; ?>'>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="tw_link" type="text" placeholder="Twitter Link" value='<?php echo  $row_brand['tw_link']; ?>'>
+											</div>
+											<div class="form-group">
+												<input class="form-control" name="delivery_partner" type="text" placeholder="Delivery Partner" value='<?php echo  $row_brand['delivery_partner']; ?>'>
+											</div>
+										</div>										
+									</div>
+								</div>								
+								
+								
 								<div class="box box-warning">
 									<div class="box-header with-border">
 									  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i> Food Menu Details</h3>
@@ -406,9 +441,9 @@
 												{
 												while($gallery = mysqli_fetch_array($gallery_sql)){ 
 												?> 
-													<img src="<?php echo $gallery['gallery_image_path']; ?>" width="172" height="183"  id="gallery_prev<?php echo $gallery['id']; ?>"  />
+													<img src="<?php echo str_replace("../","",$gallery['gallery_image_path']);?>" width="172" height="183"  id="gallery_prev<?php echo $gallery['id']; ?>"  />
 																
-													<a href="#" class="galleryLinks" id=<?php echo $gallery['id']; ?> style="font-size: 30px;margin-left: -22px;color: red;position: absolute;top: 112px;">×</a>
+													<a href="#" class="galleryLinks" id=<?php echo $gallery['id']; ?> style="font-size: 30px;margin-left: -22px;color: red;position: absolute;top: 67px;">×</a>
 												<?php }  
 												}?>
 												</div>
