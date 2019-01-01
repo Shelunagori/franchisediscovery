@@ -44,7 +44,7 @@ $message = '';
 				$investor_data_id=$inv_result['id'];
 				
 			}
-			echo$inv_rows="INSERT INTO investor_data_rows(comment,investor_datas_id,date_on,time_on) VALUES ('$comment','$investor_data_id','$date_on','$time_on')";
+			$inv_rows=mysqli_query($db,"INSERT INTO investor_data_rows(comment,investor_datas_id,date_on,time_on) VALUES ('$comment','$investor_data_id','$date_on','$time_on')");
 
 			$status = 'success';
 			$message = 'Data added successfully !';
@@ -82,7 +82,7 @@ $message = '';
 	if(@$_GET["Action"] == "Del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
-		$delete_query = "update investor_datas set status ='Deactive' where id = '$id'";
+		$delete_query = "DELETE FROM investor_datas where id = '$id'";
 		if ($db->query($delete_query) === TRUE) {
 			
 			$status = 'success';
@@ -97,7 +97,7 @@ $message = '';
 
 <link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
- 
+
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Main content -->
@@ -122,7 +122,7 @@ $message = '';
 
 		  </div>
         <!-- left column -->
-		<div class="col-md-12">
+	<div class="col-md-12">
 		<form role="form" method="post" action="" enctype="multipart/form-data">
 		<div class="box box-primary">
 
@@ -269,80 +269,7 @@ $message = '';
       </form>
 	</div>
     </div>
-
  
-    <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">View Investor Data Form</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-        <div id="cStatus"> </div>
-        <form action="admin/update_Sequence" method="post">
-          <table id="example1" class="display select">
-                <thead>
-                <tr>
-                  <th># </th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Mobile No</th>
-				  <th>City</th>
-				  <th>Brand</th>
-				  <th>Action</th>
-               </tr>
-                </thead>
-                <tbody>
-				<?php $i = 1;
-					$query=mysqli_query($db,"select * from investor_datas order by id DESC ");
-					$result=mysqli_num_rows($query);
-					if($result)
-					{
-					while($row=mysqli_fetch_array($query)){
-						?>
-						<tr>
-							<td><?php echo $i; $i++;  ?></td>
-							<td><?php echo $row['name'];?></td>
-							<td><?php echo $row['email']; ?></td>
-							<td><?php echo $row['mobile_no']; ?></td>
-							<td><?php echo $row['city']; ?></td>
-							<td><?php 
-								$brand_id=$row['brand_id'];
-									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
-									while($brand_row=mysqli_fetch_array($brand_query))
-									{
-										echo $brand_row['name'];
-									}
-							?></td>
-							<td>	
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
-									<span class="fa fa-edit"></span>
-								</a>
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
-									<span class="fa fa-eye"></span>
-								</a>
-								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="investor_dataform.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
-									<span class="fa fa-times"></span>
-								</a>
-							</td>
-						</tr>
-					<?php } }
-					else
-						{
-							echo"No Data Found";
-						}?>
-               </tbody>
-              </table>
-            </form> 
-      </div>
-      <!-- /.box -->
-  </div>
 </section>
     <!-- /.content -->
    </div>

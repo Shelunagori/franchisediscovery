@@ -4,8 +4,7 @@ include('config.php');
 if(isset($_POST['add']))
 {
 	$brand_id=$_POST['brand_id'];
-	$add_fav="INSERT INTO favrouite(user_id,brand_id) VALUES ('$id','$brand_id')";
-	$add_result=mysqli_query($db,$add_fav);
+	$add_fav=mysqli_query($db,"INSERT INTO favrouite(user_id,brand_id) VALUES ('$id','$brand_id')");
 }
 
 		if(@$_GET["Action"] == "Del")

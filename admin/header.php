@@ -228,11 +228,22 @@
         </li> 
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-fw fa-user"></i> <span>Enquiry Form</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-fw fa-user"></i> <span>Add Enquiry Form</span> <i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Investor Enquiry</a></li>
+            <li><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Investor Enquiry</a>
+            </li>
             <li><a href="brand_enquiry.php"><i class="fa fa-circle-o"></i>Brand Enquiry</a></li>
+          </ul>
+        </li> 
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-fw fa-user"></i> <span>List Enquiry Form</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="list_investordataform.php"><i class="fa fa-circle-o"></i>Investor Enquiry</a>
+            </li>
+            <li><a href="list_brandenquiry.php"><i class="fa fa-circle-o"></i>Brand Enquiry</a></li>
           </ul>
         </li> 
 

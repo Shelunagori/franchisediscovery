@@ -8,12 +8,34 @@ if(isset($_POST['add']))
 {
 	$comment=$_POST['comment'];
 	$reminder=$_POST['reminder'];
+	$date_on = date('Y-m-d', strtotime($reminder));
+	$time_on = date('H:i:s', strtotime($reminder));
+	$add_comm=mysqli_query($db,"INSERT INTO investor_data_rows(comment,date_on,time_on,investor_datas_id) VALUES ('$comment','$date_on','$time_on','$id')");
+
 }
+if(@$_GET["Action"] == "Del")
+	{
+		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
+		$delete_query = "DELETE FROM investor_data_rows where id = '$id'";
+		if ($db->query($delete_query) === TRUE) {
+			
+			header('location:view_investordata.php?id='.$_GET['investor_id']);
+		} else {
+			$status = 'fail';
+			$_SESSION['message'] = 'Something went wrong !';
+		}
+	}
 
 include('header.php');
 ?>
+<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
+
 <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 <style>
+.right
+{
+	margin-left: 20px;
+}
 .dot {
   height: 55px;
   width: 150px;
@@ -34,9 +56,7 @@ include('header.php');
 					<div class="box-body">
 						<form method="post" enctype="multipart/form-data">
 							<div class="col-md-12">
-								<div class="box">
-									
-									<div class="box-body">
+								
 										<?php
 												$result=mysqli_query($db,$detail_query);
 												while($row=mysqli_fetch_array($result))
@@ -106,16 +126,23 @@ include('header.php');
 															$com_query=mysqli_query($db,"SELECT * FROM investor_data_rows WHERE investor_datas_id=$investor_datas_id");
 															while($com_result=mysqli_fetch_array($com_query))
 															{
-																echo $com_result['comment'];		
-															
+																
+																 $comment=$com_result['comment'];
+												  				 echo wordwrap($comment,20,"<br>\n",TRUE);	
+															}
 														?>
 													</div>
 													<div class="form-group">
 														<label class="form-data">Reminder </label>
 														<?php
+														$investor_datas_id=$row['id'];
+															$com_query=mysqli_query($db,"SELECT * FROM investor_data_rows WHERE investor_datas_id=$investor_datas_id");
+															while($com_result=mysqli_fetch_array($com_query))
+															{
+																
 															$date_on=$com_result['date_on'];	
 																$time_on=$com_result['time_on'];	
-																echo$reminder="$date_on &nbsp;"."$time_on";	
+																echo$reminder="$date_on &nbsp;"."$time_on<br>";	
 															}
 														?>
 													</div>
@@ -123,9 +150,7 @@ include('header.php');
 												</div>
 												<?php } ?>
 											</div>	
-									</div>
 								</div>
-							</div>
 						</form>
 					</div> 
 
@@ -163,7 +188,7 @@ include('header.php');
 													</td>
 												</tr>
 												<tr>
-													<td><button type="submit" name="add" class="btn btn-primary pull-right ">Add</button></td>
+												<td><button type="submit" name="add" class="btn btn-primary" style="float:right;">Add</button></td>
 												</tr>
 											</table>
 										</form>
@@ -185,6 +210,7 @@ include('header.php');
 											<th>S.no</th>
 											<th>Comment</th>
 											<th>Reminder</th>
+											<th>Action</th>
 										</tr>
 											<?php 
 											$i=0;
@@ -197,7 +223,10 @@ include('header.php');
 											?>
 										<tr>
 											<td><?= $i ?></td>
-											<td><?php echo wordwrap( $com_result['comment'], 20, "<br />\n") ?>
+											<td><?php $comment=$com_result['comment'];
+												   echo wordwrap($comment,20,"<br>\n",TRUE);
+
+											?>
 											</td>
 											<td>
 												<?php 
@@ -207,7 +236,12 @@ include('header.php');
 												
 												?>
 											</td>
-											
+											<td>
+												<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="view_investordata.php?Action=Del&id=<?php echo base64_encode($com_result['id'])?>&investor_id=<?php echo base64_encode($investor_datas_id) ?>">
+													<span class="fa fa-times"></span>
+												</a>
+														
+											</td>
 										</tr>		
 										<?php } ?> 
 									</table>
@@ -221,11 +255,16 @@ include('header.php');
 <?php
 include('footer.php');
 ?>
+<script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
-<script>
+
+ <script>
+ $(document).ready(function()
+ {
 	
 $(function () {
 	$('#datetimepicker1').datetimepicker();
 });
- 
+ });
 </script>

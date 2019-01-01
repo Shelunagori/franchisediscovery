@@ -19,7 +19,7 @@ include('header.php');
 <div class="content-wrapper">
     <section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
 						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>View Brand Enquiry</h3>
@@ -28,9 +28,7 @@ include('header.php');
 					<div class="box-body">
 						<form method="post" enctype="multipart/form-data">
 							<div class="col-md-6">
-								<div class="box">
-									
-									<div class="box-body">
+								
 										<?php
 												$result=mysqli_query($db,$detail_query);
 												while($row=mysqli_fetch_array($result))
@@ -85,9 +83,7 @@ include('header.php');
 												<?php } ?>
 											</div>	
 									</div>
-								</div>
-							</div>
-						</form>
+							</form>
 					</div> 
 
 				</div>
