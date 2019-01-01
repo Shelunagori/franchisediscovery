@@ -101,7 +101,7 @@ $status='';
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="name">Time Frame</label>
-							<input class="form-control" name="time_frame" type="text" placeholder="edit mobile-no" value='<?php echo $row['time_frame']; ?>' required>
+							<input class="form-control" name="time_frame" type="text" placeholder="edit time_frame" value='<?php echo $row['time_frame']; ?>' required>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -110,7 +110,10 @@ $status='';
 							<select  name="status" class="form-control select2" style="width: 100%;">
 								
 								<?php
-										
+									if($row['status'] == "open")	
+									{
+										echo"<option value=".$row['status']."selected>".$row['status']."</option>";
+									}
 									echo"<option value=".$row['status'].">".$row['status']."</option>"
 								?>
 							</select>
@@ -147,71 +150,7 @@ $status='';
   </div> 
  </div>
   
-   <div class="col-md-12">
-      <div class="box box-primary">
-        <div class="box-header with-border">
-          <h3 class="box-title">View Investor Data Form</h3>
-
-	          <div class="box-tools pull-right">
-	            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-	              <i class="fa fa-minus"></i></button>
-	            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-	              <i class="fa fa-times"></i></button>
-	          </div>
-        </div>
-        <div class="box-body">
-        <div id="cStatus"> </div>
-        <form action="admin/update_Sequence" method="post">
-          <table id="example1" class="display select">
-                <thead>
-                <tr>
-                  <th># </th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Mobile No</th>
-				  <th>City</th>
-				  <th>Brand</th>
-				  <th>Action</th>
-               </tr>
-                </thead>
-                <tbody>
-				<?php $i = 1;
-					$query=mysqli_query($db,"select * from investor_datas order by id DESC ");
-					while($row=mysqli_fetch_array($query)){
-						?>
-						<tr>
-							<td><?php echo $i; $i++;  ?></td>
-							<td><?php echo $row['name'];?></td>
-							<td><?php echo $row['email']; ?></td>
-							<td><?php echo $row['mobile_no']; ?></td>
-							<td><?php echo $row['city']; ?></td>
-							<td><?php 
-								$brand_id=$row['brand_id'];
-									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
-									while($brand_row=mysqli_fetch_array($brand_query))
-									{
-										echo $brand_row['name'];
-									}
-							?></td>
-							<td>	
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
-									<span class="fa fa-edit"></span>
-								</a>
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_investordata.php?id=<?php echo base64_encode($row['id']); ?>">
-									<span class="fa fa-eye"></span>
-								</a>
-								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="investor_dataform.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
-									<span class="fa fa-times"></span>
-								</a>
-							</td>
-						</tr>
-					<?php } ?>
-               </tbody>
-              </table>
-            </form> 
-      </div>
-      <!-- /.box -->
-  </div>
+   
  </section>
 </div>
 </div>

@@ -164,3 +164,19 @@ padding : 5px 15px;
 <?php
 include('footer.php');
 ?>
+<script>
+	 $('#page_id').on('change',function(){
+                var page_id = $(this).val();
+               
+                $.ajax({
+                 url : 'acc_page.php?page_id='+page_id,    
+                    success: function(result){
+                       $('#position').html(result);
+                       
+                    }
+                });
+                
+            });
+	 $('#start_date').datepicker();
+	 $('#end_date').datepicker();
+</script>

@@ -21,28 +21,28 @@ $message = '';
 
 				if(!$first_name==null && $email == null && @$from == null && @$to == null)
 				{
-					$where="AND name LIKE'%$first_name%'";
+					$where="name LIKE'%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$where="AND email LIKE'%$email%'";
+					$where="email LIKE'%$email%'";
 				}
 
 				else if($first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					echo$where=" AND created_on BETWEEN '$from' AND '$to'";
+					echo$where="created_on BETWEEN '$from' AND '$to'";
 				}
 				else if(!$first_name==null && !$email==null && @$from==null && @$to==null)
 				{
-					$where=" AND name LIKE'%$first_name%' AND email LIKE '%$email%'";
+					$where=" name LIKE'%$first_name%' AND email LIKE '%$email%'";
 				}
 				else if(!$first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$where=" AND name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where="name LIKE'%$first_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
 				}
 				else if($first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					$where="AND created_on > '$from'";
+					$where="created_on > '$from'";
 				}
 				else if($first_name==null && $email==null && @$from==null && !@$to==null)
 				{
@@ -50,27 +50,27 @@ $message = '';
 				}
 				else if(!$first_name==null && $email==null && @$from==null && !@$to==null)
 				{
-					$where="AND created_on < '$to' AND name LIKE'%$first_name%'";
+					$where="created_on < '$to' AND name LIKE'%$first_name%'";
 				}
 				else if(!$first_name==null && $email==null && !@$from==null && @$to==null)
 				{
-					$where="AND created_on > '$from' AND name LIKE'%$first_name%'";
+					$where="created_on > '$from' AND name LIKE'%$first_name%'";
 				}
 				else if($first_name==null && !$email==null && !@$from==null && @$to==null)
 				{
-					$where="AND created_on > '$from' AND email LIKE'%$email%'";
+					$where="created_on > '$from' AND email LIKE'%$email%'";
 				}
 				else if($first_name==null && !$email==null && @$from==null && !@$to==null)
 				{
-					$where="AND created_on <'$to' AND email LIKE'%$email%'";
+					$where="created_on <'$to' AND email LIKE'%$email%'";
 				}
 				else if($first_name==null && !$email==null && !@$from==null && !@$to==null)
 				{
-					$where="AND created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
+					$where="created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
 				}
 				else if(!$first_name==null && $email==null && !@$from==null && !@$to==null)
 				{
-					$where="AND created_on BETWEEN '$from' AND '$to' AND name LIKE'%$first_name%'";
+					$where="created_on BETWEEN '$from' AND '$to' AND name LIKE'%$first_name%'";
 				}
 			
 	}

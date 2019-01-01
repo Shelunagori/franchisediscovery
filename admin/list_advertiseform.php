@@ -75,36 +75,17 @@ $message = '';
 			
 	}
 		if(!empty($where)){
-			$query= "select * from brand_enquiry where $where order by id DESC ";
+			$query= "select * from advertise where $where order by id DESC ";
 		}else{
-			$query= "select * from brand_enquiry order by id DESC ";
+			$query= "select * from advertise order by id DESC ";
 		}
 
 
-		if(isset($_POST['edit']))
-		{
-		$email= mysqli_real_escape_string($db,$_POST['email']);
-		$mobile_no= mysqli_real_escape_string($db,$_POST['mobile_no']);
-		$brand_id= mysqli_real_escape_string($db,$_POST['brand_id']);
-		$company_name= mysqli_real_escape_string($db,$_POST['company_name']);
-		$person_name= mysqli_real_escape_string($db,$_POST['person_name']);
-		$brand_origin= mysqli_real_escape_string($db,$_POST['brand_origin']);
-		$landline_no= mysqli_real_escape_string($db,$_POST['landline_no']);
-		$id = mysqli_real_escape_string($db,$_POST['id']);
-		$data_update = "update brand_enquiry set email='$email',mobile_no='$mobile_no',brand_id='$brand_id',company_name='$company_name',brand_origin='$brand_origin',consult_person_name='$person_name',landline_no='$landline_no' where id = '$id'";
-			if ($db->query($data_update) === TRUE) {
-				
-				$status='success';
-			}
-			 else {
-				$status = 'fail';
-			}
-		}
 
 	if(@$_GET["Action"] == "Del")
 	{
 		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
-		$delete_query = "DELETE FROM  brand_enquiry where id =$id";
+		$delete_query = "DELETE  FROM  advertise where id =$id";
 		if ($db->query($delete_query) === TRUE) {
 			
 			$status = 'success';
@@ -150,7 +131,7 @@ $message = '';
     <div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">View Brand Enquiry</h3>
+          <h3 class="box-title">View Advertise Form</h3>
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -197,10 +178,9 @@ $message = '';
                 <thead>
                 <tr>
                   <th># </th>
-                  <th>Company Name</th>
-                  <th>Email</th>
-                  <th>Mobile No</th>
-				  <th>Brand</th>
+                  <th>Page</th>
+                  <th>Position</th>
+                  <th>Link URL</th>
 				  <th>Action</th>
                </tr>
                 </thead>
@@ -211,25 +191,24 @@ $message = '';
 						?>
 						<tr>
 							<td><?php echo $i; $i++;  ?></td>
-							<td><?php echo $row['company_name'];?></td>
-							<td><?php echo $row['email']; ?></td>
-							<td><?php echo $row['mobile_no']; ?></td>
-							<td><?php 
-								$brand_id=$row['brand_id'];
-									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
-									while($brand_row=mysqli_fetch_array($brand_query))
-									{
-										echo $brand_row['name'];
-									}
+							<td><?php  $page_id=$row['page_id'];
+								$page_query=mysqli_query($db,"SELECT * FROM pages where id=$page_id");
+								while($pages_row=mysqli_fetch_array($page_query))
+								{
+									echo $pages_row['name'];
+								}
+
 							?></td>
+							<td><?php echo $row['position_name']; ?></td>
+							<td><?php echo $row['link_url']; ?></td>
 							<td>	
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_login_enquiry.php?id=<?php echo base64_encode($row['id']); ?>">
+								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_advertiseform.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-edit"></span>
 								</a>
-								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_login_enquiry.php?id=<?php echo base64_encode($row['id']); ?>">
+								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="view_advertiseform.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-eye"></span>
 								</a>
-								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="brand_enquiry.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
+								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="list_advertiseform.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-times"></span>
 								</a>
 							</td>
@@ -250,11 +229,3 @@ $message = '';
 </div>
 
    <?php require('footer.php'); ?>
-<script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
-
-<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
-<script>
-  $(document).ready(function(){
-    CKEDITOR.replace('editor1');
-  });
- </script>

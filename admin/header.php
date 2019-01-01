@@ -115,7 +115,8 @@
 				<i class="fa fa-list-alt" aria-hidden="true"></i> <span>Testimonial</span>
 				<i class="fa fa-angle-left pull-right"></i>
 			  </a>
-			</li>					
+			</li>		
+       			
 			
 			<li><a href="employee_master.php">
 				<i class="fa fa-fw fa-child"></i> <span>Employee Master</span> <i class="fa fa-angle-left pull-right"></i>
@@ -202,7 +203,32 @@
 			<li><a href="list_seo.php"><i class="fa fa-circle-o"></i> List SEO </a></li>
 		  </ul>
         </li> 
-
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-fw fa-bullseye"></i><span>Position</span> <i class="fa fa-angle-left pull-right"></i>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="add_position.php"><i class="fa fa-circle-o"></i> Add </a></li>
+      </ul>
+        </li> 
+      <li class="treeview">
+         <a href="#">
+        <i class="fa fa-list-alt" aria-hidden="true"></i> <span>Advertise </span>
+        <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+          <li class="treeview">
+            <a href="advertise_form.php">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>Add</i>
+            </a>
+          </li>
+           <li class="treeview">
+            <a href="list_advertiseform.php">
+            <i class="fa fa-list-alt" aria-hidden="true"></i>List</i>
+            </a>
+          </li>
+      </ul>
+      </li> 
 
 		<li class="treeview">
           <a href="listing_request.php">
@@ -228,26 +254,26 @@
         </li> 
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-fw fa-user"></i> <span>Add Enquiry Form</span> <i class="fa fa-angle-left pull-right"></i>
+            <i class="fa fa-fw fa-user"></i><span>CRM</span><i class="fa fa-angle-left pull-right"></i>
           </a>
           <ul class="treeview-menu">
-            <li><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Investor Enquiry</a>
+            <li><a href="#"><i class="fa fa-circle-o"></i><span>Investor Enquiry</span><i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+              <li class="treeview"><a href="investor_dataform.php"><i class="fa fa-circle-o"></i>Add</a>
+              </li>
+              <li><a href="list_investordataform.php"><i class="fa fa-circle-o"></i>List</a></li>
+              </ul>
             </li>
-            <li><a href="brand_enquiry.php"><i class="fa fa-circle-o"></i>Brand Enquiry</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i><span>Brand Enquiry</span><i class="fa fa-angle-left pull-right"></i></a>
+              <ul class="treeview-menu">
+              <li class="treeview"><a href="brand_enquiry.php"><i class="fa fa-circle-o"></i>Add</a>
+              </li>
+              <li><a href="list_brandenquiry.php"><i class="fa fa-circle-o"></i>List</a></li>
+              </ul>
+            </li>
           </ul>
         </li> 
-         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-fw fa-user"></i> <span>List Enquiry Form</span> <i class="fa fa-angle-left pull-right"></i>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="list_investordataform.php"><i class="fa fa-circle-o"></i>Investor Enquiry</a>
-            </li>
-            <li><a href="list_brandenquiry.php"><i class="fa fa-circle-o"></i>Brand Enquiry</a></li>
-          </ul>
-        </li> 
-
-
+        
 		<li class="treeview">
           <a href="notification.php">
             <i class="fa fa-fw fa-bell"></i> <span>Notification</span>
