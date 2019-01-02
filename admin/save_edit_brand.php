@@ -13,6 +13,7 @@ if(isset($_POST['add']))
 	$description = mysqli_real_escape_string($db,$_POST['description']);
 	$food_type = mysqli_real_escape_string($db,$_POST['food_type']);
 	$contact_no = mysqli_real_escape_string($db,$_POST['contact_no']);
+	
 	$address = mysqli_real_escape_string($db,$_POST['address']);
 	$footer_content = mysqli_real_escape_string($db,$_POST['footer_content']);
 	$investment_range_in_words = mysqli_real_escape_string($db,$_POST['investment_range_in_words']);
@@ -45,6 +46,15 @@ if(isset($_POST['add']))
 	$t_image = mysqli_real_escape_string($db,$_POST['t_image']);
 	$seo_name = seo_url($name);
 	$seo_name = $seo_name.'-franchise';
+	
+	$company_name = mysqli_real_escape_string($db,$_POST['company_name']);
+	$fb_link = mysqli_real_escape_string($db,$_POST['fb_link']);	
+	$insta_link = mysqli_real_escape_string($db,$_POST['insta_link']);	
+	$tw_link = mysqli_real_escape_string($db,$_POST['tw_link']);	
+	$yt_link = mysqli_real_escape_string($db,$_POST['yt_link']);	
+	$delivery_partner = mysqli_real_escape_string($db,$_POST['delivery_partner']);	
+	$other_link = mysqli_real_escape_string($db,$_POST['other_link']);		
+	
 	if(!empty($seo_id) && $seo_id > 0)
 	{
 		$sql_seo = "update page_seo set title = '$title', meta_description = '$meta_description',meta_keywords = '$meta_keywords',meta_robots = '$meta_robots',meta_abstract = '$meta_abstract',meta_topic = '$meta_topic',meta_url = '$meta_url',g_name = '$g_name',g_description = '$g_description',g_image = '$g_image',t_title = '$t_title',t_description = '$t_description',t_image = '$t_image',og_title = '$og_title',og_type = '$og_type',og_url = '$og_url',og_image = '$og_image',og_description = '$og_description',og_site_name = '$og_site_name',fb_admins = '$fb_admins',canonical = '$canonical' where id = '$seo_id' ";
@@ -77,7 +87,7 @@ if(isset($_POST['add']))
 	$is_state = 'No';
 	$is_gallery = 'No';
 
-	$sql = "update brands set chart_id = '$chart_id', name = '$name', title = '$description', contact_no = '$contact_no',rating = '$rating',avg_rating = '$avg_rating',food_type = '$food_type',area_reqired = '$area_reqired',investment_range = '$investment_range',investment_range_in_words = '$investment_range_in_words',franchise_outlets = '$franchise_outlets',address = '$address',seo_name = '$seo_name', footer_content = '$footer_content' where id = '$brand_id'";
+	$sql = "update brands set chart_id = '$chart_id', name = '$name',company_name = '$company_name', title = '$description', contact_no = '$contact_no',rating = '$rating',avg_rating = '$avg_rating',food_type = '$food_type',area_reqired = '$area_reqired',investment_range = '$investment_range',investment_range_in_words = '$investment_range_in_words',franchise_outlets = '$franchise_outlets',address = '$address',seo_name = '$seo_name', footer_content = '$footer_content',fb_link = '$fb_link',insta_link = '$insta_link',tw_link = '$tw_link',yt_link = '$yt_link',delivery_partner = '$delivery_partner',other_link = '$other_link'	where id = '$brand_id'";
 	
 	
 	

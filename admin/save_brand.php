@@ -14,6 +14,7 @@ if(isset($_POST['add']))
 	$food_type = mysqli_real_escape_string($db,$_POST['food_type']);
 	$contact_no = mysqli_real_escape_string($db,$_POST['contact_no']);
 	$address = mysqli_real_escape_string($db,$_POST['address']);
+	
 	$footer_content = mysqli_real_escape_string($db,$_POST['footer_content']);
 	$investment_range_in_words = mysqli_real_escape_string($db,$_POST['investment_range_in_words']);
 	$brand_details = $_POST['brand_details'];
@@ -50,6 +51,16 @@ if(isset($_POST['add']))
 	$t_description = mysqli_real_escape_string($db,$_POST['t_description']);
 	$t_image = mysqli_real_escape_string($db,$_POST['t_image']);
 
+	$company_name = mysqli_real_escape_string($db,$_POST['company_name']);	
+	$fb_link = mysqli_real_escape_string($db,$_POST['fb_link']);	
+	$insta_link = mysqli_real_escape_string($db,$_POST['insta_link']);	
+	$tw_link = mysqli_real_escape_string($db,$_POST['tw_link']);	
+	$yt_link = mysqli_real_escape_string($db,$_POST['yt_link']);	
+	$delivery_partner = mysqli_real_escape_string($db,$_POST['delivery_partner']);	
+	$other_link = mysqli_real_escape_string($db,$_POST['other_link']);	
+	
+	
+	
 	$seo_name = seo_url($name);
 	$seo_name = $seo_name.'-franchises';
     if(in_array($type,array("jpg","jpeg","gif","png")))
@@ -57,7 +68,7 @@ if(isset($_POST['add']))
 		move_uploaded_file($_FILES["slider_image"]["tmp_name"],$url);
 	}
 	
-	$sql = "INSERT INTO brands(chart_id, name, title, contact_no, rating, avg_rating, food_type, area_reqired, investment_range,investment_range_in_words, franchise_outlets, brand_image,address,seo_name,footer_content) VALUES('$chart_id','$name','$description','$contact_no','$rating','$avg_rating','$food_type','$area_reqired','$investment_range','$investment_range_in_words','$franchise_outlets','$url','$address','$seo_name','$footer_content')";
+	$sql = "INSERT INTO brands(chart_id, name,company_name, title, contact_no, rating, avg_rating, food_type, area_reqired, investment_range,investment_range_in_words, franchise_outlets, brand_image,address,seo_name,footer_content,fb_link,insta_link,tw_link,yt_link,delivery_partner,other_link) VALUES('$chart_id','$name','$company_name','$description','$contact_no','$rating','$avg_rating','$food_type','$area_reqired','$investment_range','$investment_range_in_words','$franchise_outlets','$url','$address','$seo_name','$footer_content','$fb_link','$insta_link','$tw_link','$yt_link','$delivery_partner','$other_link')";
 	
 	if ($db->query($sql) === TRUE) {
 		$brand_id = mysqli_insert_id($db);

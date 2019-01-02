@@ -166,11 +166,7 @@
 			<div class="row home-catg"></div>
 		</div>
     </section>
-
-    
 	
-	
-
           <?php include("footer.php");?>
 	  <script>
 		$(document).ready(function(){

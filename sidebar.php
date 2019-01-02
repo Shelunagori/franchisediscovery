@@ -1,5 +1,7 @@
 <?php 
 		$reg_type=$_SESSION['reg_type'];
+		
+		$is_paid_memeber = $_SESSION['is_paid_memeber'];
 ?>
 <style>
 	#sidebar_wid_menu li a:hover {
@@ -17,6 +19,11 @@
 										
 										{?>	
 											<li><a class="<?php if($currentPage == 'Manage Profile') { echo 'active acolor';}?>" href="manage-profile.php"><i class="ti-unlock"></i>Manage Profile</a></li>
+											
+											<?php if($is_paid_memeber == 'Yes') { ?>
+												<li><a class="<?php if($currentPage == 'Inbox') { echo 'active acolor';}?>" href="myinbox.php"><i class="ti-wand"></i> Inbox</a></li>
+											<?php } ?>
+											
 											<li><a class="<?php if($currentPage == 'Brand') { echo 'active acolor';}?>" href="brand_list_brand.php"><i class="ti-wand"></i> Brand List</a></li>
 											
 											<li><a class="<?php if($currentPage == 'CRM Details') { echo 'active acolor';}?>" href="crm-details.php"><i class="ti-user"></i> CRM Details</a></li>

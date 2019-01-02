@@ -228,10 +228,10 @@ $message = '';
 			</div>
 			<div class="col-md-2">	
 				<div class="form-group">
-					<label >test</label>
+					<label >Time</label>
 					<select name="times"  class="form-control " >
 						<option value="">--Time--</option>
-						<option value="Minute">Minute</option>
+						<option value="minute">Minute</option>
 						<option value="hour">Hour</option>
 						<option value="day">Day</option>
 						<option value="week">Week</option>
@@ -240,9 +240,7 @@ $message = '';
 					</select>
 				</div>
 			</div> 
-
-   
-        </div>
+		</div>
         <div class="row">
         	<div class="col-md-4">
         		<div class="form-group">

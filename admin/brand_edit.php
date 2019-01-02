@@ -52,7 +52,7 @@ $status='';
 		</div>
 		<?php $brand_id = base64_decode($_GET['rowvalue']);
 		
-		 $sql = "select brands.id,brands.chart_id,brands.name,brands.title,brands.contact_no,brands.rating,brands.avg_rating,brands.food_type,brands.area_reqired,brands.investment_range,brands.investment_range_in_words,brands.franchise_outlets,brands.brand_image,brands.address,brands.seo_name,brands.footer_content,brands.status,brand_rows.category_id from brands LEFT JOIN brand_rows ON brand_rows.brand_id=brands.id where status = 'Active' and brands.id = '$brand_id' ";
+		 $sql = "select brands.id,brands.chart_id,brands.company_name,brands.name,brands.title,brands.contact_no,brands.rating,brands.avg_rating,brands.food_type,brands.area_reqired,brands.investment_range,brands.investment_range_in_words,brands.franchise_outlets,brands.brand_image,brands.address,brands.seo_name,brands.footer_content,brands.status,brand_rows.category_id,brands.fb_link,brands.insta_link,brands.tw_link,brands.yt_link,brands.delivery_partner,brands.other_link from brands LEFT JOIN brand_rows ON brand_rows.brand_id=brands.id where status = 'Active' and brands.id = '$brand_id' ";
 		
 			  $query_brand=mysqli_query($db,$sql);
 			  
@@ -179,6 +179,49 @@ $status='';
 				</div> 
 			</div>
 
+        <div class="col-md-12">
+			<div class="box box-warning">
+				<div class="box-header with-border">
+				  <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>  Other Details</h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+						  <i class="fa fa-minus"></i>
+						</button>
+				  </div>
+				</div>
+				<div class="box-body">
+					<div class="col-md-6">				
+						<div class="form-group">
+							<input class="form-control" name="company_name" type="text" placeholder="Company Name" value='<?php echo  $row_brand['company_name']; ?>' required>
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="insta_link" type="text" placeholder="Instagram Link" value='<?php echo  $row_brand['insta_link']; ?>'>
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="yt_link" type="text" placeholder="YouTube Link" value='<?php echo  $row_brand['yt_link']; ?>'>
+						</div>					
+						<div class="form-group">
+							<input class="form-control" name="other_link" type="text" placeholder="Any other social link" value='<?php echo  $row_brand['other_link']; ?>'>
+						</div>						
+					</div>
+					<div class="col-md-6">				
+						<div class="form-group">
+							<input class="form-control" name="fb_link" type="text" placeholder="Facebook Link" value='<?php echo  $row_brand['fb_link']; ?>'>
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="tw_link" type="text" placeholder="Twitter Link" value='<?php echo  $row_brand['tw_link']; ?>'>
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="delivery_partner" type="text" placeholder="Delivery Partner" value='<?php echo  $row_brand['delivery_partner']; ?>'>
+						</div>
+					</div>
+				</div>
+								
+			</div> 
+		</div>					
+			
+			
+			
         <div class="col-md-12">
 			<div class="box box-warning">
 				<div class="box-header with-border">

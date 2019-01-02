@@ -39,7 +39,7 @@
 
     padding-bottom: 80px !important;
 
-    background-color: #a5c6ca  !important;
+    background-color: #00acc1  !important;
 
     background-position: center !important;
 
@@ -216,12 +216,15 @@ padding : 5px 15px;
                 <div class="col-lg-3">
                     <div class="vc_column-inner vc_custom_1537353427517">
                         <div class="wpb_wrapper">
-                            <h3 style="color: #fff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">			
-                                <a href="profile_view.php?id=<?php echo base64_encode($id); ?>">User Profile</a>
-                            </h3>
-                            <div class="vc_btn3-container vc_btn3-center  icon-this">
-                            <i class="fa fa-user "></i>
+                           
+						<div class="vc_btn3-container vc_btn3-center  icon-this">
+                            <i style="color:#fff;" class="fa fa-user "></i>
                             </div>
+
+						   <h3 style="color: #fff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">			
+                                <a style="color:#fff;" href="profile_view.php?id=<?php echo base64_encode($id); ?>">User Profile</a>
+                            </h3>
+                           
                         </div>
                     </div>
                 </div>
@@ -229,11 +232,12 @@ padding : 5px 15px;
                 <div class="col-sm-3">
                     <div class="vc_column-inner vc_custom_1537353427517">
                         <div class="wpb_wrapper">
-                            <h3 style="color: #fff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">              <a href="support_ticket.php?id=<?php echo base64_encode($id); ?>">Support Ticket</a>
+							<div class="vc_btn3-container vc_btn3-center icon-this">
+                                <i style="color:#fff;" class="fa fa-ticket "></i>
+                            </div>                           
+						   <h3 style="color: #fff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">              <a style="color:#fff;" href="support_ticket.php?id=<?php echo base64_encode($id); ?>">Support Ticket</a>
                             </h3>
-                            <div class="vc_btn3-container vc_btn3-center icon-this">
-                                <i class="fa fa-ticket "></i>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -241,11 +245,13 @@ padding : 5px 15px;
                 <div class="col-sm-3">
                     <div class="vc_column-inner vc_custom_1537353427517">
                         <div class="wpb_wrapper">
-                            <h3 style="color: #ffffff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">				<a href="listing_request.php?id=<?php echo base64_encode($id); ?>">   Request Listing</a>
+							<div class="vc_btn3-container vc_btn3-center icon-this">
+                              <i style="color:#fff;" class="fa fa-file "></i>
+                            </div>                           
+
+						   <h3 style="color: #ffffff;text-align: center;font-family:Arial,Helvetica !important;font-weight:400;font-style:normal;font-size: 20px;" class="vc_custom_heading">				<a style="color:#fff;" href="listing_request.php?id=<?php echo base64_encode($id); ?>">   Request Listing</a>
                             </h3>
-                            <div class="vc_btn3-container vc_btn3-center icon-this">
-                              <i class="fa fa-file "></i>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
