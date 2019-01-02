@@ -316,7 +316,7 @@ if(isset($_GET['blog_filter']))
 							</tr>
 						</table>
 					</form>
-									<table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
+									<table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 										<thead>
 											<tr role="row">
 												<th>S.No.</th>

@@ -35,7 +35,7 @@ $status='';
 			<div class="box">
 				<div class="box-header with-border">
 				  <h3 class="box-title">Edit Investor Data</h3>
-					<a href="investor_dataform.php" class="pull-right"> Add New</a>
+					<a href="advertise_form.php" class="pull-right"> Add New</a>
 				</div>
 				<?php 
 				@$id=base64_decode($_GET['id']); 

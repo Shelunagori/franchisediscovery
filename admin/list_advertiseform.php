@@ -86,7 +86,6 @@ $message = '';
 
 ?>
 
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
  <style>
 	.dataTables_wrapper { padding: 0px 30px 0px 30px !important; }
 
@@ -171,7 +170,7 @@ $message = '';
         <div class="box-body">
         <div id="cStatus"> </div>
         <form action="admin/update_Sequence" method="post">
-          <table id="example1" class="display select">
+          <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                 <thead>
                 <tr>
                   <th># </th>

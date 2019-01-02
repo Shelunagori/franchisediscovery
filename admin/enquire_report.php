@@ -261,7 +261,7 @@ if(isset($_GET['ok']))
 							</tr>
 						</table>
 					</form>
-									<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
+									<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 										<thead>
 											<tr role="row">
 												<th>Sno</th>

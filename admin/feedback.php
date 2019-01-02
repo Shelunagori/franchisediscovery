@@ -194,7 +194,7 @@
 								
 								<div class="tab-content">
 								<div class="tab-pane active" id="1">
-								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info" style="margin-top: 30px;">
+								<table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
 										<thead>
 											<tr>
 												<th>S.No</th>

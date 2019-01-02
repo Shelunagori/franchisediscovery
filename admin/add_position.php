@@ -22,6 +22,19 @@ if(isset($_POST['add']))
 			$message = 'Something went wrong !!';
 		}
 }
+if(@$_GET["Action"] == "Del")
+	{
+		$id = mysqli_real_escape_string($db,base64_decode($_GET['id']));
+		$delete_query = "DELETE  FROM  position where id =$id";
+		if ($db->query($delete_query) === TRUE) {
+			
+			$status = 'success';
+			$_SESSION['message'] = 'Data deleted successfully !';
+		} else {
+			$status = 'fail';
+			$_SESSION['message'] = 'Something went wrong !';
+		}
+	}
 	
 
 ?>
@@ -92,7 +105,68 @@ if(isset($_POST['add']))
        </div>
    </div>
       </form>
+
 	</div>
+	 <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">View Positions</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+              <i class="fa fa-minus"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+              <i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <div class="box-body">
+        <div id="cStatus"> </div>
+        <form action="admin/update_Sequence" method="post">
+          <table id="example1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                <thead>
+                <tr>
+                  <th># </th>
+                  <th>Page</th>
+                  <th>Position Name</th>
+                  <th>Delete</th>
+               </tr>
+                </thead>
+                <tbody>
+				<?php $i = 1;
+					$query=mysqli_query($db,"select * from position order by id DESC ");
+					while($row=mysqli_fetch_array($query)){
+						?>
+						<tr>
+							<td><?php echo $i; $i++;  ?></td>
+							<td><?php  $row['page_id']; 
+								$page_id=$row['page_id'];
+								$page_query=mysqli_query($db,"SELECT * FROM pages where id=$page_id");
+								while($pages_row=mysqli_fetch_array($page_query))
+								{
+									echo $pages_row['name'];
+								}
+
+							?>
+							</td>
+							<td><?php echo $row['position_name']; ?></td>
+							
+							<td>
+								<a class="mb-control1 btn btn-danger btn-rounded btn-sm" onclick="return confirm('Are you sure ?')" href="add_position.php?Action=Del&id=<?php echo base64_encode($row['id']); ?>">
+									<span class="fa fa-times"></span>
+								</a>
+							</td>
+						</tr>
+						<?php
+					}
+				?>                 
+               </tbody>
+              </table>
+            </form> 
+      </div>
+      <!-- /.box -->
+  </div>
+
+</div>
     </div>
  
 </section>

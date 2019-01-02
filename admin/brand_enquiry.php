@@ -10,13 +10,13 @@ $message = '';
 	{
 		$email= mysqli_real_escape_string($db,$_POST['email']);
 		$mobile_no= mysqli_real_escape_string($db,$_POST['mobile_no']);
-		$brand_id= mysqli_real_escape_string($db,$_POST['brand_id']);
+		$brand_name= mysqli_real_escape_string($db,$_POST['brand_name']);
 		$company_name= mysqli_real_escape_string($db,$_POST['company_name']);
 		$landline_no= mysqli_real_escape_string($db,$_POST['landline_no']);
 		$brand_origin= mysqli_real_escape_string($db,$_POST['brand_origin']);
 		$person_name= mysqli_real_escape_string($db,$_POST['person_name']);
 	
-		$sql="INSERT INTO brand_enquiry(mobile_no,email,brand_id,company_name,landline_no,brand_origin,consult_person_name,created_by,edited_by) VALUES ('$mobile_no','$email','$brand_id','$company_name','$landline_no','$brand_origin','$person_name','$created_by','$edited_by')";	
+		$sql="INSERT INTO brand_enquiry(mobile_no,email,brand_name,company_name,landline_no,brand_origin,consult_person_name,created_by,edited_by) VALUES ('$mobile_no','$email','$brand_name','$company_name','$landline_no','$brand_origin','$person_name','$created_by','$edited_by')";	
 		
 		if($db->query($sql) === TRUE)
 		{
@@ -33,13 +33,13 @@ $message = '';
 		{
 		$email= mysqli_real_escape_string($db,$_POST['email']);
 		$mobile_no= mysqli_real_escape_string($db,$_POST['mobile_no']);
-		$brand_id= mysqli_real_escape_string($db,$_POST['brand_id']);
+		$brand_name= mysqli_real_escape_string($db,$_POST['brand_name']);
 		$company_name= mysqli_real_escape_string($db,$_POST['company_name']);
 		$person_name= mysqli_real_escape_string($db,$_POST['person_name']);
 		$brand_origin= mysqli_real_escape_string($db,$_POST['brand_origin']);
 		$landline_no= mysqli_real_escape_string($db,$_POST['landline_no']);
 		$id = mysqli_real_escape_string($db,$_POST['id']);
-		$data_update = "update brand_enquiry set email='$email',mobile_no='$mobile_no',brand_id='$brand_id',company_name='$company_name',brand_origin='$brand_origin',consult_person_name='$person_name',landline_no='$landline_no' where id = '$id'";
+		$data_update = "update brand_enquiry set email='$email',mobile_no='$mobile_no',brand_name='$brand_name',company_name='$company_name',brand_origin='$brand_origin',consult_person_name='$person_name',landline_no='$landline_no' where id = '$id'";
 			if ($db->query($data_update) === TRUE) {
 				
 				$status='success';
@@ -115,17 +115,8 @@ $message = '';
 				<div class="col-md-4">
 					<div class="form-group">
 						<label for="address">Brand</label>
-						<select name="brand_id" multiple class="form-control select2" >
-							<option value="">--Select Brand--</option>
-							<?php
-								$brand_query="SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'";
-								$brand_result=mysqli_query($db,$brand_query);
-								while($brand_row=mysqli_fetch_array($brand_result))
-								{
-									echo"<option value=".$brand_row['id'].">".$brand_row['name']."</option>";
-								}
-							?>
-						</select>
+						<input type="text" name="brand_name" multiple class="form-control" >
+							
 					</div>
 				</div>
 				

@@ -117,7 +117,6 @@ $message = '';
 
 ?>
 
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
  
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -193,7 +192,7 @@ $message = '';
         <div class="box-body">
         <div id="cStatus"> </div>
         <form action="admin/update_Sequence" method="post">
-          <table id="example1" class="display select">
+          <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                 <thead>
                 <tr>
                   <th># </th>
@@ -214,14 +213,7 @@ $message = '';
 							<td><?php echo $row['company_name'];?></td>
 							<td><?php echo $row['email']; ?></td>
 							<td><?php echo $row['mobile_no']; ?></td>
-							<td><?php 
-								$brand_id=$row['brand_id'];
-									$brand_query=mysqli_query($db,"SELECT * FROM brands WHERE status='Active' AND is_approve='Approved'");
-									while($brand_row=mysqli_fetch_array($brand_query))
-									{
-										echo $brand_row['name'];
-									}
-							?></td>
+							<td><?php echo $row['brand_name'];?></td>
 							<td>	
 								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_login_enquiry.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-edit"></span>
@@ -250,7 +242,6 @@ $message = '';
 </div>
 
    <?php require('footer.php'); ?>
-<script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
 
 <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
 <script>

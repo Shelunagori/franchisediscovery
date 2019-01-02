@@ -3,6 +3,7 @@ include('config.php');
 $status='';
 $message='';
 @$id=base64_decode($_GET['id']);
+      
 $detail_query="select * FROM registration WHERE id=$id";
 
 include('header.php');
@@ -10,18 +11,16 @@ include('header.php');
 <div class="content-wrapper">
     <section class="content">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<div class="box">
 					<div class="box-header">
-						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>Edit</h3>
+						 <h3 class="box-title"><i class="fa fa-fw fa-angle-double-right"></i>Profile</h3>
 					</div>
 						
 					<div class="box-body">
 						<form method="post" enctype="multipart/form-data">
-							<div class="col-md-6">
-								<div class="box">
-									
-									<div class="box-body">
+							 <input type="hidden" name="namec" value="<?php echo htmlspecialchars($cn); ?>">
+								
 										<?php
 												$result=mysqli_query($db,$detail_query);
 												while($row=mysqli_fetch_array($result))
@@ -74,9 +73,7 @@ include('header.php');
 												</div>
 												<?php } ?>
 											</div>	
-									</div>
-								</div>
-							</div>
+									
 						</form>
 					</div> 
 				</div>

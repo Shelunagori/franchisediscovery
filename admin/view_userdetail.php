@@ -3,7 +3,7 @@
 	include('header.php');
 	$status="";
 	$message="";
-		$id=base64_decode($_GET['id']);
+	$id=base64_decode($_GET['id']);
 		
 		
 ?>

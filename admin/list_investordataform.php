@@ -119,7 +119,6 @@ $message = '';
 
 ?>
 
-<link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
 <link href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
  <!-- Content Wrapper. Contains page content -->
@@ -194,7 +193,7 @@ $message = '';
         <div class="box-body">
         <div id="cStatus"> </div>
         <form action="admin/update_Sequence" method="post">
-          <table id="example1" class="display select">
+          <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                 <thead>
                 <tr>
                   <th># </th>
@@ -256,7 +255,6 @@ $message = '';
 </div>
 
    <?php require('footer.php'); ?>
-<script  src='http://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js'></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
 <script src="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js"></script>
 
