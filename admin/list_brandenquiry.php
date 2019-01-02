@@ -257,4 +257,6 @@ $message = '';
   $(document).ready(function(){
     CKEDITOR.replace('editor1');
   });
+  $('#datepicker').datepicker();
+		 $('#datepicker1').datepicker();
  </script>

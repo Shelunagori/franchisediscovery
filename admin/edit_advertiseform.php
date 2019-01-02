@@ -62,30 +62,30 @@ $status='';
 						</div>
 						<div class="form-group">
 							<label for="email">Position</label>
-							<input class="form-control" name="position_name" type="text"  value='<?php echo $row['position_name']; ?>' required>
+							<input class="form-control" name="position_name" type="text"  value='<?php echo $row['position_name']; ?>' >
 						</div>
 						<div class="form-group">
-							<label for="email">Image</label>
-							<input class="form-control" name="image" type="file"  value='<?php echo $row['image']; ?>' required>
+							<label for="email">Image :</label>
+							<?= $row['image'] ?><input class="form-control" name="image" type="file">
 						</div>
 						<div class="form-group">
 							<label for="email">Link_url</label>
-							<input class="form-control" name="link_url" type="text"  value='<?php echo $row['link_url']; ?>' required>
+							<input class="form-control" name="link_url" type="text"  value='<?php echo $row['link_url']; ?>' >
 						</div>
 						<div class="form-group">
 							<label for="email">Start_date</label>
-							<input class="form-control" name="start_date" type="text"  value='<?php echo $row['start_date']; ?>' required>
+							<input class="form-control" name="start_date" type="text"  value='<?php echo $row['start_date']; ?>' >
 						</div>
 						<div class="form-group">
 							<label for="email">End Date</label>
-							<input class="form-control" name="end_date" type="text"  value='<?php echo $row['end_date']; ?>' required>
+							<input class="form-control" name="end_date" type="text"  value='<?php echo $row['end_date']; ?>' >
 						</div>
 						<div class="form-group">
 							<label for="email">Current_date</label>
-							<input class="form-control" name="current_date" type="text"  value='<?php echo $row['current_dates']; ?>' required>
+							<input class="form-control" name="current_date" type="text"  value='<?php echo $row['current_dates']; ?>' >
 						</div>
 					
-							<input class="form-control" name="id" type="hidden" value='<?php echo $id; ?>' required>
+							<input class="form-control" name="id" type="hidden" value='<?php echo $id; ?>' >
 				
 				<?php } ?> 
 						</div>

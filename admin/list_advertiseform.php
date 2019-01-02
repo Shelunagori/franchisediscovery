@@ -2,75 +2,63 @@
 require('config.php');
 require('header.php');
 
-$created_by=$_SESSION['login_id'];$edited_by=$_SESSION['login_id'];
+$created_by=$_SESSION['login_id'];
+$edited_by=$_SESSION['login_id'];
 
 $status = '';
 $message = '';
 	if(isset($_GET['ok']))
 			{
-				$company_name=$_GET['company_name'];
-				$email=$_GET['email'];
-				$from_date= $_GET['from_datepicker']?date('Y-m-d',strtotime($_GET['from_datepicker'])):null;
+				$page_id=$_GET['page_id'];
+				$position_name=$_GET['position_name'];
+				$from_date= $_GET['start_date']?date('Y-m-d',strtotime($_GET['start_date'])):null;
 				if(!$from_date==null)
-					$from=$from_date." 00:00:00.000000";
+					$from=$from_date;
 
-				$to_date= $_GET['to_datepicker']?date('Y-m-d',strtotime($_GET['to_datepicker'])):null;
+				$to_date= $_GET['end_date']?date('Y-m-d',strtotime($_GET['end_date'])):null;
 				if(!$to_date==null)
-					$to=$to_date." 00:00:00.000000";
+					$to=$to_date;
 
 
-				if(!$company_name==null && $email == null && @$from == null && @$to == null)
+				if(!$page_id==null && $position_name == null && @$from == null && @$to == null)
 				{
-					echo$where="company_name LIKE'%$company_name%'";
+					$where="page_id LIKE'%$page_id%'";
 				}
-				else if($company_name==null && !$email==null && @$from==null && @$to==null)
+				
+				else if($page_id==null && $position_name==null && !@$from==null && !@$to==null)
 				{
-					$where="email LIKE'%$email%'";
+					$where="start_date BETWEEN '$from' AND '$to'";
 				}
-
-				else if($company_name==null && $email==null && !@$from==null && !@$to==null)
+				else if(!$page_id==null && !$position_name==null && @$from==null && @$to==null)
 				{
-					echo$where="created_on BETWEEN '$from' AND '$to'";
+					$where="page_id LIKE'%$page_id%' AND position_name LIKE '%$position_name%'";
 				}
-				else if(!$company_name==null && !$email==null && @$from==null && @$to==null)
+				else if(!$page_id==null && !$position_name==null && !@$from==null && !@$to==null)
 				{
-					$where="company_name LIKE'%$company_name%' AND email LIKE '%$email%'";
+					$where="page_id LIKE'%$page_id%' AND position_name LIKE '%$position_name%' AND start_date BETWEEN '$from' AND '$to'";
 				}
-				else if(!$company_name==null && !$email==null && !@$from==null && !@$to==null)
+				else if($page_id==null && $position_name==null && !@$from==null && @$to==null)
 				{
-					$where="company_name LIKE'%$company_name%' AND email LIKE '%$email%' AND created_on BETWEEN '$from' AND '$to'";
+					$where="start_date > '$from'";
 				}
-				else if($company_name==null && $email==null && !@$from==null && @$to==null)
+				else if($page_id==null && $position_name==null && @$from==null && !@$to==null)
 				{
-					$where="created_on > '$from'";
+					$where="start_date < '$to'";
 				}
-				else if($company_name==null && $email==null && @$from==null && !@$to==null)
+				else if(!$page_id==null && $position_name==null && @$from==null && !@$to==null)
 				{
-					$where="created_on < '$to'";
+					$where="start_date < '$to' AND page_id LIKE'%$page_id%'";
 				}
-				else if(!$company_name==null && $email==null && @$from==null && !@$to==null)
+				else if(!$page_id==null && $position_name==null && !@$from==null && @$to==null)
 				{
-					$where="created_on < '$to' AND company_name LIKE'%$company_name%'";
+					$where="start_date > '$from' AND page_id LIKE'%$page_id%'";
 				}
-				else if(!$company_name==null && $email==null && !@$from==null && @$to==null)
+				
+				
+			
+				else if(!$page_id==null && $position_name==null && !@$from==null && !@$to==null)
 				{
-					$where="created_on > '$from' AND company_name LIKE'%$company_name%'";
-				}
-				else if($company_name==null && !$email==null && !@$from==null && @$to==null)
-				{
-					$where="created_on > '$from' AND email LIKE'%$email%'";
-				}
-				else if($company_name==null && !$email==null && @$from==null && !@$to==null)
-				{
-					$where="created_on <'$to' AND email LIKE'%$email%'";
-				}
-				else if($company_name==null && !$email==null && !@$from==null && !@$to==null)
-				{
-					$where="created_on BETWEEN '$from' AND '$to' AND email LIKE'%$email%'";
-				}
-				else if(!$company_name==null && $email==null && !@$from==null && !@$to==null)
-				{
-					$where="created_on BETWEEN '$from' AND '$to' AND company_name LIKE'%$company_name%'";
+					$where="start_date BETWEEN '$from' AND '$to' AND page_id LIKE'%$page_id%'";
 				}
 			
 	}
@@ -99,7 +87,10 @@ $message = '';
 ?>
 
 <link href="admin_assest/admin_css/jquery.dataTables.min.css" rel="stylesheet" />
- 
+ <style>
+	.dataTables_wrapper { padding: 0px 30px 0px 30px !important; }
+
+</style>
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Main content -->
@@ -125,10 +116,7 @@ $message = '';
 		  </div>
         <!-- left column -->
 		
-    </div>
-
- 
-    <div class="col-md-12">
+<div class="col-md-12">
       <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">View Advertise Form</h3>
@@ -144,17 +132,26 @@ $message = '';
 						<table class='table table-striped'>
 							<tr>
 								<td width="20%">
-									<input type="text" name="company_name" placeholder="Enter company name" class="form-control" value="<?= @$company_name ?>">
+										<select name="page_id" id="page_id" class="form-control">
+											<option value="">--Select Page--</option>
+											<?php
+												$page_query=mysqli_query($db,"SELECT * FROM pages WHERE is_valid_advertise='Yes'");
+												while($page_row=mysqli_fetch_array($page_query))
+												{
+													echo"<option value=".$page_row['id'].">".$page_row['name']."</option>";
+												}
+								?>
+							</select>
 								</td>
 								<td width="20%">
-									<input type="text" name="email" placeholder="Enter email" class="form-control" value="<?= @$email ?>">
+									<select name="position_name" id="position_name" class="form-control">
 								</td>
 								<td width="20%">
 									<div class="input-group date">
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="from_datepicker" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$from_date ?>">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker" name="start_date" placeholder="From Date" data-date-format="mm-dd-yyyy" value="<?= @$from_date ?>">
 									</div>
 								</td>
 								<td width="20%">
@@ -162,7 +159,7 @@ $message = '';
 										<div class="input-group-addon">
 										<i class="fa fa-calendar"></i>
 										</div>
-										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="to_datepicker" placeholder="To Date" value="<?= @$to_date ?>">
+										<input type="text" class="form-control pull-right datepicker" id="datepicker1" name="end_date" placeholder="To Date" value="<?= @$to_date ?>">
 									</div>
 								</td>
 								<td>
@@ -200,7 +197,7 @@ $message = '';
 
 							?></td>
 							<td><?php echo $row['position_name']; ?></td>
-							<td><?php echo $row['link_url']; ?></td>
+							<td><a href="<?php echo $row['link_url']; ?>"><?php echo $row['link_url']; ?></a></td>
 							<td>	
 								<a style="color:#fff;" class="btn btn-info btn-rounded btn-sm" href="edit_advertiseform.php?id=<?php echo base64_encode($row['id']); ?>">
 									<span class="fa fa-edit"></span>
@@ -223,9 +220,31 @@ $message = '';
       </div>
       <!-- /.box -->
   </div>
+</div>
+</div>
+
 </section>
     <!-- /.content -->
    </div>
 </div>
 
    <?php require('footer.php'); ?>
+<script>
+	$(document).ready(function(){
+		$('#page_id').on('change',function(){
+	                var page_id = $(this).val();
+	               
+	                $.ajax({
+	                 url : 'acc_page.php?page_id='+page_id,    
+	                    success: function(result){
+	                       $('#position_name').html(result);
+	                       
+	                    }
+	                });
+	                
+	            });
+		 
+		 $('#datepicker').datepicker();
+		 $('#datepicker1').datepicker();
+	});
+</script>

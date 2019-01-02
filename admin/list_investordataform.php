@@ -264,6 +264,9 @@ $message = '';
 
 $(function () {
 	$('#datetimepicker1').datetimepicker();
+	$('#datepicker1').datepicker();
+	$('#datepicker').datepicker();
+
 });
  	
 

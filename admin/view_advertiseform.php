@@ -73,7 +73,7 @@ include('header.php');
 														}
 													?></h3>
 													<div class="form-group">
-														<label class="form-data">Page  </label>
+														<label class="form-data">Page :  </label>
 														
 														<?php
 														$page_id=$row['page_id'];
@@ -91,24 +91,24 @@ include('header.php');
 														<?= $row['position_name'] ?>
 													</div>
 													<div class="form-group">
-														<label class="form-data">Image</label>
+														<label class="form-data">Image :</label>
 														<?= $row['image'] ?>
 													</div>
 													<div class="form-group">
-														<label class="form-data">Link URL</label>
-														<?= $row['link_url'] ?>
+														<label class="form-data">Link URL :</label>
+														<a href="<?= $row['link_url'] ?>"><?= $row['link_url'] ?></a>
 													</div>
 													<div class="form-group">
 														<label class="form-data">Start
-														Date</label>
+														Date :</label>
 														<?= $row['start_date'] ?>
 													</div>
 													<div class="form-group">
-														<label class="form-data">End Date</label>
+														<label class="form-data">End Date :</label>
 														<?= $row['end_date'] ?>
 													</div>
 													<div class="form-group">
-														<label class="form-data">Current Date</label>
+														<label class="form-data">Current Date :</label>
 														<?= $row['current_dates'] ?>
 													</div>
 													

@@ -11,8 +11,8 @@ $message = '';
 		$page_id=$_POST['page_id'];
 		$position_name=$_POST['position_name'];
 		$link_url=$_POST['link_url'];
-		$start_date=date($_POST['start_date']);
-		$end_date=date($_POST['end_date']);
+		$start_date=date('Y-m-d',strtotime($_POST['start_date']));
+		$end_date=date('Y-m-d',strtotime($_POST['end_date']));
 		$current_dates=$_POST['current_date'];
 		if(isset($_FILES['upload_file'])){ 
 					$errors = array();
@@ -45,7 +45,7 @@ $message = '';
 			$image="uploadProfile/".$file_name;
 
 
-	$add_query="INSERT INTO advertise (page_id,position_name,image,link_url,start_date,end_date,user_id,current_dates) VALUES ($page_id,'$position_name','$image','$link_url','$start_date','$end_date','$user_id','$current_dates')";
+	echo$add_query="INSERT INTO advertise (page_id,position_name,image,link_url,start_date,end_date,user_id,current_dates) VALUES ($page_id,'$position_name','$image','$link_url','$start_date','$end_date','$user_id','$current_dates')";
 		if($db->query($add_query) === TRUE)
 		{
 			$status = 'success';
@@ -182,13 +182,11 @@ $message = '';
 <script>
 	$(document).ready(function(){
 		$('#page_id').on('change',function(){
-		 	alert();
 	                var page_id = $(this).val();
 	               
 	                $.ajax({
 	                 url : 'acc_page.php?page_id='+page_id,    
 	                    success: function(result){
-	                    	alert(result)
 	                       $('#position_name').html(result);
 	                       
 	                    }
