@@ -1,5 +1,5 @@
 <?php
-require('config.php');
+
 require('header.php');
 
 $created_by=$_SESSION['login_id'];$edited_by=$_SESSION['login_id'];
