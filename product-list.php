@@ -206,14 +206,14 @@
           },
           success: function(html) {
            $('#loader_image').hide();
-		 //  alert(html);
-			if (html.length == 4) {
-              $("#loader_message").html('<button class="btn btn-default" type="button">No more records.</button>').show()
-            } else {
-				  $("#results").append(html);
-              $("#loader_message").html('<button class="btn btn-default" type="button">Loading please wait...</button>').show();
+			if (html == 0) {
+              $("#loader_message").html('<button class="btn btn-default" type="button">No more records.</button>').show();
+			} else {
+				$("#results").append(html);
+			    $("#loader_message").html('<button class="btn btn-default" type="button">Loading please wait...</button>').show();
+			   
             }
-            window.busy = false;
+			 window.busy = false;	
           }
         });
       }
