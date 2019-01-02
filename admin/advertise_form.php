@@ -34,7 +34,7 @@ $message = '';
 									move_uploaded_file($file_tmp,"uploadProfile/".$file_name);
 
 								}else{
-									print_r($errors);
+									//print_r($errors);
 								}
 								}
 					
@@ -45,7 +45,7 @@ $message = '';
 			$image="uploadProfile/".$file_name;
 
 
-	echo$add_query="INSERT INTO advertise (page_id,position_name,image,link_url,start_date,end_date,user_id,current_dates) VALUES ($page_id,'$position_name','$image','$link_url','$start_date','$end_date','$user_id','$current_dates')";
+	$add_query="INSERT INTO advertise (page_id,position_name,image,link_url,start_date,end_date,user_id,current_dates) VALUES ($page_id,'$position_name','$image','$link_url','$start_date','$end_date','$user_id','$current_dates')";
 		if($db->query($add_query) === TRUE)
 		{
 			$status = 'success';

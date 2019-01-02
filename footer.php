@@ -37,6 +37,9 @@ label.expend {
 
 .nav-tabs{ margin-bottom:15px}
 
+.videoWidth { width : 60%;  }
+.addVideoWidth { width : 40%;  }
+
  </style>
 	 <section class=" popular_brands_area_margin top-brands">
         <div class="container advice">
@@ -277,12 +280,14 @@ label.expend {
 					<?php 
 					
 					if(isset($_GET['data_row']) && !empty($_GET['data_row']))
-						{
-							$query=mysqli_query($db,"select * from chart where chart.category_id = '$category_id'");
+						{ 
+						  $query=mysqli_query($db,"select * from chart where chart.category_id = '$category_id'");
 							
+							if($query->num_rows == 0)
+							{ $query=mysqli_query($db,"select * from chart limit 6"); }							
 						}else
-						{
-							$query=mysqli_query($db,"select * from chart limit 6");  
+						{ 
+						 	$query=mysqli_query($db,"select * from chart limit 6");  
 						}
 					
 					while($row=mysqli_fetch_array($query)){
@@ -305,12 +310,13 @@ label.expend {
 
 	 <section class="popular_brands_area_margin_clents top-brands">
         <div class="container advice">
-				<div class="row">
-			    <div class="col-12">
-                    <div class="popular_section_heading mb-30">
-                        <h3 class="title-text"><?php if(!empty($get_Category_name)) { echo $get_Category_name.' Brands';  } ?> Videos</h3>
-                    </div>
-			     </div>
+			   <div class="row">
+				<div class="videoWidth">
+				   <div class="col-12">
+						<div class="popular_section_heading mb-30">
+							<h3 class="title-text"><?php if(!empty($get_Category_name)) { echo $get_Category_name.' Brands';  } ?> Videos</h3>
+						</div>
+					 </div>
 					<?php
 					
 						if(isset($_GET['data_row']) && !empty($_GET['data_row']))
@@ -341,7 +347,7 @@ label.expend {
 							$recentCatseo = $rowString['seo_name']; 
 							
 					?>		
-						<div class="col-sm-6 blog_sidebar">
+						<div class="col-sm-12 blog_sidebar">
 							<div class="latest_post mb-30 news">
 								<div class="single_latest_post ">
 									<?php if(empty($rowVB['image'])){ ?>
@@ -352,13 +358,56 @@ label.expend {
 									<?php } ?>	
 								    <a href="<?php echo $baseURL; ?>videodetail/<?php echo $recentCatseo;?>/<?php echo $rowVB['seo_name']; ?>">
 										<?php echo $rowVB['title']; ?></a>
-									<p><?php echo substr($rowVB['content'],0,150).'...'; ?></p>
+									<p><?php echo substr($rowVB['content'],0,200).'...'; ?></p>
 								</div>
 								
 							</div>
 						</div>					
-					<?php } } ?>				 
+					<?php } } ?>		
 				</div>
+				
+				<div class="addVideoWidth">
+				
+				
+					<?php
+					
+						if(isset($_GET['data_row']) && !empty($_GET['data_row']))
+						{
+							
+							$sql = "SELECT * FROM advertise where page_id = 1 and position_name = 'Near Video'";
+							$queryVB=mysqli_query($db,$sql); 
+							
+						}else
+						{
+							$sql = "SELECT * FROM advertise where page_id = 1 and position_name = 'Near Video'";
+							$queryVB=mysqli_query($db,$sql); 
+						}					
+						if($queryVB->num_rows > 0){ 
+						while($rowVB=mysqli_fetch_array($queryVB)){
+					?>		
+						<div class="col-sm-12 blog_sidebar">
+							<div class="latest_post mb-30 news">
+								<div class="single_latest_post ">
+									<?php if(empty($rowVB['image'])){ ?>
+										<img src="<?php echo $baseURL; ?>img/no-image.png" 
+										alt="">
+									<?php }else{ ?>
+										<img src="<?php echo $baseURL; ?><?php echo str_replace('../',"",$rowVB['image']); ?>" alt="news">
+									<?php } ?>	
+								</div>
+								
+							</div>
+						</div>					
+					<?php } } ?>				
+				
+				
+				
+				
+				</div>
+				
+				
+				<div>	
+				 </div>
 			</div>
     </section>
 	
